@@ -94,6 +94,7 @@ public class UserLoginInfoController extends BaseController{
     }
 
     @RequestMapping(value = "/checkMail", method = RequestMethod.POST)
+    @RequiresPermissions("aa")
     public Serializable checkMail(@RequestBody UserLoginInfo userLoginInfo) throws Exception {
         System.out.println("调用checkMail方法");
         JSONObject jsonObject = new JSONObject();

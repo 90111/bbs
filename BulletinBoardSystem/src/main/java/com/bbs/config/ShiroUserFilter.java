@@ -2,6 +2,7 @@ package com.bbs.config;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.shiro.web.filter.PathMatchingFilter;
 import org.apache.shiro.web.filter.authc.UserFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +22,7 @@ import java.util.Map;
  * PathMatchingFilter则不会
  * @author MDY
  */
-public class ShiroUserFilter extends UserFilter {
+public class ShiroUserFilter extends PathMatchingFilter {
 
     /**
      * 在访问过来的时候检测是否为OPTIONS请求，如果是就直接返回true
@@ -41,15 +42,15 @@ public class ShiroUserFilter extends UserFilter {
      * 该方法会在验证失败后调用，这里由于是前后端分离，后台不控制页面跳转
      * 因此重写改成传输JSON数据
      */
-    @Override
-    protected void saveRequestAndRedirectToLogin(ServletRequest request, ServletResponse response) throws IOException {
-        saveRequest(request);
-        setHeader((HttpServletRequest) request,(HttpServletResponse) response);
-        PrintWriter out = response.getWriter();
-//        out.println(JSONObject.toJSONString(ResultUtil.error(ExceptionEnum.IS_NOT_LOGIN)));
-        out.flush();
-        out.close();
-    }
+//    @Override
+//    protected void saveRequestAndRedirectToLogin(ServletRequest request, ServletResponse response) throws IOException {
+//        saveRequest(request);
+//        setHeader((HttpServletRequest) request,(HttpServletResponse) response);
+//        PrintWriter out = response.getWriter();
+////        out.println(JSONObject.toJSONString(ResultUtil.error(ExceptionEnum.IS_NOT_LOGIN)));
+//        out.flush();
+//        out.close();
+//    }
 
     /**
      * 为response设置header，实现跨域
@@ -65,19 +66,19 @@ public class ShiroUserFilter extends UserFilter {
         response.setStatus(HttpStatus.OK.value());
     }
 
-    @Override
-    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        HttpServletResponse res = (HttpServletResponse) response;
-        res.setHeader("Access-Control-Allow-Origin", "*");
-        res.setStatus(HttpServletResponse.SC_OK);
-        res.setCharacterEncoding("UTF-8");
-        PrintWriter writer = res.getWriter();
-        Map<String, Object> map = new HashMap<>();
-        map.put("code", 702);
-        map.put("msg", "未登录");
-        writer.write(JSON.toJSONString(map));
-        writer.close();
-        return false;
-    }
+//    @Override
+//    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+//        HttpServletResponse res = (HttpServletResponse) response;
+//        res.setHeader("Access-Control-Allow-Origin", "*");
+//        res.setStatus(HttpServletResponse.SC_OK);
+//        res.setCharacterEncoding("UTF-8");
+//        PrintWriter writer = res.getWriter();
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("code", 702);
+//        map.put("msg", "未登录");
+//        writer.write(JSON.toJSONString(map));
+//        writer.close();
+//        return false;
+//    }
 }
 

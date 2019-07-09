@@ -30,14 +30,12 @@ public class ShiroConfiguration {
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
         // 配置不会被拦截的链接 顺序判断
         filterChainDefinitionMap.put("/logout", "logout");
-        filterChainDefinitionMap.put("/static/**", "anon");
-        filterChainDefinitionMap.put("/icon.png", "anon");
-        filterChainDefinitionMap.put("/image.jpeg", "anon");
         filterChainDefinitionMap.put("/ajaxLogin", "anon");
         filterChainDefinitionMap.put("/register", "anon");
         filterChainDefinitionMap.put("/checkUsername", "anon");
         filterChainDefinitionMap.put("/checkMail", "anon");
         filterChainDefinitionMap.put("/anon/**", "anon");
+        filterChainDefinitionMap.put("/static/**", "anon");
 
 
         //配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
@@ -49,20 +47,8 @@ public class ShiroConfiguration {
         filterMap.put("custom", new ShiroUserFilter());
         shiroFilterFactoryBean.setFilters(filterMap);
         filterChainDefinitionMap.put("/**", "custom");
-//        filterChainDefinitionMap.put("/index", "roles[admin]");
 
-        // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-        //shiroFilterFactoryBean.setLoginUrl("/login");
-
-        // 登录成功后要跳转的链接
-//        shiroFilterFactoryBean.setSuccessUrl("/index");
-
-//        shiroFilterFactoryBean.setLoginUrl("/unauth");
-
-        //未授权界面;
-        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-
 
         return shiroFilterFactoryBean;
     }
@@ -118,33 +104,32 @@ public class ShiroConfiguration {
         return authorizationAttributeSourceAdvisor;
     }
 
-    @Bean(name="simpleMappingExceptionResolver")
-    public SimpleMappingExceptionResolver
-    createSimpleMappingExceptionResolver() {
-        SimpleMappingExceptionResolver r = new SimpleMappingExceptionResolver();
-        Properties mappings = new Properties();
-        mappings.setProperty("DatabaseException", "databaseError");//数据库异常处理
-        mappings.setProperty("UnauthorizedException","403");
-        r.setExceptionMappings(mappings);  // None by default
-        r.setDefaultErrorView("error");    // No default
-        r.setExceptionAttribute("ex");     // Default is "exception"
-        //r.setWarnLogCategory("example.MvcLogger");     // No default
-        return r;
-    }
+//    @Bean(name="simpleMappingExceptionResolver")
+//    public SimpleMappingExceptionResolver createSimpleMappingExceptionResolver() {
+//        SimpleMappingExceptionResolver r = new SimpleMappingExceptionResolver();
+//        Properties mappings = new Properties();
+//        mappings.setProperty("DatabaseException", "databaseError");//数据库异常处理
+//        mappings.setProperty("UnauthorizedException","403");
+//        r.setExceptionMappings(mappings);  // None by default
+//        r.setDefaultErrorView("error");    // No default
+//        r.setExceptionAttribute("ex");     // Default is "exception"
+//        //r.setWarnLogCategory("example.MvcLogger");     // No default
+//        return r;
+//    }
 
 
     /**
      * 注册全局异常处理
      * @return
      */
-    @Bean(name = "exceptionHandler")
-    public HandlerExceptionResolver handlerExceptionResolver() {
-        return new MyExceptionHandler();
-    }
+//    @Bean(name = "exceptionHandler")
+//    public HandlerExceptionResolver handlerExceptionResolver() {
+//        return new MyExceptionHandler();
+//    }
 
 
 //    //自定义sessionManager
-//    @Bean
+//    @Bean(name = "sessionManager")
 //    public SessionManager sessionManager() {
 //        return new CustomSessionManager();
 //    }
@@ -153,7 +138,8 @@ public class ShiroConfiguration {
     public DefaultWebSessionManager sessionManager() {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         // 设置session过期时间
-        sessionManager.setGlobalSessionTimeout(600000L);
+        sessionManager.setGlobalSessionTimeout(1800000L);
+        sessionManager.setDeleteInvalidSessions(true);
         return sessionManager;
     }
 
