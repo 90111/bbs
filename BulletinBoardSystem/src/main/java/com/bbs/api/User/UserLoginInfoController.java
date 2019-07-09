@@ -1,9 +1,10 @@
-package com.bbs.api;
+package com.bbs.api.User;
 
 
 import com.alibaba.fastjson.JSON;
 import com.bbs.model.User.UserLoginInfo;
-import com.bbs.service.UserLoginInfoServiceImpl;
+import com.bbs.service.User.UserBaseInfoServiceImpl;
+import com.bbs.service.User.UserLoginInfoServiceImpl;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -32,6 +33,9 @@ public class UserLoginInfoController extends BaseController{
     @Autowired
     private UserLoginInfoServiceImpl userLoginInfoService;
 
+    @Autowired
+    private UserBaseInfoServiceImpl userBaseInfoService;
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Serializable login(@RequestBody UserLoginInfo userLoginInfo) throws JSONException {
         System.out.println("调用login方法");
@@ -42,9 +46,13 @@ public class UserLoginInfoController extends BaseController{
                 userLoginInfo.getPassword());
         //进行验证，这里可以捕获异常，然后返回对应信息
         try {
+            UserLoginInfo info = userLoginInfoService.getUserLoginInfoByName(userLoginInfo.getUser_name());
             currentUser.login(usernamePasswordToken);
-            jsonObject.put("token", currentUser.getSession().getId());
             jsonObject.put("msg", "登录成功");
+            jsonObject.put("code", "200");
+            jsonObject.put("id", info.getId());
+            jsonObject.put("user_name", info.getUser_name());
+            jsonObject.put("icon", userBaseInfoService.getUserBaseInfoByUserId(info.getId()).getIcon());
         } catch (IncorrectCredentialsException e) {
             jsonObject.put("msg", "密码错误");
         } catch (LockedAccountException e) {
@@ -74,13 +82,15 @@ public class UserLoginInfoController extends BaseController{
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(@RequestBody UserLoginInfo userLoginInfo) throws Exception {
-        userLoginInfoService.AddUserLoginInfo(userLoginInfo);
+        System.out.println("调用register方法");
+        userLoginInfoService.addUserLoginInfo(userLoginInfo);
 
         return "用户注册成功";
     }
 
     @RequestMapping(value = "/checkUsername", method = RequestMethod.POST)
     public Serializable checkUsername(@RequestBody UserLoginInfo userLoginInfo) throws Exception {
+        System.out.println("调用checkUsername方法");
         JSONObject jsonObject = new JSONObject();
         UserLoginInfo userLoginInfo1 = null;
         userLoginInfo1 = userLoginInfoService.getUserLoginInfoByName(userLoginInfo.getUser_name());

@@ -1,7 +1,8 @@
-package com.bbs.service;
+package com.bbs.service.User;
 
 
-import com.bbs.dao.UserLoginInfoDao;
+import com.bbs.dao.User.UserBaseInfoDao;
+import com.bbs.dao.User.UserLoginInfoDao;
 import com.bbs.model.User.RoleInfo;
 import com.bbs.model.User.UserLoginInfo;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService{
 
     @Resource
     private UserLoginInfoDao userLoginInfoDao;
+    @Resource
+    private UserBaseInfoDao userBaseInfoDao;
 
     public UserLoginInfo getUserLoginInfoByName(String username) throws Exception {
         UserLoginInfo userLoginInfo = userLoginInfoDao.getUserLoginInfoByName(username);
@@ -27,8 +30,9 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService{
     }
 
     @Override
-    public void AddUserLoginInfo(UserLoginInfo userLoginInfo) throws Exception {
-        userLoginInfoDao.AddUserLoginInfo(userLoginInfo);
+    public void addUserLoginInfo(UserLoginInfo userLoginInfo) throws Exception {
+        userLoginInfoDao.addUserLoginInfo(userLoginInfo);
+        userBaseInfoDao.addUserBaseInfo(userLoginInfo.getId());
     }
 
 

@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="08715a13-e999-4e3f-9f66-53861be37bd7" name="Default Changelist" comment="" />
+    <list default="true" id="08715a13-e999-4e3f-9f66-53861be37bd7" name="Default Changelist" comment="实现登录注册">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/api/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bbs/api/User/BaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/api/UserLoginInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bbs/api/User/UserLoginInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/config/AjaxFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/config/CORSAuthenticationFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/config/Realm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bbs/config/Realm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/config/ShiroConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bbs/config/ShiroConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/dao/RoleInfoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bbs/dao/User/RoleInfoDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/dao/UserLoginInfoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bbs/dao/User/UserLoginInfoDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/model/Post/PlateInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bbs/model/Post/PlateInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/service/UserLoginInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bbs/service/User/UserLoginInfoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/service/UserLoginInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bbs/service/User/UserLoginInfoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/bbs/api/BaseController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/bbs/api/UserLoginInfoController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/bbs/config/AjaxFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/bbs/config/CORSAuthenticationFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/bbs/config/Realm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bbs/config/Realm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/bbs/config/ShiroConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bbs/config/ShiroConfiguration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/bbs/dao/RoleInfoDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/bbs/dao/UserLoginInfoDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/bbs/model/Post/PlateInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bbs/model/Post/PlateInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/bbs/service/UserLoginInfoService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/bbs/service/UserLoginInfoServiceImpl.class" beforeDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -11,113 +38,21 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
+    <option name="isMigrated" value="true" />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="bulletinboardsystem" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/ShiroConfiguration.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="11" column="64" selection-start-line="11" selection-start-column="64" selection-end-line="11" selection-end-column="64" />
-              <folding>
-                <element signature="e#1457#1472#0" expanded="true" />
-                <element signature="e#4829#4830#0" expanded="true" />
-                <element signature="e#4876#4877#0" expanded="true" />
-                <element signature="e#5131#5132#0" expanded="true" />
-                <element signature="e#5180#5181#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CORSAuthenticationFilter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="34" column="82" selection-start-line="34" selection-start-column="82" selection-end-line="34" selection-end-column="82" />
+            <state relative-caret-position="35">
+              <caret line="44" column="51" selection-start-line="44" selection-start-column="36" selection-end-line="44" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#236#237#0" expanded="true" />
-                <element signature="e#259#260#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/ShiroUserFilter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="76" column="30" lean-forward="true" selection-start-line="76" selection-start-column="30" selection-end-line="76" selection-end-column="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CORSConfiguration.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="41" lean-forward="true" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#331#820#0" expanded="true" />
-                <element signature="e#819#820#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/AjaxFilter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CommonIntercepter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="22" column="5" lean-forward="true" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/Realm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="54" column="32" lean-forward="true" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/UserLoginInfoController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="66" column="45" lean-forward="true" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#1304#1319#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -126,8 +61,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CustomSessionManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+            <state relative-caret-position="197">
+              <caret line="27" column="46" lean-forward="true" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -136,14 +71,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/MyExceptionHandler.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/User/UserLoginInfoController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="25" column="21" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
+            <state relative-caret-position="223">
+              <caret line="79" column="23" lean-forward="true" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#844#860#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/User/UserLoginInfoService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -162,20 +105,12 @@
       <find>filterChainDefinitionMap</find>
     </findStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/CorsConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/FunctionInfo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/RoleFunctionPermission.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/RoleInfo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/dao/RoleInfoDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/api/ResponseModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/ResponseModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/RoleUserInfo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/UserLoginInfo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/ShiroConfiguration.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/Realm.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/dao/BaseRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/BulletinboardsystemApplication.java" />
@@ -193,10 +128,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/Message/MessageInfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/Post/PostTitleInfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/Post/ReportPostInfo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/Post/PlateInfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/AnnouncementInfo/AnnouncementInfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/FriendlyLinkInfo/FriendlyLinkInfo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/UserLoginInfoService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/config/CorsConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/config/CorsFilter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/dao/UserLoginInfoDao.java" />
@@ -204,13 +137,31 @@
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/config/Realm.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/config/AjaxFilter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/config/MyExceptionHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/api/BaseController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/api/UserLoginInfoController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/config/CommonIntercepter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/config/CORSConfiguration.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/config/CORSAuthenticationFilter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/config/ShiroUserFilter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/api/UserLoginInfoController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/api/BaseController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/UserLoginInfoService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/Post/PostPlateInfoService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/Post/PostPlateInfoImp.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/Post/PlateInfoService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/dao/Post/DistrictInfoDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/Post/DistrictInfoService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/Post/DistrictInfoServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/Post/PlateInfo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/dao/Post/PlateInfoDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/Post/PlateInfoServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/api/Post/PlateController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/User/UserBaseInfoService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/User/UserBaseInfoServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/User/UserLoginInfoServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/dao/User/UserLoginInfoDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/dao/User/UserBaseInfoDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/config/ShiroConfiguration.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/api/User/UserLoginInfoController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/User/UserLoginInfoService.java" />
       </list>
     </option>
   </component>
@@ -250,6 +201,7 @@
     <option name="width" value="1280" />
     <option name="height" value="705" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -304,6 +256,16 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="bbs" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="User" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bulletinboardsystem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BulletinBoardSystem" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bbs" type="462c0819:PsiDirectoryNode" />
               <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -311,42 +273,7 @@
               <item name="BulletinBoardSystem" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bbs" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bulletinboardsystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BulletinBoardSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bbs" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bulletinboardsystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BulletinBoardSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bbs" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bulletinboardsystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BulletinBoardSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bulletinboardsystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BulletinBoardSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -361,24 +288,30 @@
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/bbs/model/FriendlyLinkInfo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/java/com/bbs/model/Post" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/com/bbs/model/FriendlyLinkInfo" />
       <recent name="$PROJECT_DIR$/src/main/java/com/bbs/model/AnnouncementInfo" />
       <recent name="$PROJECT_DIR$/src/main/java/com/bbs/model/Post" />
       <recent name="$PROJECT_DIR$/src/main/java/com/bbs/model/Message" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.bbs.service.Post" />
+      <recent name="com.bbs.dao.Post" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/static" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/bbs/model/Post" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -413,11 +346,12 @@
       <option name="presentableId" value="Default" />
       <updated>1562373719261</updated>
       <workItem from="1562373720690" duration="61302000" />
+      <workItem from="1562632727554" duration="9376000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61302000" />
+    <option name="totallyTimeSpent" value="70678000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -429,165 +363,60 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="705" extended-state="6" />
+    <frame x="0" y="23" width="1280" height="705" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Web" side_tool="true" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Favorites" sideWeight="0.5027174" side_tool="true" weight="0.24959612" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4972826" visible="true" weight="0.24959612" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4972826" visible="true" weight="0.2536349" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Java Enterprise" />
-      <window_info anchor="bottom" id="Spring" />
-      <window_info anchor="bottom" id="Terminal" weight="0.32952693" />
-      <window_info anchor="bottom" id="Event Log" sideWeight="0.50080776" side_tool="true" weight="0.32952693" />
-      <window_info anchor="bottom" id="Messages" weight="0.32952693" />
+      <window_info id="Web" order="2" side_tool="true" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Favorites" order="5" sideWeight="0.5027174" side_tool="true" weight="0.24959612" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.32952693" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32952693" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49919224" weight="0.32952693" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39967373" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32952693" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Maven" weight="0.32956383" />
-      <window_info anchor="right" id="Bean Validation" weight="0.32956383" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32952693" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Spring" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32952693" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50080776" side_tool="true" weight="0.32952693" />
+      <window_info active="true" anchor="bottom" id="Messages" order="13" visible="true" weight="0.32952693" />
+      <window_info anchor="bottom" id="Java Enterprise" order="14" weight="0.32952693" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Maven" order="5" weight="0.32956383" />
+      <window_info anchor="right" id="Bean Validation" order="6" weight="0.32956383" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="实现登录注册" />
+    <option name="LAST_COMMIT_MESSAGE" value="实现登录注册" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/bbs/service/User/UserLoginInfoServiceImpl.java</url>
+          <line>33</line>
+          <properties />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/User/FunctionInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/User/ResponseModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/User/RoleFunctionPermission.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/User/RoleInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/User/RoleUserInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/User/UserBaseInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="23" lean-forward="true" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
-          <folding>
-            <element signature="e#254#255#0" expanded="true" />
-            <element signature="e#279#280#0" expanded="true" />
-            <element signature="e#312#313#0" expanded="true" />
-            <element signature="e#340#341#0" expanded="true" />
-            <element signature="e#371#372#0" expanded="true" />
-            <element signature="e#401#402#0" expanded="true" />
-            <element signature="e#444#445#0" expanded="true" />
-            <element signature="e#482#483#0" expanded="true" />
-            <element signature="e#518#519#0" expanded="true" />
-            <element signature="e#550#551#0" expanded="true" />
-            <element signature="e#600#601#0" expanded="true" />
-            <element signature="e#642#643#0" expanded="true" />
-            <element signature="e#672#673#0" expanded="true" />
-            <element signature="e#698#699#0" expanded="true" />
-            <element signature="e#736#737#0" expanded="true" />
-            <element signature="e#766#767#0" expanded="true" />
-            <element signature="e#796#797#0" expanded="true" />
-            <element signature="e#824#825#0" expanded="true" />
-            <element signature="e#864#865#0" expanded="true" />
-            <element signature="e#898#899#0" expanded="true" />
-            <element signature="e#929#930#0" expanded="true" />
-            <element signature="e#956#957#0" expanded="true" />
-            <element signature="e#996#997#0" expanded="true" />
-            <element signature="e#1028#1029#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/User/UserLoginInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/shiro/shiro-web/1.4.1/shiro-web-1.4.1.jar!/org/apache/shiro/web/servlet/ProxiedFilterChain.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="48" selection-start-line="48" selection-end-line="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/shiro/shiro-core/1.4.1/shiro-core-1.4.1.jar!/org/apache/shiro/subject/support/SubjectCallable.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/shiro/shiro-core/1.4.1/shiro-core-1.4.1.jar!/org/apache/shiro/subject/support/DelegatingSubject.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="294" selection-start-line="294" selection-end-line="294" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/shiro/shiro-web/1.4.1/shiro-web-1.4.1.jar!/org/apache/shiro/web/servlet/AbstractShiroFilter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="158" selection-start-line="158" selection-end-line="158" />
-          <folding>
-            <element signature="e#6061#6376#0" expanded="true" />
-            <element signature="e#6375#6376#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.1.8.RELEASE/spring-web-5.1.8.RELEASE.jar!/org/springframework/web/filter/CorsFilter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.1.8.RELEASE/spring-web-5.1.8.RELEASE.jar!/org/springframework/web/filter/RequestContextFilter.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
@@ -640,12 +469,8 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/Message/MessageInfo.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file:///Volumes/DISK/User/ReplyInfo.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file:///Volumes/DISK/User/PostTitleInfo.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file:///Volumes/DISK/User/ReplyInfo.java" />
+    <entry file="file:///Volumes/DISK/User/PostTitleInfo.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/Post/PostTitleInfo.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -665,29 +490,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/Post/PlateInfo.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/dao/RoleInfoDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/dao/UserLoginInfoDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.1.8.RELEASE/spring-web-5.1.8.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="113">
@@ -695,30 +497,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CorsConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="28" column="20" lean-forward="true" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/UserLoginInfoService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/UserLoginInfoServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CorsConfig.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.1.8.RELEASE/spring-webmvc-5.1.8.RELEASE.jar!/org/springframework/web/servlet/handler/SimpleMappingExceptionResolver.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -740,16 +519,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CorsFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CorsFilter.java" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
@@ -757,51 +527,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/BaseController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="19" column="27" lean-forward="true" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/Realm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="54" column="32" lean-forward="true" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/MyExceptionHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
+        <state relative-caret-position="225">
           <caret line="25" column="21" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#844#860#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CustomSessionManager.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/AjaxFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/UserLoginInfoController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="66" column="45" lean-forward="true" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
+        <state relative-caret-position="323">
+          <caret line="68" column="7" selection-start-line="68" selection-start-column="4" selection-end-line="68" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -810,37 +549,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CommonIntercepter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="22" column="5" lean-forward="true" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/BulletinboardsystemApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CORSAuthenticationFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="34" column="82" selection-start-line="34" selection-start-column="82" selection-end-line="34" selection-end-column="82" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#236#237#0" expanded="true" />
-            <element signature="e#259#260#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/ShiroUserFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="76" column="30" lean-forward="true" selection-start-line="76" selection-start-column="30" selection-end-line="76" selection-end-column="30" />
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -849,20 +559,223 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CORSConfiguration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="41" lean-forward="true" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+        <state relative-caret-position="300">
+          <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#331#820#0" expanded="true" />
-            <element signature="e#819#820#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/AjaxFilter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CORSAuthenticationFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="55">
+          <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/Post/PlateInfoService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/dao/User/RoleInfoDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
-          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/Post/DistrictInfoServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="12" column="51" selection-start-line="12" selection-start-column="51" selection-end-line="12" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/Post/DistrictInfoService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/Post/PlateInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#276#277#0" expanded="true" />
+            <element signature="e#312#313#0" expanded="true" />
+            <element signature="e#382#383#0" expanded="true" />
+            <element signature="e#432#433#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/dao/Post/DistrictInfoDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/dao/Post/PlateInfoDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/Post/PlateInfoServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/User/BaseController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/Realm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="52" column="57" lean-forward="true" selection-start-line="52" selection-start-column="57" selection-end-line="52" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/Post/PlateController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="18" column="63" lean-forward="true" selection-start-line="18" selection-start-column="63" selection-end-line="18" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/User/UserBaseInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-173">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/User/UserBaseInfoService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/icon.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/BulletinboardsystemApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/User/UserBaseInfoServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="17" column="64" lean-forward="true" selection-start-line="17" selection-start-column="64" selection-end-line="17" selection-end-column="64" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/User/UserLoginInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="29" lean-forward="true" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/User/UserLoginInfoServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="34" column="29" lean-forward="true" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/ShiroUserFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-33">
+          <caret line="31" column="35" lean-forward="true" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/dao/User/UserLoginInfoDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="29" column="43" lean-forward="true" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/dao/User/UserBaseInfoDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="16" column="90" selection-start-line="16" selection-start-column="90" selection-end-line="16" selection-end-column="90" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CustomSessionManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="27" column="46" lean-forward="true" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -871,15 +784,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/ShiroConfiguration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="11" column="64" selection-start-line="11" selection-start-column="64" selection-end-line="11" selection-end-column="64" />
+        <state relative-caret-position="35">
+          <caret line="44" column="51" selection-start-line="44" selection-start-column="36" selection-end-line="44" selection-end-column="51" />
           <folding>
-            <element signature="e#1457#1472#0" expanded="true" />
-            <element signature="e#4829#4830#0" expanded="true" />
-            <element signature="e#4876#4877#0" expanded="true" />
-            <element signature="e#5131#5132#0" expanded="true" />
-            <element signature="e#5180#5181#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1304#1319#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/User/UserLoginInfoController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="79" column="23" lean-forward="true" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/User/UserLoginInfoService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
         </state>
       </provider>
     </entry>

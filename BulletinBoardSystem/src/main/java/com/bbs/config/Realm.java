@@ -3,7 +3,7 @@ package com.bbs.config;
 import com.bbs.model.User.FunctionInfo;
 import com.bbs.model.User.RoleInfo;
 import com.bbs.model.User.UserLoginInfo;
-import com.bbs.service.UserLoginInfoService;
+import com.bbs.service.User.UserLoginInfoService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;

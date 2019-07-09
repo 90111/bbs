@@ -1,12 +1,22 @@
 package com.bbs.model.Post;
 
 import java.util.Date;
+import java.util.List;
 
 public class PlateInfo {
 
     private int id;
     private  int post_num;
     private String plate_name;
+    private List<DistrictInfo> districtInfos;
+
+    public List<DistrictInfo> getDistrictInfos() {
+        return districtInfos;
+    }
+
+    public void setDistrictInfos(List<DistrictInfo> districtInfos) {
+        this.districtInfos = districtInfos;
+    }
 
     public int getId() {return id;}
 

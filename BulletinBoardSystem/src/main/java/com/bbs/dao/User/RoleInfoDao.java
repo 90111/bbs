@@ -1,4 +1,4 @@
-package com.bbs.dao;
+package com.bbs.dao.User;
 
 import com.bbs.model.User.FunctionInfo;
 import org.apache.ibatis.annotations.Mapper;
