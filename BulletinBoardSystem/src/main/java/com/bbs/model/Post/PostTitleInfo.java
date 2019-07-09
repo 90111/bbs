@@ -16,6 +16,24 @@ public class PostTitleInfo {
     private String delete_reason;
     private Date delete_time;
     private String state;
+    private String image;
+    private String icon;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
     public int getId(){return id;}
     public void setId(int id){this.id=id;}

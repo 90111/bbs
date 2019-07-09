@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface PlateInfoService {
 
-    public List<PlateInfo> getPlates() throws Exception;
+    List<PlateInfo> getPlates() throws Exception;
 }

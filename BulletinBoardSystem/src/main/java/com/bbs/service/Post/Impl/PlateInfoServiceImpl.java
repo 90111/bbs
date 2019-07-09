@@ -1,8 +1,9 @@
-package com.bbs.service.Post;
+package com.bbs.service.Post.Impl;
 
 import com.bbs.dao.Post.DistrictInfoDao;
 import com.bbs.dao.Post.PlateInfoDao;
 import com.bbs.model.Post.PlateInfo;
+import com.bbs.service.Post.PlateInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,7 +22,7 @@ public class PlateInfoServiceImpl implements PlateInfoService {
     public List<PlateInfo> getPlates() throws Exception {
         List<PlateInfo> ls = plateInfoDao.getPlates();
         for (PlateInfo p : ls){
-            p.setDistrictInfos(districtInfoDao.getDistricts());
+            p.setDistrictInfos(districtInfoDao.getDistricts(p.getId()));
         }
         return ls;
     }

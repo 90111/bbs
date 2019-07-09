@@ -1,8 +1,9 @@
-package com.bbs.service.User;
+package com.bbs.service.User.Impl;
 
 import com.bbs.dao.User.UserBaseInfoDao;
 import com.bbs.model.User.UserBaseInfo;
 import com.bbs.model.User.UserLoginInfo;
+import com.bbs.service.User.UserBaseInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

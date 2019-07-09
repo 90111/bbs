@@ -3,8 +3,8 @@ package com.bbs.api.User;
 
 import com.alibaba.fastjson.JSON;
 import com.bbs.model.User.UserLoginInfo;
-import com.bbs.service.User.UserBaseInfoServiceImpl;
-import com.bbs.service.User.UserLoginInfoServiceImpl;
+import com.bbs.service.User.Impl.UserBaseInfoServiceImpl;
+import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -67,25 +67,14 @@ public class UserLoginInfoController extends BaseController{
         return jsonObject.toString();
     }
 
-    @RequestMapping(value = "/index", method = RequestMethod.POST)
-    @RequiresPermissions("createPlate")
-    public void getIndex(ServletRequest request, ServletResponse response) throws IOException {
-        HttpServletResponse res = (HttpServletResponse) response;
-        res.setCharacterEncoding("UTF-8");
-        PrintWriter writer = res.getWriter();
-        Map<String, Object> map = new HashMap<>();
-        map.put("code", 200);
-        map.put("msg", "操作成功");
-        writer.write(JSON.toJSONString(map));
-        writer.close();
-    }
-
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(@RequestBody UserLoginInfo userLoginInfo) throws Exception {
+    public Map register(@RequestBody UserLoginInfo userLoginInfo) throws Exception {
         System.out.println("调用register方法");
         userLoginInfoService.addUserLoginInfo(userLoginInfo);
-
-        return "用户注册成功";
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 200);
+        map.put("msg", "注册成功");
+        return map;
     }
 
     @RequestMapping(value = "/checkUsername", method = RequestMethod.POST)
@@ -96,10 +85,26 @@ public class UserLoginInfoController extends BaseController{
         userLoginInfo1 = userLoginInfoService.getUserLoginInfoByName(userLoginInfo.getUser_name());
         if (userLoginInfo1 == null){
             jsonObject.put("code", "200");
-            jsonObject.put("message", "该用户名可用");
+            jsonObject.put("msg", "该用户名可用");
         }else{
             jsonObject.put("code", "500");
-            jsonObject.put("message", "用户名不可用，已存在该用户名");
+            jsonObject.put("msg", "用户名不可用，已存在该用户名");
+        }
+        return jsonObject.toString();
+    }
+
+    @RequestMapping(value = "/checkMail", method = RequestMethod.POST)
+    public Serializable checkMail(@RequestBody UserLoginInfo userLoginInfo) throws Exception {
+        System.out.println("调用checkMail方法");
+        JSONObject jsonObject = new JSONObject();
+        UserLoginInfo userLoginInfo1 = null;
+        userLoginInfo1 = userLoginInfoService.getUserLoginInfoByMail(userLoginInfo.getMail());
+        if (userLoginInfo1 == null){
+            jsonObject.put("code", "200");
+            jsonObject.put("msg", "该邮箱未被注册");
+        }else{
+            jsonObject.put("code", "500");
+            jsonObject.put("msg", "该邮箱已被注册");
         }
         return jsonObject.toString();
     }
@@ -110,6 +115,7 @@ public class UserLoginInfoController extends BaseController{
         JSONObject jsonObject = new JSONObject();
         Subject currentUser = SecurityUtils.getSubject();
         currentUser.logout();
+        jsonObject.put("code", 200);
         jsonObject.put("msg", "退出成功");
         return "login";
     }

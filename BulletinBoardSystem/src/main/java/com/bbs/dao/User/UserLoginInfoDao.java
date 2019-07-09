@@ -29,4 +29,9 @@ public interface UserLoginInfoDao {
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     void addUserLoginInfo(UserLoginInfo userLoginInfo) throws Exception;
 
+    @Delete("delete from UserLoginInfo where id = #{id}")
+    void deleteUserLoginInfoById(int id) throws Exception;
+
+    @Select("select * from UserLoginInfo where mail = #{mail}")
+    UserLoginInfo getUserLoginInfoByMail(String mail)throws Exception;
 }

@@ -8,4 +8,8 @@ public interface UserLoginInfoService {
 
     void addUserLoginInfo(UserLoginInfo userLoginInfo) throws Exception;
 
+    void deleteUserLoginInfoById(int id) throws Exception;
+
+    UserLoginInfo getUserLoginInfoByMail(String mail) throws Exception;
+
 }
