@@ -9,20 +9,12 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.session.mgt.DefaultSessionContext;
-import org.apache.shiro.session.mgt.SessionKey;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.session.mgt.WebSessionKey;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -110,25 +102,22 @@ public class UserLoginInfoController extends BaseController{
         return jsonObject.toString();
     }
 
-    @RequestMapping(value = "/logout")
-    public String logout() throws JSONException {
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public Map logout() throws JSONException {
         System.out.println("调用logout方法");
-        JSONObject jsonObject = new JSONObject();
-        Subject currentUser = SecurityUtils.getSubject();
-        currentUser.logout();
-        jsonObject.put("code", 200);
-        jsonObject.put("msg", "退出成功");
-        return "login";
-    }
-
-    @RequestMapping(value = "/unauth")
-    @ResponseBody
-    public Object unauth() {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("code", "1000000");
-        map.put("msg", "未登录");
+        Map<String, Object> map = new HashMap<>();
+        try{
+            Subject currentUser = SecurityUtils.getSubject();
+            currentUser.logout();
+            map.put("code", "200");
+            map.put("msg", "退出成功");
+        }catch (Exception e){
+            map.put("code", "500");
+            map.put("msg", "退出失败");
+        }
         return map;
     }
+
 
     @RequestMapping(value = "/checkSession", method = RequestMethod.POST)
     public Map checkSession() throws Exception {

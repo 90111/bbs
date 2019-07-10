@@ -18,12 +18,8 @@ public interface UserLoginInfoDao {
     @Select("SELECT * from RoleInfo where id in (select role_info_id from RoleUserInfo where user_info_id = #{id})")
     List<RoleInfo> LoadRolePermission(int id) throws Exception;
 
-    @Select("select * from RoleInfo")
-    List<RoleInfo> getRoles() throws Exception;
-
     @Select("select * from FunctionInfo where id in (select function_info_id from RoleFunctionPermission where role_info_id = #{role_info_id})")
     List<FunctionInfo> getFunctions (int role_info_id) throws Exception;
-
 
     @Insert("insert into UserLoginInfo (user_name, `password`, mail) VALUES (#{user_name}, #{password}, #{mail})")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
@@ -34,4 +30,7 @@ public interface UserLoginInfoDao {
 
     @Select("select * from UserLoginInfo where mail = #{mail}")
     UserLoginInfo getUserLoginInfoByMail(String mail)throws Exception;
+
+    @Update("update UserLoginInfo set password=#{password} where id=#{id}")
+    void updateUserLoginInfo(UserLoginInfo userLoginInfo) throws Exception;
 }

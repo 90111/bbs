@@ -21,4 +21,15 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
     }
 
 
+    @Override
+    public void deleteAnnouncementInfoById (int id) throws Exception{
+        announcementInfoDao.deleteAnnouncementInfoById(id);
+    }
+
+    @Override
+    public void addAnnouncementInfo(AnnouncementInfo announcementInfo) throws Exception{
+        announcementInfoDao.addAnnouncementInfo(announcementInfo);
+    }
+
+
 }

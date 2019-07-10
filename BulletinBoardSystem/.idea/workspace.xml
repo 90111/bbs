@@ -2,13 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08715a13-e999-4e3f-9f66-53861be37bd7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bbs/api/Announcement/AnnouncementController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bbs/dao/Announcement/AnnouncementInfoDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bbs/service/Announcement/AnnouncementInfoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bbs/service/Announcement/lmpl/AnnouncementInfoServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/api/Announcement/AnnouncementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bbs/api/Announcement/AnnouncementController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/api/User/UserLoginInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bbs/api/User/UserLoginInfoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/default.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/default.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/config/ShiroConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bbs/config/ShiroConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/dao/Announcement/AnnouncementInfoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bbs/dao/Announcement/AnnouncementInfoDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/dao/Post/ReplyInfoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bbs/dao/Post/ReplyInfoDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/dao/User/UserLoginInfoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bbs/dao/User/UserLoginInfoDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/model/Post/ReplyInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bbs/model/Post/ReplyInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/service/Announcement/AnnouncementInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bbs/service/Announcement/AnnouncementInfoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bbs/service/Announcement/lmpl/AnnouncementInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bbs/service/Announcement/lmpl/AnnouncementInfoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/bbs/config/ShiroConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bbs/config/ShiroConfiguration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/bbs/model/Post/ReplyInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bbs/model/Post/ReplyInfo.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -27,85 +32,57 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/Post/PostController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/Announcement/AnnouncementController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="70" column="38" selection-start-line="70" selection-start-column="38" selection-end-line="70" selection-end-column="38" />
+            <state relative-caret-position="150">
+              <caret line="25" column="12" lean-forward="true" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/Post/Impl/PostInfoServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="43" column="25" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/Post/PostInfoService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="72" selection-start-line="17" selection-start-column="72" selection-end-line="17" selection-end-column="72" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/dao/Post/PostTitleInfoDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/User/UserLoginInfoController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="61" selection-start-line="11" selection-start-column="61" selection-end-line="11" selection-end-column="61" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/Post/Impl/DistrictInfoServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/Announcement/AnnouncementController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/dao/Announcement/AnnouncementInfoDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="34" column="32" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
+            <state relative-caret-position="244">
+              <caret line="18" column="113" selection-start-line="18" selection-start-column="113" selection-end-line="18" selection-end-column="113" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/dao/Announcement/AnnouncementInfoDao.java">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/AnnouncementInfo/AnnouncementInfo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="21" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="21" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/Announcement/lmpl/AnnouncementInfoServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="15" column="45" lean-forward="true" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/Announcement/AnnouncementInfoService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -128,9 +105,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/Message/MessageInfo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/Post/ReportPostInfo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/AnnouncementInfo/AnnouncementInfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/FriendlyLinkInfo/FriendlyLinkInfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/config/CorsConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/config/CorsFilter.java" />
@@ -155,7 +129,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/dao/User/UserBaseInfoDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/User/UserLoginInfoServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/Post/PlateInfoService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/dao/User/UserLoginInfoDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/User/UserLoginInfoService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/User/Impl/UserLoginInfoServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/dao/Post/DistrictInfoDao.java" />
@@ -165,20 +138,24 @@
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/api/Post/PlateController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/config/ShiroUserFilter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/config/MyExceptionHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/config/ShiroConfiguration.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/Post/ReplyInfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/Post/ReplyInfoService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/dao/Post/ReplyInfoDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/Post/Impl/ReplyInfoServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bbs/api/Post/ReplyInfoController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/User/UserBaseInfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/Post/PostTitleInfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/Post/PostInfoService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/Post/Impl/PostInfoServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/api/Post/PostController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/dao/Post/PostTitleInfoDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/config/ShiroConfiguration.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/api/Post/ReplyInfoController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/api/User/UserLoginInfoController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/dao/User/UserLoginInfoDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/model/Post/ReplyInfo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/dao/Post/ReplyInfoDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/Announcement/AnnouncementInfoService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/service/Announcement/lmpl/AnnouncementInfoServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bbs/api/Announcement/AnnouncementController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bbs/dao/Announcement/AnnouncementInfoDao.java" />
       </list>
     </option>
   </component>
@@ -295,8 +272,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="bbs" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="User" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="bulletinboardsystem" type="b2602c69:ProjectViewProjectNode" />
@@ -325,6 +301,25 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="bbs" type="462c0819:PsiDirectoryNode" />
               <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="User" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bulletinboardsystem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BulletinBoardSystem" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bbs" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bulletinboardsystem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BulletinBoardSystem" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bbs" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
               <item name="Post" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -334,7 +329,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="bbs" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
               <item name="User" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -372,36 +367,7 @@
               <item name="BulletinBoardSystem" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bbs" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="Post" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bulletinboardsystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BulletinBoardSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bbs" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="Post" type="462c0819:PsiDirectoryNode" />
-              <item name="Impl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bulletinboardsystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BulletinBoardSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bulletinboardsystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BulletinBoardSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -477,7 +443,7 @@
       <option name="presentableId" value="Default" />
       <updated>1562373719261</updated>
       <workItem from="1562373720690" duration="61302000" />
-      <workItem from="1562632727554" duration="35122000" />
+      <workItem from="1562632727554" duration="44611000" />
     </task>
     <task id="LOCAL-00001" summary="实现登录注册">
       <created>1562654055303</created>
@@ -542,11 +508,25 @@
       <option name="project" value="LOCAL" />
       <updated>1562729609116</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="实现获取最新公告接口">
+      <created>1562731055464</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1562731055464</updated>
+    </task>
+    <task id="LOCAL-00011" summary="实现用户登录状态判断接口">
+      <created>1562743273749</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1562743273749</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96424000" />
+    <option name="totallyTimeSpent" value="105913000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -569,17 +549,17 @@
       <window_info id="Favorites" order="5" sideWeight="0.5027174" side_tool="true" weight="0.24959612" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32952693" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49919224" visible="true" weight="0.32952693" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39967373" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4983845" visible="true" weight="0.32952693" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49919224" weight="0.39967373" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32952693" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32952693" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Spring" order="10" />
+      <window_info anchor="bottom" id="Spring" order="10" weight="0.32952693" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32952693" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50080776" side_tool="true" weight="0.32952693" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5016155" side_tool="true" weight="0.32952693" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32952693" />
       <window_info anchor="bottom" id="Java Enterprise" order="14" weight="0.32952693" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -638,24 +618,11 @@
     <MESSAGE value="实现首页获取最新发帖接口" />
     <MESSAGE value="修改获取帖子内容接口" />
     <MESSAGE value="修改发送帖子接口" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改发送帖子接口" />
+    <MESSAGE value="实现获取最新公告接口" />
+    <MESSAGE value="实现用户登录状态判断接口" />
+    <option name="LAST_COMMIT_MESSAGE" value="实现用户登录状态判断接口" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.1.8.RELEASE/spring-webmvc-5.1.8.RELEASE.jar!/org/springframework/web/servlet/HandlerExceptionResolver.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/shiro/shiro-core/1.4.1/shiro-core-1.4.1.jar!/org/apache/shiro/authc/SimpleAuthenticationInfo.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CorsFilter.java" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
@@ -710,13 +677,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/icon.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/BulletinboardsystemApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/User/UserLoginInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -755,26 +715,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="71" selection-start-line="12" selection-start-column="71" selection-end-line="12" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/User/Impl/UserLoginInfoServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="46" column="59" selection-start-line="46" selection-start-column="59" selection-end-line="46" selection-end-column="59" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/dao/User/UserLoginInfoDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="36" column="1" lean-forward="true" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -845,46 +785,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CommonIntercepter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="16" column="30" lean-forward="true" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CORSConfiguration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CustomSessionManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="32" column="16" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/MyExceptionHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53">
-          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.1.8.RELEASE/spring-webmvc-5.1.8.RELEASE.jar!/org/springframework/web/servlet/handler/SimpleMappingExceptionResolver.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-548">
@@ -902,34 +802,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/ShiroConfiguration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1245">
-          <caret line="83" column="5" lean-forward="true" selection-start-line="83" selection-start-column="5" selection-end-line="83" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/Post/PlateController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="21" column="39" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/Post/ReplyInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
-          <folding>
-            <element signature="e#276#277#0" expanded="true" />
-            <element signature="e#326#327#0" expanded="true" />
-            <element signature="e#370#371#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -941,23 +819,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/Post/Impl/ReplyInfoServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="18" column="26" lean-forward="true" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/dao/Post/ReplyInfoDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="20" column="70" selection-start-line="20" selection-start-column="70" selection-end-line="20" selection-end-column="70" />
         </state>
       </provider>
     </entry>
@@ -988,16 +849,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="263">
           <caret line="21" column="62" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/Post/ReplyInfoController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="22" column="40" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1038,25 +889,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/Post/PostController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="70" column="38" selection-start-line="70" selection-start-column="38" selection-end-line="70" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/default.jpg">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/User/UserLoginInfoController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="61" selection-start-line="11" selection-start-column="61" selection-end-line="11" selection-end-column="61" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/Post/Impl/DistrictInfoServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1065,16 +899,194 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/dao/Announcement/AnnouncementInfoDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/ShiroConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="34" column="63" lean-forward="true" selection-start-line="34" selection-start-column="63" selection-end-line="34" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/User/UserLoginInfoController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="119" lean-forward="true" selection-start-line="119" selection-end-line="119" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/User/Impl/UserLoginInfoServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/Post/PostController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="76" column="35" lean-forward="true" selection-start-line="76" selection-start-column="35" selection-end-line="76" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CORSConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/MyExceptionHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/Post/ReplyInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+          <folding>
+            <element signature="e#331#332#0" expanded="true" />
+            <element signature="e#381#382#0" expanded="true" />
+            <element signature="e#423#424#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
+            <element signature="e#481#482#0" expanded="true" />
+            <element signature="e#521#522#0" expanded="true" />
+            <element signature="e#553#554#0" expanded="true" />
+            <element signature="e#243#244#0" expanded="true" />
+            <element signature="e#276#277#0" expanded="true" />
+            <element signature="e#326#327#0" expanded="true" />
+            <element signature="e#370#371#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CommonIntercepter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="17" column="45" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/config/CustomSessionManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="32" column="16" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/Post/Impl/ReplyInfoServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/dao/Post/ReplyInfoDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/Post/ReplyInfoController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../新建文件夹/AnnouncementController.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/Announcement/lmpl/AnnouncementInfoServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/Announcement/AnnouncementInfoService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/BulletinboardsystemApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/api/Announcement/AnnouncementController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="34" column="32" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
+        <state relative-caret-position="150">
+          <caret line="25" column="12" lean-forward="true" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/service/Announcement/lmpl/AnnouncementInfoServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="15" column="45" lean-forward="true" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/model/AnnouncementInfo/AnnouncementInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="21" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/dao/User/UserLoginInfoDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="33" column="50" lean-forward="true" selection-start-line="33" selection-start-column="50" selection-end-line="33" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bbs/dao/Announcement/AnnouncementInfoDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="18" column="113" selection-start-line="18" selection-start-column="113" selection-end-line="18" selection-end-column="113" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

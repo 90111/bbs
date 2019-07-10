@@ -7,6 +7,24 @@ public class ReplyInfo {
     private int user_id;
     private String content;
     private Date reply_time;
+    private String nick_name;
+    private String icon;
+
+    public String getNick_name() {
+        return nick_name;
+    }
+
+    public void setNick_name(String nick_name) {
+        this.nick_name = nick_name;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
     public Date getReply_time() {
         return reply_time;
