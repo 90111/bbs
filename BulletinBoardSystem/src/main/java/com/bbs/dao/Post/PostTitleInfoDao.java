@@ -55,6 +55,6 @@ public interface PostTitleInfoDao {
     @Select("SELECT PostTitleInfo.id, DistrictInfo.plate_id, title, owner, post_time, reply_num, reply_time, view_num, like_num, DistrictInfo.plate_id FROM DistrictInfo, PostTitleInfo WHERE PostTitleInfo.districtInfo_id = DistrictInfo.id ORDER BY PostTitleInfo.id DESC limit 20")
     List<PostTitleInfo> getPostTitleInfosByTime(String s) throws Exception;
 
-    @Select("SELECT title, view_num, like_num, image FROM PostTitleInfo WHERE owner=#{id} ORDER BY id DESC limit 2")
+    @Select("SELECT id, title, view_num, like_num, image FROM PostTitleInfo WHERE owner=#{id} ORDER BY id DESC limit 2")
     List<PostTitleInfo> getUserRecentPostTitleByUserId(int id) throws Exception;
 }
