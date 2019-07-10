@@ -10,4 +10,6 @@ public interface PostInfoService {
     List<PostTitleInfo> getPostTitleInfos(int id) throws Exception;
 
     PostTitleInfo getPostTitleContent(int id) throws Exception;
+
+    List<PostTitleInfo> getPostTitleInfosByTime(String s) throws Exception;
 }

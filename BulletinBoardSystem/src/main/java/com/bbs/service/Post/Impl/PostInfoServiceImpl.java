@@ -27,4 +27,12 @@ public class PostInfoServiceImpl implements PostInfoService {
         return postTitleInfoDao.getPostTitleContent(id);
     }
 
+    @Override
+    public List<PostTitleInfo> getPostTitleInfosByTime(String s) throws Exception {
+        List<PostTitleInfo> ls = postTitleInfoDao.getPostTitleInfosByTime(s);
+
+        return ls;
+    }
+
+
 }

@@ -49,6 +49,9 @@ public interface PostTitleInfoDao {
     @Select("SELECT PostTitleInfo.id as id, title, owner, nick_name, PostTitleInfo.image, UserBaseInfo.icon, view_num, like_num from PostTitleInfo, UserBaseInfo where districtInfo_id = #{id} and UserBaseInfo.user_id = PostTitleInfo.owner")
     List<PostTitleInfo> getPostTitleInfos(int id) throws Exception;
 
-    @Select("select PostTitleInfo.id as id, owner, nick_name, content, PostTitleInfo.image, UserBaseInfo.icon from PostTitleInfo, UserBaseInfo where UserBaseInfo.user_id=PostTitleInfo.owner and PostTitleInfo.id=#{id}")
+    @Select("select PostTitleInfo.id as id, title, owner, nick_name, content, post_time, PostTitleInfo.image, UserBaseInfo.icon from PostTitleInfo, UserBaseInfo where UserBaseInfo.user_id=PostTitleInfo.owner and PostTitleInfo.id=#{id}")
     PostTitleInfo getPostTitleContent(int id) throws Exception;
+
+    @Select("SELECT PostTitleInfo.id, DistrictInfo.plate_id, title, owner, post_time, reply_num, reply_time, view_num, like_num, DistrictInfo.plate_id FROM DistrictInfo, PostTitleInfo WHERE PostTitleInfo.districtInfo_id = DistrictInfo.id ORDER BY PostTitleInfo.id DESC")
+    List<PostTitleInfo> getPostTitleInfosByTime(String s) throws Exception;
 }

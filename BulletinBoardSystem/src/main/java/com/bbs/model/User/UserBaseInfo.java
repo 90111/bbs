@@ -8,6 +8,16 @@ public class UserBaseInfo {
     private int user_id;
     private String nick_name;
     private String sex;
+    private String motto;
+
+    public String getMotto() {
+        return motto;
+    }
+
+    public void setMotto(String motto) {
+        this.motto = motto;
+    }
+
     private Date birth;
     private String icon;
 
