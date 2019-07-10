@@ -6,6 +6,15 @@ public class ReplyInfo {
     private int post_title_id;
     private int user_id;
     private String content;
+    private Date reply_time;
+
+    public Date getReply_time() {
+        return reply_time;
+    }
+
+    public void setReply_time(Date reply_time) {
+        this.reply_time = reply_time;
+    }
 
     public int getId(){return id;}
     public void setId(int id){this.id=id;}

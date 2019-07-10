@@ -72,7 +72,7 @@ public class UserLoginInfoController extends BaseController{
         System.out.println("调用register方法");
         userLoginInfoService.addUserLoginInfo(userLoginInfo);
         Map<String, Object> map = new HashMap<>();
-        map.put("code", 200);
+        map.put("code", "200");
         map.put("msg", "注册成功");
         return map;
     }
@@ -94,7 +94,6 @@ public class UserLoginInfoController extends BaseController{
     }
 
     @RequestMapping(value = "/checkMail", method = RequestMethod.POST)
-    @RequiresPermissions("aa")
     public Serializable checkMail(@RequestBody UserLoginInfo userLoginInfo) throws Exception {
         System.out.println("调用checkMail方法");
         JSONObject jsonObject = new JSONObject();
