@@ -10,12 +10,19 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.session.mgt.DefaultSessionContext;
+import org.apache.shiro.session.mgt.SessionKey;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.session.mgt.WebSessionKey;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -120,6 +127,23 @@ public class UserLoginInfoController extends BaseController{
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("code", "1000000");
         map.put("msg", "未登录");
+        return map;
+    }
+
+    @RequestMapping(value = "/checkSession", method = RequestMethod.POST)
+    public Map checkSession() throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        Subject currentUser = SecurityUtils.getSubject();
+        if (currentUser.isAuthenticated()){
+            String username = currentUser.getPrincipal().toString();
+            int id = userLoginInfoService.getUserLoginInfoByName(username).getId();
+            map.put("code", "200");
+            map.put("msg", "已登录");
+            map.put("id", id);
+        }else{
+            map.put("code", "500");
+            map.put("msg", "未登录");
+        }
         return map;
     }
 }
