@@ -6,6 +6,7 @@ import com.bbs.service.Post.PostInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 
@@ -35,6 +36,12 @@ public class PostInfoServiceImpl implements PostInfoService {
     @Override
     public List<PostTitleInfo> getUserRecentPostTitleByUserId(int id) throws Exception {
         return postTitleInfoDao.getUserRecentPostTitleByUserId(id);
+    }
+
+    @Override
+    public void addPostTitleInfo(PostTitleInfo postTitleInfo) throws Exception {
+        postTitleInfo.setPost_time(new Date());
+        postTitleInfoDao.addPostTitleInfo(postTitleInfo);
     }
 
 

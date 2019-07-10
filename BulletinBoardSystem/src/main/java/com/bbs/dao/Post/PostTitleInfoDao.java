@@ -14,8 +14,7 @@ import java.util.List;
 @Component
 public interface PostTitleInfoDao {
 
-    @Insert("insert into PostTitleInfo (districtInfo_id,title,`owner`,content,post_time) " +
-            "VALUES (#{districtInfo_id},#{title},#{owner},#{content},#{post_time})")
+    @Insert("insert into PostTitleInfo (districtInfo_id,title,owner,content,post_time, image) VALUES (#{districtInfo_id},#{title},#{owner},#{content},#{post_time}, #{image})")
     public void addPostTitleInfo(PostTitleInfo postTitleInfo) throws Exception;
 
     @Delete("delete from PostTitleInfo where id = #{id}")
@@ -52,7 +51,7 @@ public interface PostTitleInfoDao {
     @Select("select PostTitleInfo.id as id, title, owner, nick_name, content, post_time, PostTitleInfo.image, UserBaseInfo.icon from PostTitleInfo, UserBaseInfo where UserBaseInfo.user_id=PostTitleInfo.owner and PostTitleInfo.id=#{id}")
     PostTitleInfo getPostTitleContent(int id) throws Exception;
 
-    @Select("SELECT PostTitleInfo.id, DistrictInfo.plate_id, title, owner, post_time, reply_num, reply_time, view_num, like_num, DistrictInfo.plate_id FROM DistrictInfo, PostTitleInfo WHERE PostTitleInfo.districtInfo_id = DistrictInfo.id ORDER BY PostTitleInfo.id DESC limit 20")
+    @Select("SELECT PostTitleInfo.id, DistrictInfo.plate_id, DistrictInfo.id as districtInfo_id, title, owner, UserBaseInfo.nick_name, UserBaseInfo.icon, post_time,reply_time, view_num, like_num, PostTitleInfo.image FROM DistrictInfo, PostTitleInfo, UserBaseInfo WHERE PostTitleInfo.districtInfo_id = DistrictInfo.id and PostTitleInfo.owner = UserBaseInfo.user_id ORDER BY PostTitleInfo.id DESC limit 20")
     List<PostTitleInfo> getPostTitleInfosByTime(String s) throws Exception;
 
     @Select("SELECT id, title, view_num, like_num, image FROM PostTitleInfo WHERE owner=#{id} ORDER BY id DESC limit 2")

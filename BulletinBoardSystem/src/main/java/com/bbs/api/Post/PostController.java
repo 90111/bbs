@@ -3,7 +3,9 @@ package com.bbs.api.Post;
 import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.service.Post.Impl.PostInfoServiceImpl;
 import com.bbs.service.User.Impl.UserBaseInfoServiceImpl;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,6 +64,22 @@ public class PostController {
             map.put("msg", "获取首页帖子失败");
         }
         return map;
+    }
 
+
+    @RequestMapping(value = "/addPostTitle", method = RequestMethod.POST)
+    @RequiresPermissions("createPost")
+    public Map addPostTitleInfo(@RequestBody PostTitleInfo postTitleInfo) {
+        System.out.println("调用addPostTitleInfo方法");
+        Map<String, Object> map = new HashMap();
+        try {
+            postInfoService.addPostTitleInfo(postTitleInfo);
+            map.put("code", "200");
+            map.put("msg", "发布帖子成功");
+        }catch (Exception e){
+            map.put("code", "500");
+            map.put("msg", "发布帖子失败");
+        }
+        return map;
     }
 }

@@ -14,4 +14,6 @@ public interface PostInfoService {
     List<PostTitleInfo> getPostTitleInfosByTime(String s) throws Exception;
 
     List<PostTitleInfo> getUserRecentPostTitleByUserId(int id) throws Exception;
+
+    void addPostTitleInfo(PostTitleInfo postTitleInfo) throws Exception;
 }
