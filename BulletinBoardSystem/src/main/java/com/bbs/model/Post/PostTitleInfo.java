@@ -3,6 +3,7 @@ package com.bbs.model.Post;
 import java.util.Date;
 public class PostTitleInfo {
     private int id;
+    private int plate_id;
     private int districtInfo_id;
     private String title;
     private int owner;
@@ -19,6 +20,15 @@ public class PostTitleInfo {
     private String image;
     private String icon;
     private String nick_name;
+
+
+    public int getPlate_id() {
+        return plate_id;
+    }
+
+    public void setPlate_id(int plate_id) {
+        this.plate_id = plate_id;
+    }
 
     public String getNick_name() {
         return nick_name;

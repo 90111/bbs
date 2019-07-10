@@ -29,9 +29,12 @@ public class PostInfoServiceImpl implements PostInfoService {
 
     @Override
     public List<PostTitleInfo> getPostTitleInfosByTime(String s) throws Exception {
-        List<PostTitleInfo> ls = postTitleInfoDao.getPostTitleInfosByTime(s);
+        return postTitleInfoDao.getPostTitleInfosByTime(s);
+    }
 
-        return ls;
+    @Override
+    public List<PostTitleInfo> getUserRecentPostTitleByUserId(int id) throws Exception {
+        return postTitleInfoDao.getUserRecentPostTitleByUserId(id);
     }
 
 

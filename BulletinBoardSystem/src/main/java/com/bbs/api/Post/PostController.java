@@ -23,15 +23,15 @@ public class PostController {
     private UserBaseInfoServiceImpl userBaseInfoService;
 
     @RequestMapping(value = "/getPostTitles", method = RequestMethod.GET)
-    public List<PostTitleInfo> getPostTitles(int id) throws Exception {
-        System.out.println("调用getPostTitles方法");
+    public List<PostTitleInfo> getPostTitlesByDistrictId(int id) throws Exception {
+        System.out.println("调用getPostTitlesByDistrictId方法");
 
         return postInfoService.getPostTitleInfos(id);
     }
 
     @RequestMapping(value = "/getPostTitleContent", method = RequestMethod.GET)
     public Map getPostTitleContent(int id) {
-        System.out.println("调用getPostTitleContent");
+        System.out.println("获取帖子内容");
         Map<String, Object> map = new HashMap<>();
         try {
             PostTitleInfo info = postInfoService.getPostTitleContent(id);
@@ -39,6 +39,7 @@ public class PostController {
             map.put("msg", "获取帖子内容成功");
             map.put("Content", info);
             map.put("UserInfo", userBaseInfoService.getUserBaseInfoByUserId(info.getOwner()));
+            map.put("CurrentPostTitle", postInfoService.getUserRecentPostTitleByUserId(info.getOwner()));
         }catch (Exception e){
             map.put("code", "500");
             map.put("msg", "获取帖子内容失败");
