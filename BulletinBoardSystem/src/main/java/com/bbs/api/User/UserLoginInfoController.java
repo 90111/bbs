@@ -1,7 +1,6 @@
 package com.bbs.api.User;
 
 
-import com.alibaba.fastjson.JSON;
 import com.bbs.model.User.UserLoginInfo;
 import com.bbs.service.User.Impl.UserBaseInfoServiceImpl;
 import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
@@ -17,11 +16,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
