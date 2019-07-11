@@ -11,7 +11,16 @@ public class UserCollectionInfo {
     private int like_num;
     private int reply_num;
     private int view_num;
+    private boolean liked;
     private int recommend_num;
+
+    public boolean isliked() {
+        return liked;
+    }
+
+    public void setLiked(boolean likde) {
+        this.liked = likde;
+    }
 
     public int getUser_id() {
         return user_id;

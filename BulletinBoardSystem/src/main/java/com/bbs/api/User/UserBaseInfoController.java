@@ -2,6 +2,7 @@ package com.bbs.api.User;
 
 
 import com.bbs.model.Post.PostTitleInfo;
+import com.bbs.model.User.UserCollectionInfo;
 import com.bbs.model.User.UserLoginInfo;
 import com.bbs.service.Post.Impl.PostTitleInfoServiceImpl;
 import com.bbs.service.User.Impl.UserBaseInfoServiceImpl;
@@ -52,17 +53,13 @@ public class UserBaseInfoController {
     }
 
     @RequestMapping(value = "/userPostTitles", method = RequestMethod.POST)
-    public Map getUserPostTitle(int id) throws Exception {
+    public Map getUserPostTitle(int id) {
         Map<String, Object> map = new HashMap<>();
         System.out.println("调用getUserPostTitles方法");
-        Subject currentUser = SecurityUtils.getSubject();
-        String username = (String) currentUser.getPrincipal();
-        int user_id = -1;
-        user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
         try {
             List<PostTitleInfo> ls = postTitleInfoService.getUserPostTitleByUserId(id);
             for (PostTitleInfo info : ls){
-                info.setLiked(userLikeInfoService.checkIsLike(user_id, info.getId()));
+                info.setLiked(userLikeInfoService.checkIsLike(id, info.getId()));
             }
             map.put("code", "200");
             map.put("msg", "个人帖子获取成功");
@@ -76,17 +73,13 @@ public class UserBaseInfoController {
     }
 
     @RequestMapping(value = "/UserCollection", method = RequestMethod.POST)
-    public Map getUserCollection(int id) throws Exception {
+    public Map getUserCollection(int id) {
         Map<String, Object> map = new HashMap<>();
         System.out.println("调用getUserCollection方法");
-        Subject currentUser = SecurityUtils.getSubject();
-        String username = (String) currentUser.getPrincipal();
-        int user_id = -1;
-        user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
         try {
-            List<PostTitleInfo> ls = postTitleInfoService.getUserPostTitleByUserId(id);
-            for (PostTitleInfo info : ls){
-                info.setLiked(userLikeInfoService.checkIsLike(user_id, info.getId()));
+            List<UserCollectionInfo> ls = postTitleInfoService.getUserCollection(id);
+            for (UserCollectionInfo info : ls){
+                info.setLiked(userLikeInfoService.checkIsLike(id, info.getPost_title_id()));
             }
             map.put("code", "200");
             map.put("msg", "个人收藏获取成功");

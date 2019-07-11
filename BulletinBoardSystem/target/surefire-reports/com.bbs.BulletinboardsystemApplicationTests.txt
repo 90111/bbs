@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.bbs.BulletinboardsystemApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.761 s - in com.bbs.BulletinboardsystemApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.173 s - in com.bbs.BulletinboardsystemApplicationTests
