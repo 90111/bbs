@@ -84,14 +84,14 @@ public class UserBaseInfoController {
         int user_id = -1;
         user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
         try {
-//            List<PostTitleInfo> ls = postTitleInfoService.getUserPostTitleByUserId(id);
-//            for (PostTitleInfo info : ls){
-//                info.setLiked(userLikeInfoService.checkIsLike(user_id, info.getId()));
-//            }
-//            map.put("code", "200");
-//            map.put("msg", "个人收藏获取成功");
-//            map.put("collection", postTitleInfoService.getUserCollection(id));
-//        }catch (Exception e){
+            List<PostTitleInfo> ls = postTitleInfoService.getUserPostTitleByUserId(id);
+            for (PostTitleInfo info : ls){
+                info.setLiked(userLikeInfoService.checkIsLike(user_id, info.getId()));
+            }
+            map.put("code", "200");
+            map.put("msg", "个人收藏获取成功");
+            map.put("collection", postTitleInfoService.getUserCollection(id));
+        }catch (Exception e){
             e.printStackTrace();
             map.put("code", "500");
             map.put("msg", "个人收藏获取失败");
