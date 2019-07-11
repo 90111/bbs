@@ -11,7 +11,7 @@ import java.util.List;
 public interface AnnouncementInfoDao {
 
     @Select("SELECT id,owner,content,post_time FROM AnnouncementInfo ORDER BY id DESC limit 1")
-    AnnouncementInfo getTopAnnouncementInfo() throws Exception;
+    AnnouncementInfo getRecentAnnouncement() throws Exception;
 
     @Delete("DELETE FROM AnnouncementInfo WHERE id = #{id}")
     void deleteAnnouncementInfoById (int id) throws Exception;

@@ -17,7 +17,7 @@ public interface ReplyInfoDao {
     @Insert("insert into ReplyInfo (post_title_id,user_id,content,reply_time) VALUES (#{post_title_id},#{user_id},#{content},#{reply_time})")
     void addReplyInfo(ReplyInfo replyInfo) throws Exception;
 
-    @Select("select ReplyInfo.id, ReplyInfo.user_id, ReplyInfo.content, UserBaseInfo.nick_name, UserBaseInfo.icon from ReplyInfo, UserBaseInfo where post_title_id=#{post_title_id} and ReplyInfo.user_id = UserBaseInfo.user_id")
+    @Select("select ReplyInfo.id, ReplyInfo.user_id, ReplyInfo.content, UserBaseInfo.nick_name, UserBaseInfo.icon, ReplyInfo.reply_time from ReplyInfo, UserBaseInfo where post_title_id=#{post_title_id} and ReplyInfo.user_id = UserBaseInfo.user_id")
     List<ReplyInfo> getReplyInfos(int post_title_id) throws Exception;
 
 }

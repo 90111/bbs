@@ -19,12 +19,12 @@ public class AnnouncementController {
     @Autowired
     private UserBaseInfoServiceImpl userBaseInfoService;
 
-    @RequestMapping(value = "/getTopAnnouncement", method = RequestMethod.GET)
+    @RequestMapping(value = "/getRecentAnnouncement", method = RequestMethod.GET)
     public Map getTopAnnouncement(){
         System.out.println("获取最新公告");
         Map<String, Object> map = new HashMap<>();
         try{
-            AnnouncementInfo announcementInfo = announcementInfoService.getTopAnnouncementInfo();
+            AnnouncementInfo announcementInfo = announcementInfoService.getRecentAnnouncement();
             map.put("code","200");
             map.put("msg", "获取最新公告成功");
             map.put("topAnnouncement",announcementInfo);

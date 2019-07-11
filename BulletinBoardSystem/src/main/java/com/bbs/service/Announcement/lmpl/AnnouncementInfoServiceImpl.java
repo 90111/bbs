@@ -6,6 +6,7 @@ import com.bbs.service.Announcement.AnnouncementInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 
@@ -16,8 +17,8 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
     private AnnouncementInfoDao announcementInfoDao;
 
     @Override
-    public AnnouncementInfo getTopAnnouncementInfo() throws Exception{
-        return announcementInfoDao.getTopAnnouncementInfo();
+    public AnnouncementInfo getRecentAnnouncement() throws Exception{
+        return announcementInfoDao.getRecentAnnouncement();
     }
 
 
@@ -28,6 +29,7 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
 
     @Override
     public void addAnnouncementInfo(AnnouncementInfo announcementInfo) throws Exception{
+        announcementInfo.setPost_time(new Date());
         announcementInfoDao.addAnnouncementInfo(announcementInfo);
     }
 

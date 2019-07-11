@@ -60,6 +60,7 @@ public class PostController {
             map.put("msg", "获取首页帖子成功");
             map.put("PostTitleList", ls);
         }catch (Exception e){
+            e.printStackTrace();
             map.put("code", "500");
             map.put("msg", "获取首页帖子失败");
         }
