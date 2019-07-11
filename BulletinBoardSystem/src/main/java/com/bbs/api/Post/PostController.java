@@ -102,4 +102,23 @@ public class PostController {
         }
         return map;
     }
+
+    @RequestMapping(value = "/like", method = RequestMethod.GET)
+    public Map addLike(int post_title_id) throws Exception {
+        System.out.println("调用addLike方法");
+        Map<String, Object> map = new HashMap<>();
+        Subject currentUser = SecurityUtils.getSubject();
+        String username = (String) currentUser.getPrincipal();
+        int user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
+        try {
+            userLikeInfoService.changeLike(user_id, post_title_id);
+            map.put("code", "200");
+            map.put("msg", "操作成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("code", "500");
+            map.put("msg", "操作失败");
+        }
+        return map;
+    }
 }

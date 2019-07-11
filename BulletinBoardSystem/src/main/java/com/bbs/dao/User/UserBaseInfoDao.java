@@ -23,4 +23,7 @@ public interface UserBaseInfoDao {
 
     @Update("update UserBaseInfo set fans_num = (select count(*) from UserFollowInfo where follow_id = #{user_id}) WHERE user_id = #{user_id}")
     void updateUserFansNum(int user_id) throws Exception;
+
+    @Update("update UserBaseInfo set post_num = (select count(*) from PostTitleInfo where `owner` = #{user_id}) where user_id = #{user_id}")
+    void updatePostNumByUserId(int user_id) throws Exception;
 }
