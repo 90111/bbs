@@ -2,7 +2,7 @@ package com.bbs.service.Post.Impl;
 
 import com.bbs.dao.Post.PostTitleInfoDao;
 import com.bbs.model.Post.PostTitleInfo;
-import com.bbs.service.Post.PostInfoService;
+import com.bbs.service.Post.PostTitleInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @Service
-public class PostInfoServiceImpl implements PostInfoService {
+public class PostTitleInfoServiceImpl implements PostTitleInfoService {
 
     @Resource
     private PostTitleInfoDao postTitleInfoDao;
@@ -42,6 +42,11 @@ public class PostInfoServiceImpl implements PostInfoService {
     public void addPostTitleInfo(PostTitleInfo postTitleInfo) throws Exception {
         postTitleInfo.setPost_time(new Date());
         postTitleInfoDao.addPostTitleInfo(postTitleInfo);
+    }
+
+    @Override
+    public List<PostTitleInfo> getUserPostTitleByUserId(int id) throws Exception {
+        return postTitleInfoDao.getUserPostTitleByUserId(id);
     }
 
 

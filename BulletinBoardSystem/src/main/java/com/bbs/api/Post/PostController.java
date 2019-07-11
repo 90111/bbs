@@ -1,7 +1,7 @@
 package com.bbs.api.Post;
 
 import com.bbs.model.Post.PostTitleInfo;
-import com.bbs.service.Post.Impl.PostInfoServiceImpl;
+import com.bbs.service.Post.Impl.PostTitleInfoServiceImpl;
 import com.bbs.service.User.Impl.UserBaseInfoServiceImpl;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.Map;
 public class PostController {
 
     @Autowired
-    private PostInfoServiceImpl postInfoService;
+    private PostTitleInfoServiceImpl postInfoService;
 
     @Autowired
     private UserBaseInfoServiceImpl userBaseInfoService;
@@ -54,7 +54,7 @@ public class PostController {
         System.out.println("调用getIndexPostTitles方法");
         Map<String, Object> map = new HashMap<>();
         try{
-            String s = "a";
+            String s = "post_time";
             List<PostTitleInfo> ls = postInfoService.getPostTitleInfosByTime(s);
             map.put("code", "200");
             map.put("msg", "获取首页帖子成功");

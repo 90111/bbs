@@ -2,10 +2,9 @@ package com.bbs.service.Post;
 
 import com.bbs.model.Post.PostTitleInfo;
 
-import javax.annotation.Resource;
 import java.util.List;
 
-public interface PostInfoService {
+public interface PostTitleInfoService {
 
     List<PostTitleInfo> getPostTitleInfos(int id) throws Exception;
 
@@ -16,4 +15,6 @@ public interface PostInfoService {
     List<PostTitleInfo> getUserRecentPostTitleByUserId(int id) throws Exception;
 
     void addPostTitleInfo(PostTitleInfo postTitleInfo) throws Exception;
+
+    List<PostTitleInfo> getUserPostTitleByUserId(int id) throws Exception;
 }
