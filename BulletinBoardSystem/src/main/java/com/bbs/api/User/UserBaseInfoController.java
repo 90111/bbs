@@ -79,6 +79,7 @@ public class UserBaseInfoController {
 
     @RequestMapping(value = "/deletePost", method = RequestMethod.POST)
     public Map deletePostTitleById(int post_title_id) throws Exception {
+        System.out.println("调用deletePostTitleById方法");
         Map<String, Object> map = new HashMap<>();
         Subject currentUser = SecurityUtils.getSubject();
         String username = (String) currentUser.getPrincipal();
