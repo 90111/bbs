@@ -2,12 +2,14 @@ package com.bbs.service.Post.Impl;
 
 import com.bbs.dao.Post.PostTitleInfoDao;
 import com.bbs.model.Post.PostTitleInfo;
+import com.bbs.model.User.UserCollectionInfo;
 import com.bbs.service.Post.PostTitleInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -47,6 +49,11 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     @Override
     public List<PostTitleInfo> getUserPostTitleByUserId(int id) throws Exception {
         return postTitleInfoDao.getUserPostTitleByUserId(id);
+    }
+
+    @Override
+    public List<UserCollectionInfo> getUserCollection(int user_id) throws Exception {
+        return postTitleInfoDao.getUserCollection(user_id);
     }
 
 

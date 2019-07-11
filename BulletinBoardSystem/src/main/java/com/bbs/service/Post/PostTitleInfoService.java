@@ -1,8 +1,10 @@
 package com.bbs.service.Post;
 
 import com.bbs.model.Post.PostTitleInfo;
+import com.bbs.model.User.UserCollectionInfo;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PostTitleInfoService {
 
@@ -17,4 +19,6 @@ public interface PostTitleInfoService {
     void addPostTitleInfo(PostTitleInfo postTitleInfo) throws Exception;
 
     List<PostTitleInfo> getUserPostTitleByUserId(int id) throws Exception;
+
+    List<UserCollectionInfo> getUserCollection(int user_id) throws Exception;
 }

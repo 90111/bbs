@@ -6,6 +6,34 @@ public class UserBaseInfo {
 
     private int id;
     private int user_id;
+    private int follow_num;
+    private int fans_num;
+
+    public int getFollow_num() {
+        return follow_num;
+    }
+
+    public void setFollow_num(int follow_num) {
+        this.follow_num = follow_num;
+    }
+
+    public int getFans_num() {
+        return fans_num;
+    }
+
+    public void setFans_num(int fans_num) {
+        this.fans_num = fans_num;
+    }
+
+    public int getLike_num() {
+        return like_num;
+    }
+
+    public void setLike_num(int like_num) {
+        this.like_num = like_num;
+    }
+
+    private int like_num;
     private String nick_name;
     private String sex;
     private String motto;

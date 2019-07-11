@@ -30,6 +30,7 @@ public class UserBaseInfoController {
             map.put("msg", "个人信息获取成功");
             map.put("userInfo", baseInfoService.getUserBaseInfoByUserId(id));
             map.put("recentPost", postTitleInfoService.getUserPostTitleByUserId(id));
+            map.put("collection", postTitleInfoService.getUserCollection(id));
         }catch (Exception e){
             e.printStackTrace();
             map.put("code", "200");

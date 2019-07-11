@@ -14,6 +14,15 @@ public class UserLoginInfo {
     private String password;
     private String mail;
     private List<RoleInfo> roleInfos;
+    private UserBaseInfo userBaseInfo;
+
+    public UserBaseInfo getUserBaseInfo() {
+        return userBaseInfo;
+    }
+
+    public void setUserBaseInfo(UserBaseInfo userBaseInfo) {
+        this.userBaseInfo = userBaseInfo;
+    }
 
     public List<RoleInfo> getRoleInfos() {
         return roleInfos;
