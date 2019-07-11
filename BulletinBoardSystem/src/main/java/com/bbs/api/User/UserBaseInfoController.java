@@ -1,9 +1,11 @@
 package com.bbs.api.User;
 
 
+import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.model.User.UserLoginInfo;
 import com.bbs.service.Post.Impl.PostTitleInfoServiceImpl;
 import com.bbs.service.User.Impl.UserBaseInfoServiceImpl;
+import com.bbs.service.User.Impl.UserLikeInfoServiceImpl;
 import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -27,6 +30,9 @@ public class UserBaseInfoController {
 
     @Autowired
     private UserLoginInfoServiceImpl userLoginInfoService;
+
+    @Autowired
+    private UserLikeInfoServiceImpl userLikeInfoService;
 
     @RequestMapping(value = "/baseInfo", method = RequestMethod.POST)
     public Map getBaseInfo(int id) {
@@ -46,13 +52,21 @@ public class UserBaseInfoController {
     }
 
     @RequestMapping(value = "/userPostTitles", method = RequestMethod.POST)
-    public Map getUserPostTitle(int id) {
+    public Map getUserPostTitle(int id) throws Exception {
         Map<String, Object> map = new HashMap<>();
         System.out.println("调用getUserPostTitles方法");
+        Subject currentUser = SecurityUtils.getSubject();
+        String username = (String) currentUser.getPrincipal();
+        int user_id = -1;
+        user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
         try {
+            List<PostTitleInfo> ls = postTitleInfoService.getUserPostTitleByUserId(id);
+            for (PostTitleInfo info : ls){
+                info.setLiked(userLikeInfoService.checkIsLike(user_id, info.getId()));
+            }
             map.put("code", "200");
             map.put("msg", "个人帖子获取成功");
-            map.put("recentPost", postTitleInfoService.getUserPostTitleByUserId(id));
+            map.put("recentPost", ls);
         }catch (Exception e){
             e.printStackTrace();
             map.put("code", "500");
@@ -62,14 +76,22 @@ public class UserBaseInfoController {
     }
 
     @RequestMapping(value = "/UserCollection", method = RequestMethod.POST)
-    public Map getUserCollection(int id) {
+    public Map getUserCollection(int id) throws Exception {
         Map<String, Object> map = new HashMap<>();
         System.out.println("调用getUserCollection方法");
+        Subject currentUser = SecurityUtils.getSubject();
+        String username = (String) currentUser.getPrincipal();
+        int user_id = -1;
+        user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
         try {
-            map.put("code", "200");
-            map.put("msg", "个人收藏获取成功");
-            map.put("collection", postTitleInfoService.getUserCollection(id));
-        }catch (Exception e){
+//            List<PostTitleInfo> ls = postTitleInfoService.getUserPostTitleByUserId(id);
+//            for (PostTitleInfo info : ls){
+//                info.setLiked(userLikeInfoService.checkIsLike(user_id, info.getId()));
+//            }
+//            map.put("code", "200");
+//            map.put("msg", "个人收藏获取成功");
+//            map.put("collection", postTitleInfoService.getUserCollection(id));
+//        }catch (Exception e){
             e.printStackTrace();
             map.put("code", "500");
             map.put("msg", "个人收藏获取失败");

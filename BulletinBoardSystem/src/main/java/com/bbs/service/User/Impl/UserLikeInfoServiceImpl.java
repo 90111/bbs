@@ -1,7 +1,8 @@
-package com.bbs.service.Post.Impl;
+package com.bbs.service.User.Impl;
 
 import com.bbs.dao.Post.PostTitleInfoDao;
 import com.bbs.dao.User.UserLikeInfoDao;
+import com.bbs.service.User.UserLikeInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -32,4 +33,6 @@ public class UserLikeInfoServiceImpl implements UserLikeInfoService {
         }
         postTitleInfoDao.updatePostTitleLikeNum(post_title_id);
     }
+
+
 }

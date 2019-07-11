@@ -2,7 +2,7 @@ package com.bbs.api.Post;
 
 import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.service.Post.Impl.PostTitleInfoServiceImpl;
-import com.bbs.service.Post.Impl.UserLikeInfoServiceImpl;
+import com.bbs.service.User.Impl.UserLikeInfoServiceImpl;
 import com.bbs.service.User.Impl.UserBaseInfoServiceImpl;
 import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
 import org.apache.shiro.SecurityUtils;
@@ -42,11 +42,16 @@ public class PostController {
     }
 
     @RequestMapping(value = "/getPostTitleContent", method = RequestMethod.GET)
-    public Map getPostTitleContent(int id) {
+    public Map getPostTitleContent(int id) throws Exception {
         System.out.println("获取帖子内容");
         Map<String, Object> map = new HashMap<>();
+        Subject currentUser = SecurityUtils.getSubject();
+        String username = (String) currentUser.getPrincipal();
+        int user_id = -1;
+        user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
         try {
             PostTitleInfo info = postInfoService.getPostTitleContent(id);
+            info.setLiked(userLikeInfoService.checkIsLike(user_id, id));
             map.put("code", "200");
             map.put("msg", "获取帖子内容成功");
             map.put("Content", info);
@@ -107,6 +112,25 @@ public class PostController {
     @RequestMapping(value = "/like", method = RequestMethod.GET)
     public Map addLike(int post_title_id) throws Exception {
         System.out.println("调用addLike方法");
+        Map<String, Object> map = new HashMap<>();
+        Subject currentUser = SecurityUtils.getSubject();
+        String username = (String) currentUser.getPrincipal();
+        int user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
+        try {
+            userLikeInfoService.changeLike(user_id, post_title_id);
+            map.put("code", "200");
+            map.put("msg", "操作成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("code", "500");
+            map.put("msg", "操作失败");
+        }
+        return map;
+    }
+
+    @RequestMapping(value = "/collect", method = RequestMethod.GET)
+    public Map addCollect(int post_title_id) throws Exception {
+        System.out.println("调用addCollect");
         Map<String, Object> map = new HashMap<>();
         Subject currentUser = SecurityUtils.getSubject();
         String username = (String) currentUser.getPrincipal();
