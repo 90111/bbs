@@ -39,6 +39,9 @@ public interface PostTitleInfoDao {
     @Update("update PostTitleInfo set like_num=(select count(*) from UserLikeInfo where UserLikeInfo.post_title_id=#{post_title_id}) where id=#{post_title_id}")
     public void updatePostTitleLikeNum(int post_title_id) throws Exception;
 
+    @Update("update PostTitleInfo set view_num = view_num+1 where id=#{id}")
+    public void updatePostTitleViewNum(int id) throws Exception;
+
     @Select("SELECT PostTitleInfo.id as id, title, owner, nick_name, PostTitleInfo.image, UserBaseInfo.icon, view_num, like_num from PostTitleInfo, UserBaseInfo " +
             "where districtInfo_id = #{id} and UserBaseInfo.user_id = PostTitleInfo.owner")
     List<PostTitleInfo> getPostTitleInfos(int id) throws Exception;

@@ -52,6 +52,7 @@ public class PostController {
             map.put("Content", info);
             map.put("UserInfo", userBaseInfoService.getUserBaseInfoByUserId(info.getOwner()));
             map.put("CurrentPostTitle", postInfoService.getUserRecentPostTitleByUserId(info.getOwner()));
+
         }catch (Exception e){
             map.put("code", "500");
             map.put("msg", "获取帖子内容失败");

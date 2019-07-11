@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 
 @Service
@@ -27,6 +26,7 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
 
     @Override
     public PostTitleInfo getPostTitleContent(int id) throws Exception {
+        postTitleInfoDao.updatePostTitleViewNum(id);
         return postTitleInfoDao.getPostTitleContent(id);
     }
 
