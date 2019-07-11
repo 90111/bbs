@@ -21,4 +21,8 @@ public interface PostTitleInfoService {
     List<PostTitleInfo> getUserPostTitleByUserId(int id) throws Exception;
 
     List<UserCollectionInfo> getUserCollection(int user_id) throws Exception;
+
+    void deleteByPostTitleId(int user_id, int id) throws Exception;
+
+    PostTitleInfo getPostTitleById(int id) throws Exception;
 }

@@ -10,7 +10,6 @@ import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 @Component
@@ -19,8 +18,8 @@ public interface PostTitleInfoDao {
     @Insert("insert into PostTitleInfo (districtInfo_id,title,owner,content,post_time, image) VALUES (#{districtInfo_id},#{title},#{owner},#{content},#{post_time}, #{image})")
     public void addPostTitleInfo(PostTitleInfo postTitleInfo) throws Exception;
 
-    @Delete("delete from PostTitleInfo where id = #{id}")
-    public void deletePostTitleInfoById(int id) throws Exception;
+    @Delete("delete from PostTitleInfo where owner = #{owner} and id=#{id}")
+    public void deletePostTitleInfoById(int owner, int id) throws Exception;
 
     @Select("select reply_num,reply_time from PostTitleInfo where id = #{id}")
     public void getPostTitleInfoReply(int id) throws Exception;
@@ -52,6 +51,10 @@ public interface PostTitleInfoDao {
     @Select("SELECT id, title, view_num, like_num, image FROM PostTitleInfo WHERE owner=#{user_id} ORDER BY `post_time` DESC")
     List<PostTitleInfo> getUserPostTitleByUserId(int user_id) throws Exception;
 
-    @Select("SELECT UserLoginInfo.id as user_id, PostTitleInfo.id as post_title_id, nick_name, icon, title, image, PostTitleInfo.like_num, PostTitleInfo.reply_num, PostTitleInfo.recommend_num, PostTitleInfo.view_num from PostTitleInfo JOIN CollectionInfo ON CollectionInfo.post_title_id=PostTitleInfo.id JOIN UserLoginInfo ON PostTitleInfo.`owner` = UserLoginInfo.id  JOIN UserBaseInfo ON UserLoginInfo.id = UserBaseInfo.user_id WHERE CollectionInfo.user_id=22")
+    @Select("SELECT UserLoginInfo.id as user_id, PostTitleInfo.id as post_title_id, nick_name, icon, title, image, PostTitleInfo.like_num, PostTitleInfo.reply_num, PostTitleInfo.recommend_num, PostTitleInfo.view_num from PostTitleInfo JOIN CollectionInfo ON CollectionInfo.post_title_id=PostTitleInfo.id JOIN UserLoginInfo ON PostTitleInfo.`owner` = UserLoginInfo.id  JOIN UserBaseInfo ON UserLoginInfo.id = UserBaseInfo.user_id WHERE CollectionInfo.user_id=#{user_id}")
     List<UserCollectionInfo> getUserCollection(int user_id) throws Exception;
+
+    @Select("select * from PostTitleInfo where id=#{id}")
+    PostTitleInfo getPostTitleById(int id) throws Exception;
+
 }

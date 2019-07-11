@@ -18,9 +18,9 @@ public interface UserBaseInfoDao {
     @Delete("delete from UserBaseInfo where user_id = #{user_id}")
     void deleteUserBaseInfoById(int user_id) throws Exception;
 
-    @Update("update UserBaseInfo set follow_num = (select count(*) from UserMarkInfo where user_id = #{user_id}) WHERE user_id = #{user_id}")
+    @Update("update UserBaseInfo set follow_num = (select count(*) from UserFollowInfo where user_id = #{user_id}) WHERE user_id = #{user_id}")
     void updateUserFollowNum(int user_id) throws Exception;
 
-    @Update("update UserBaseInfo set fans_num = (select count(*) from UserMarkInfo where follow_id = #{user_id}) WHERE user_id = #{user_id}")
+    @Update("update UserBaseInfo set fans_num = (select count(*) from UserFollowInfo where follow_id = #{user_id}) WHERE user_id = #{user_id}")
     void updateUserFansNum(int user_id) throws Exception;
 }

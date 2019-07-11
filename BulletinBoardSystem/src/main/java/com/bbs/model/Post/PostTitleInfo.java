@@ -20,7 +20,15 @@ public class PostTitleInfo {
     private String image;
     private String icon;
     private String nick_name;
+    private boolean Liked = false;
 
+    public boolean isLiked() {
+        return Liked;
+    }
+
+    public void setLiked(boolean liked) {
+        Liked = liked;
+    }
 
     public int getPlate_id() {
         return plate_id;

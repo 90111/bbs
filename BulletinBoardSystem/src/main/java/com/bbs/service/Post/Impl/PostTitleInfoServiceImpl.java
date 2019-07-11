@@ -56,5 +56,15 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
         return postTitleInfoDao.getUserCollection(user_id);
     }
 
+    @Override
+    public void deleteByPostTitleId(int user_id, int id) throws Exception {
+        postTitleInfoDao.deletePostTitleInfoById(user_id, id);
+    }
+
+    @Override
+    public PostTitleInfo getPostTitleById(int id) throws Exception {
+        return postTitleInfoDao.getPostTitleById(id);
+    }
+
 
 }

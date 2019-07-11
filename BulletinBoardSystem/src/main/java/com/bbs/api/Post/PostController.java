@@ -2,8 +2,12 @@ package com.bbs.api.Post;
 
 import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.service.Post.Impl.PostTitleInfoServiceImpl;
+import com.bbs.service.Post.Impl.UserLikeInfoServiceImpl;
 import com.bbs.service.User.Impl.UserBaseInfoServiceImpl;
+import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +27,12 @@ public class PostController {
 
     @Autowired
     private UserBaseInfoServiceImpl userBaseInfoService;
+
+    @Autowired
+    private UserLikeInfoServiceImpl userLikeInfoService;
+
+    @Autowired
+    private UserLoginInfoServiceImpl userLoginInfoService;
 
     @RequestMapping(value = "/getPostTitles", method = RequestMethod.GET)
     public List<PostTitleInfo> getPostTitlesByDistrictId(int id) throws Exception {
@@ -54,8 +64,17 @@ public class PostController {
         System.out.println("调用getIndexPostTitles方法");
         Map<String, Object> map = new HashMap<>();
         try{
+            Subject currentUser = SecurityUtils.getSubject();
             String s = "post_time";
             List<PostTitleInfo> ls = postInfoService.getPostTitleInfosByTime(s);
+            if (currentUser.isAuthenticated()){
+                String username = (String) currentUser.getPrincipal();
+                Integer user_id = -1;
+                user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
+                for (PostTitleInfo info : ls){
+                    info.setLiked(userLikeInfoService.checkIsLike(user_id, info.getId()));
+                }
+            }
             map.put("code", "200");
             map.put("msg", "获取首页帖子成功");
             map.put("PostTitleList", ls);
