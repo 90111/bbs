@@ -18,4 +18,9 @@ public class UserBaseInfoServiceImpl implements UserBaseInfoService {
     public UserBaseInfo getUserBaseInfoByUserId(int user_id) throws Exception {
         return userBaseInfoDao.getUserBaseInfoByUserId(user_id);
     }
+
+    @Override
+    public void updateUserLikeNum(int user_id) throws Exception {
+        userBaseInfoDao.updateUserLikeNum(user_id);
+    }
 }

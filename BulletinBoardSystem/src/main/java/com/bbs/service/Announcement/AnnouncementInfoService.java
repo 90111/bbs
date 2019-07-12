@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AnnouncementInfoService {
 
-    AnnouncementInfo getRecentAnnouncement() throws Exception;
+    AnnouncementInfo getRecentAnnouncement(int plate_id, int district_id) throws Exception;
 
     void deleteAnnouncementInfoById (int id) throws Exception;
 

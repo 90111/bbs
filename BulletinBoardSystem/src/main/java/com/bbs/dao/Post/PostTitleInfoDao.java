@@ -2,11 +2,7 @@ package com.bbs.dao.Post;
 
 import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.model.User.UserCollectionInfo;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -49,20 +45,20 @@ public interface PostTitleInfoDao {
     @Update("update PostTitleInfo set reply_time=#{reply_time} WHERE id=#{id}")
     void updateReplyTime(Date reply_time, int id) throws Exception;
 
-    @Select("SELECT PostTitleInfo.id as id, title, owner, nick_name, PostTitleInfo.image, UserBaseInfo.icon, view_num, PostTitleInfo.like_num from PostTitleInfo, UserBaseInfo " +
-            "where districtInfo_id = #{id} and UserBaseInfo.user_id = PostTitleInfo.owner")
-    List<PostTitleInfo> getPostTitleInfos(int id) throws Exception;
+    @Select("SELECT PostTitleInfo.id as id, title, owner, nick_name, PostTitleInfo.image, UserBaseInfo.icon, view_num, PostTitleInfo.like_num, recommend_num, reply_time, reply_num from PostTitleInfo, UserBaseInfo " +
+            "where districtInfo_id = #{id} and UserBaseInfo.user_id = PostTitleInfo.owner order by ${orderby} desc limit 20")
+    List<PostTitleInfo> getPostTitleInfos(int id, @Param("orderby") String orderby) throws Exception;
 
-    @Select("select PostTitleInfo.id as id, districtInfo_id, title, owner, nick_name, content, post_time, PostTitleInfo.image, UserBaseInfo.icon, view_num, PostTitleInfo.like_num, reply_num from PostTitleInfo, UserBaseInfo " +
+    @Select("select PostTitleInfo.id as id, districtInfo_id, title, owner, nick_name, content, post_time, PostTitleInfo.image, UserBaseInfo.icon, view_num, PostTitleInfo.like_num, recommend_num,reply_num from PostTitleInfo, UserBaseInfo " +
             "where UserBaseInfo.user_id=PostTitleInfo.owner and PostTitleInfo.id=#{id}")
     PostTitleInfo getPostTitleContent(int id) throws Exception;
 
-    @Select("SELECT PostTitleInfo.id, DistrictInfo.plate_id, DistrictInfo.id as districtInfo_id, title, owner, " +
-            "UserBaseInfo.nick_name, UserBaseInfo.icon, post_time, reply_time, view_num, PostTitleInfo.like_num, " +
+    @Select("SELECT PostTitleInfo.id, DistrictInfo.plate_id, DistrictInfo.id as districtInfo_id, title, owner, reply_time, " +
+            "UserBaseInfo.nick_name, UserBaseInfo.icon, recommend_num, view_num, PostTitleInfo.like_num, reply_num, " +
             "PostTitleInfo.image FROM DistrictInfo, PostTitleInfo, UserBaseInfo " +
             "WHERE PostTitleInfo.districtInfo_id = DistrictInfo.id and PostTitleInfo.owner = UserBaseInfo.user_id " +
-            "ORDER BY `post_time` DESC limit 20")
-    List<PostTitleInfo> getPostTitleInfosByTime(String s) throws Exception;
+            "ORDER BY ${orderby} DESC limit 20")
+    List<PostTitleInfo> getPostTitleInfosByTime(@Param("orderby") String orderby) throws Exception;
 
     @Select("SELECT id, title, view_num, like_num, image FROM PostTitleInfo WHERE owner=#{user_id} " +
             "ORDER BY `post_time` DESC limit 2")
@@ -78,5 +74,8 @@ public interface PostTitleInfoDao {
 
     @Select("select * from PostTitleInfo where id=#{id}")
     PostTitleInfo getPostTitleById(int id) throws Exception;
+
+    @Select("select * from PostTitleInfo where post_time between #{date1} and #{date2}")
+    List<PostTitleInfo> getPostTitleBetweenTime(String date1, String date2) throws Exception;
 
 }

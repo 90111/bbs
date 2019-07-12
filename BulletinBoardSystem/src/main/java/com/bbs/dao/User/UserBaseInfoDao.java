@@ -26,4 +26,10 @@ public interface UserBaseInfoDao {
 
     @Update("update UserBaseInfo set post_num = (select count(*) from PostTitleInfo where `owner` = #{user_id}) where user_id = #{user_id}")
     void updatePostNumByUserId(int user_id) throws Exception;
+
+    @Update("update UserBaseInfo set UserBaseInfo.like_num = (select sum(PostTitleInfo.like_num) from PostTitleInfo where `owner` = #{user_id}) where user_id = #{user_id}")
+    void updateUserLikeNum(int user_id) throws Exception;
+
+    @Update("update UserBaseInfo set post_num = (select count(*) from PostTitleInfo where owner=#{user_id}) where user_id=#{user_id}")
+    void updateUserPostNum(int user_id) throws Exception;
 }

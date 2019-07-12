@@ -1,6 +1,7 @@
 package com.bbs.service.User.Impl;
 
 import com.bbs.dao.Post.PostTitleInfoDao;
+import com.bbs.dao.User.UserBaseInfoDao;
 import com.bbs.dao.User.UserLikeInfoDao;
 import com.bbs.service.User.UserLikeInfoService;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ public class UserLikeInfoServiceImpl implements UserLikeInfoService {
 
     @Resource
     private PostTitleInfoDao postTitleInfoDao;
+
+    @Resource
+    private UserBaseInfoDao userBaseInfoDao;
 
     @Override
     public boolean checkIsLike(int user_id, int post_title_id) throws Exception {

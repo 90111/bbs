@@ -11,4 +11,9 @@ public interface DistrictInfoService {
 
     DistrictInfo getgetDistrictInfo(int district_id) throws Exception;
 
+    void addDistrictInfo(int id,String name) throws Exception;
+
+    void updateDistrictInfo(DistrictInfo districtInfo) throws Exception;
+
+    void deleteDistrictInfo(int id) throws Exception;
 }

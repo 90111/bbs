@@ -10,8 +10,8 @@ import java.util.List;
 @Component
 public interface AnnouncementInfoDao {
 
-    @Select("SELECT id,owner,content,post_time FROM AnnouncementInfo ORDER BY id DESC limit 1")
-    AnnouncementInfo getRecentAnnouncement() throws Exception;
+    @Select("SELECT * FROM AnnouncementInfo where plate_id=#{plate_id} and district_id=#{district_id} ORDER BY id DESC limit 1")
+    AnnouncementInfo getRecentAnnouncement(int plate_id, int district_id) throws Exception;
 
     @Delete("DELETE FROM AnnouncementInfo WHERE id = #{id}")
     void deleteAnnouncementInfoById (int id) throws Exception;

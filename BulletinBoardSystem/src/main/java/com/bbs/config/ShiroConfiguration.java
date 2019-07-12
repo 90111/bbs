@@ -29,7 +29,7 @@ public class ShiroConfiguration {
         //拦截器.
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
         // 配置不会被拦截的链接 顺序判断
-        filterChainDefinitionMap.put("/ajaxLogin", "anon");
+//        filterChainDefinitionMap.put("/ajaxLogin", "anon");
         filterChainDefinitionMap.put("/register", "anon");
         filterChainDefinitionMap.put("/checkUsername", "anon");
         filterChainDefinitionMap.put("/checkMail", "anon");
@@ -42,10 +42,6 @@ public class ShiroConfiguration {
         //<!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
         //<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
         Map<String, Filter> filterMap = new LinkedHashMap<>();
-//        filterMap.put("corsAuthenticationFilter", corsAuthenticationFilter());
-        filterMap.put("custom", new ShiroUserFilter());
-        shiroFilterFactoryBean.setFilters(filterMap);
-        filterChainDefinitionMap.put("/**", "custom");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
@@ -77,7 +73,7 @@ public class ShiroConfiguration {
 
     @Bean
     public SecurityManager securityManager(){
-        DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(myShiroRealm());
         securityManager.setSessionManager(sessionManager());
         return securityManager;
@@ -104,35 +100,6 @@ public class ShiroConfiguration {
         return authorizationAttributeSourceAdvisor;
     }
 
-//    @Bean(name="simpleMappingExceptionResolver")
-//    public SimpleMappingExceptionResolver createSimpleMappingExceptionResolver() {
-//        SimpleMappingExceptionResolver r = new SimpleMappingExceptionResolver();
-//        Properties mappings = new Properties();
-//        mappings.setProperty("DatabaseException", "databaseError");//数据库异常处理
-//        mappings.setProperty("UnauthorizedException","403");
-//        r.setExceptionMappings(mappings);  // None by default
-//        r.setDefaultErrorView("error");    // No default
-//        r.setExceptionAttribute("ex");     // Default is "exception"
-//        //r.setWarnLogCategory("example.MvcLogger");     // No default
-//        return r;
-//    }
-
-
-    /**
-     * 注册全局异常处理
-     * @return
-     */
-//    @Bean(name = "exceptionHandler")
-//    public HandlerExceptionResolver handlerExceptionResolver() {
-//        return new MyExceptionHandler();
-//    }
-
-
-//    //自定义sessionManager
-//    @Bean(name = "sessionManager")
-//    public SessionManager sessionManager() {
-//        return new CustomSessionManager();
-//    }
 
     @Bean(name = "sessionManager")
     public DefaultWebSessionManager sessionManager() {
@@ -145,3 +112,80 @@ public class ShiroConfiguration {
 
 
 }
+
+
+//@Configuration
+//public class ShiroConfiguration {
+//    @Bean
+//    public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
+//        System.out.println("--------------------shiro filter-------------------");
+//        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+//        shiroFilterFactoryBean.setSecurityManager(securityManager);
+//        Map<String,String> filterChainDefinitionMap = new LinkedHashMap<>();
+//        //注意过滤器配置顺序 不能颠倒
+//        //配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了，登出后跳转配置的loginUrl
+//        // 配置不会被拦截的链接 顺序判断
+//        filterChainDefinitionMap.put("/static/**", "anon");
+//        filterChainDefinitionMap.put("/favicon.ico", "anon");
+//        filterChainDefinitionMap.put("/checkMail", "anon");
+//                filterChainDefinitionMap.put("/anon/**", "anon");
+//        //拦截其他所以接口
+//        filterChainDefinitionMap.put("/**", "authc");
+//        //配置shiro默认登录界面地址，前后端分离中登录界面跳转应由前端路由控制，后台仅返回json数据
+//        shiroFilterFactoryBean.setLoginUrl("/user/unlogin");
+//        // 登录成功后要跳转的链接 自行处理。不用shiro进行跳转
+//        // shiroFilterFactoryBean.setSuccessUrl("user/index");
+//        //未授权界面;
+//        shiroFilterFactoryBean.setUnauthorizedUrl("/user/unauth");
+//        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+//        return shiroFilterFactoryBean;
+//    }
+//
+//    /**
+//     * shiro 用户数据注入
+//     * @return
+//     */
+//    @Bean
+//    public Realm shiroRealm(){
+//        Realm shiroRealm = new Realm();
+//        return shiroRealm;
+//    }
+//
+//    /**
+//     * 配置管理层。即安全控制层
+//     * @return
+//     */
+//    @Bean
+//    public SecurityManager securityManager(){
+//        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+//        securityManager.setRealm(shiroRealm());
+//        securityManager.setSessionManager(sessionManager());
+//        return  securityManager;
+//    }
+//    public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator(){
+//        DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
+//        advisorAutoProxyCreator.setProxyTargetClass(true);
+//        return advisorAutoProxyCreator;
+//    }
+//    /**
+//     * 开启shiro aop注解支持 使用代理方式所以需要开启代码支持
+//     *  一定要写入上面advisorAutoProxyCreator（）自动代理。不然AOP注解不会生效
+//     * @param securityManager
+//     * @return
+//     */
+//    @Bean
+//    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
+//        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+//        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+//        return authorizationAttributeSourceAdvisor;
+//    }
+//
+//    @Bean(name = "sessionManager")
+//    public DefaultWebSessionManager sessionManager() {
+//        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+//        // 设置session过期时间
+//        sessionManager.setGlobalSessionTimeout(1800000L);
+//        sessionManager.setDeleteInvalidSessions(true);
+//        return sessionManager;
+//    }
+//}

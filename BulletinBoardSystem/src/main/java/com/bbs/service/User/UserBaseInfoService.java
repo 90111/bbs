@@ -5,5 +5,7 @@ import com.bbs.model.User.UserLoginInfo;
 
 public interface UserBaseInfoService {
 
-    public UserBaseInfo getUserBaseInfoByUserId(int user_id)throws Exception;
+    UserBaseInfo getUserBaseInfoByUserId(int user_id)throws Exception;
+
+    void updateUserLikeNum(int user_id) throws Exception;
 }

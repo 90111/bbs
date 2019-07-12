@@ -104,7 +104,7 @@ public class UserLoginInfoController extends BaseController{
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public Map logout() throws JSONException {
+    public Map logout() {
         System.out.println("调用logout方法");
         Map<String, Object> map = new HashMap<>();
         try{

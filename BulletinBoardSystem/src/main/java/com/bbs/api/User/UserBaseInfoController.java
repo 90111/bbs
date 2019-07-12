@@ -5,10 +5,7 @@ import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.model.User.UserCollectionInfo;
 import com.bbs.model.User.UserLoginInfo;
 import com.bbs.service.Post.Impl.PostTitleInfoServiceImpl;
-import com.bbs.service.User.Impl.UserBaseInfoServiceImpl;
-import com.bbs.service.User.Impl.UserCollectionInfoServiceImpl;
-import com.bbs.service.User.Impl.UserLikeInfoServiceImpl;
-import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
+import com.bbs.service.User.Impl.*;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
@@ -41,15 +38,22 @@ public class UserBaseInfoController {
     @Autowired
     private UserCollectionInfoServiceImpl userCollectionInfoService;
 
+    @Autowired
+    private UserFollowInfoServiceImpl userFollowInfoService;
+
     @RequestMapping(value = "/baseInfo", method = RequestMethod.POST)
     public Map getBaseInfo(int id) {
         Map<String, Object> map = new HashMap<>();
+        Subject currentUser = SecurityUtils.getSubject();
         System.out.println("调用getBaseInfo方法");
         try {
+            if (currentUser.isAuthenticated()){
+                int user_id = userLoginInfoService.getUserLoginInfoByName((String)currentUser.getPrincipal()).getId();
+                map.put("isFollowed", userFollowInfoService.chekIsFollowed(user_id, id));
+            }
             map.put("code", "200");
             map.put("msg", "个人信息获取成功");
             map.put("userInfo", baseInfoService.getUserBaseInfoByUserId(id));
-//            map.put("recentPost", postTitleInfoService.getUserPostTitleByUserId(id));
         }catch (Exception e){
             e.printStackTrace();
             map.put("code", "500");
@@ -134,4 +138,29 @@ public class UserBaseInfoController {
 
         return map;
     }
+
+
+    @RequestMapping(value = "/followed", method = RequestMethod.GET)
+    public Map followed(int follow_id) {
+        System.out.println("调用followed方法");
+        Map<String, Object> map = new HashMap<>();
+        Subject currentUser = SecurityUtils.getSubject();
+        try {
+            if (currentUser.isAuthenticated()){
+                int user_id = userLoginInfoService.getUserLoginInfoByName((String)currentUser.getPrincipal()).getId();
+                userFollowInfoService.changeFollowed(user_id, follow_id);
+                map.put("code", "200");
+            }else {
+                map.put("code", "500");
+                map.put("msg", "未登录");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("code", 500);
+            map.put("msg", "调用followed方法出错");
+        }
+        return map;
+    }
+
+
 }

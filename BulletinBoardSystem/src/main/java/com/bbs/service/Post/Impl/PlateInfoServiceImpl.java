@@ -31,4 +31,19 @@ public class PlateInfoServiceImpl implements PlateInfoService {
     public PlateInfo getPlateInfo(int district_id) throws Exception {
         return plateInfoDao.getPlateInfo(district_id);
     }
+
+    @Override
+    public void addPlateInfoByName(String name) throws Exception{
+        plateInfoDao.addPlateInfoByName(name);
+    }
+
+    @Override
+    public void updatePlateInfo(PlateInfo plateInfo) throws Exception{
+        plateInfoDao.updatePlateInfo(plateInfo);
+    }
+
+    @Override
+    public void deletePlateInfoById(int id) throws Exception{
+        plateInfoDao.deletePlateInfoById(id);
+    }
 }

@@ -10,6 +10,7 @@ import com.bbs.service.User.Impl.UserCollectionInfoServiceImpl;
 import com.bbs.service.User.Impl.UserLikeInfoServiceImpl;
 import com.bbs.service.User.Impl.UserBaseInfoServiceImpl;
 import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
+import javafx.geometry.Pos;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
@@ -19,9 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RestController
 @RequestMapping("/anon/post")
@@ -50,10 +52,29 @@ public class PostController {
 
 
     @RequestMapping(value = "/getPostTitles", method = RequestMethod.GET)
-    public List<PostTitleInfo> getPostTitlesByDistrictId(int id) throws Exception {
+    public Map getPostTitlesByDistrictId(int id, String orderby) {
         System.out.println("调用getPostTitlesByDistrictId方法");
 
-        return postInfoService.getPostTitleInfos(id);
+        Map<String, Object> map = new HashMap<>();
+        Subject currentUser = SecurityUtils.getSubject();
+        try{
+            List<PostTitleInfo> ls = postInfoService.getPostTitleInfos(id, orderby);
+            if (currentUser.isAuthenticated()) {
+                String username = (String) currentUser.getPrincipal();
+                int user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
+                for (PostTitleInfo info : ls){
+                    info.setCollected(userCollectionInfoService.checkIsCollected(user_id, info.getId()));
+                    info.setLiked(userLikeInfoService.checkIsLike(user_id, info.getId()));
+                }
+            }
+            map.put("code", "200");
+            map.put("msg", "获取分区帖子成功");
+            map.put("postInfos", ls);
+        }catch (Exception e){
+            map.put("code", "500");
+            map.put("msg", "获取分区帖子失败");
+        }
+        return map;
     }
 
     /*
@@ -120,7 +141,6 @@ public class PostController {
 
 
     @RequestMapping(value = "/addPostTitle", method = RequestMethod.POST)
-    @RequiresPermissions("createPost")
     public Map addPostTitleInfo(@RequestBody PostTitleInfo postTitleInfo) {
         System.out.println("调用addPostTitleInfo方法");
         Map<String, Object> map = new HashMap();
@@ -145,6 +165,7 @@ public class PostController {
             int user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
             try {
                 userLikeInfoService.changeLike(user_id, post_title_id);
+                userBaseInfoService.updateUserLikeNum(postInfoService.getPostTitleById(post_title_id).getOwner());
                 map.put("code", "200");
                 map.put("msg", "操作成功");
                 return map;
@@ -184,6 +205,41 @@ public class PostController {
         }
         map.put("code", "500");
         map.put("msg", "用户未登录");
+        return map;
+    }
+
+    @RequestMapping(value = "/getGreatPostTitles", method = RequestMethod.GET)
+    public Map getGreatPostTitles() {
+        System.out.println("调用getGreatPostTitles方法");
+        Map<String, Object> map = new HashMap<>();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1 = new Date();
+        String date_1 = dateFormat.format(date1);
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, - 7);
+        Date date2 = c.getTime();
+        String date_2 = dateFormat.format(date2);
+        long diff = date1.getTime()-date2.getTime();
+        try {
+            List<PostTitleInfo> ls = postInfoService.getPostTitleBetweenTime(date_2, date_1);
+            ArrayList<Map<String, Object>> array = new ArrayList<Map<String, Object>>();
+            Map<String, Object> map2 = new HashMap<>();
+            for (PostTitleInfo info : ls){
+                Date post_time = info.getPost_time();
+                dateFormat.format(post_time);
+                diff = date1.getTime() - post_time.getTime();
+                map2.put("postTitle", info);
+                map2.put("diff", diff);
+                array.add(map2);
+            }
+            map.put("code", "200");
+            map.put("msg", "获取精选帖子列表成功");
+            map.put("postInfos", array);
+            map.put("diff", diff);
+        }catch (Exception e){
+            map.put("code", "500");
+            map.put("msg", "获取精选帖子列表失败");
+        }
         return map;
     }
 }

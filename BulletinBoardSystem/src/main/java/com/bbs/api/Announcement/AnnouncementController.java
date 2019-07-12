@@ -20,15 +20,17 @@ public class AnnouncementController {
     private UserBaseInfoServiceImpl userBaseInfoService;
 
     @RequestMapping(value = "/getRecentAnnouncement", method = RequestMethod.GET)
-    public Map getTopAnnouncement(){
+    public Map getTopAnnouncement(int plate_id, int district_id){
         System.out.println("获取最新公告");
         Map<String, Object> map = new HashMap<>();
         try{
-            AnnouncementInfo announcementInfo = announcementInfoService.getRecentAnnouncement();
+            AnnouncementInfo announcementInfo = announcementInfoService.getRecentAnnouncement(plate_id, district_id);
             map.put("code","200");
             map.put("msg", "获取最新公告成功");
             map.put("topAnnouncement",announcementInfo);
-            map.put("userInfo", userBaseInfoService.getUserBaseInfoByUserId(announcementInfo.getOwner()));
+            if(announcementInfo != null){
+                map.put("userInfo", userBaseInfoService.getUserBaseInfoByUserId(announcementInfo.getOwner()));
+            }
         }catch (Exception e){
             map.put("code","500");
             map.put("msg", "获取最新公告失败");

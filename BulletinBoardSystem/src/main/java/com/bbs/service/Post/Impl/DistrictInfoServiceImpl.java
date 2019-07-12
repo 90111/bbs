@@ -25,4 +25,18 @@ public class DistrictInfoServiceImpl implements DistrictInfoService {
     public DistrictInfo getgetDistrictInfo(int district_id) throws Exception {
         return districtInfoDao.getDistrictInfo(district_id);
     }
+    @Override
+    public void addDistrictInfo(int id,String name) throws Exception{
+        districtInfoDao.addDistrictInfo(id,name);
+    }
+
+    @Override
+    public void updateDistrictInfo(DistrictInfo districtInfo) throws Exception{
+        districtInfoDao.updateDistrictInfo(districtInfo);
+    }
+
+    @Override
+    public void deleteDistrictInfo(int id) throws Exception{
+        districtInfoDao.deleteDistrictInfo(id);
+    }
 }

@@ -1,6 +1,7 @@
 package com.bbs.service.Post.Impl;
 
 import com.bbs.dao.Post.PostTitleInfoDao;
+import com.bbs.dao.User.UserBaseInfoDao;
 import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.model.User.UserCollectionInfo;
 import com.bbs.service.Post.PostTitleInfoService;
@@ -17,9 +18,12 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     @Resource
     private PostTitleInfoDao postTitleInfoDao;
 
+    @Resource
+    private UserBaseInfoDao userBaseInfoDao;
+
     @Override
-    public List<PostTitleInfo> getPostTitleInfos(int id) throws Exception {
-        List<PostTitleInfo> ls = postTitleInfoDao.getPostTitleInfos(id);
+    public List<PostTitleInfo> getPostTitleInfos(int id, String s) throws Exception {
+        List<PostTitleInfo> ls = postTitleInfoDao.getPostTitleInfos(id, s);
 
         return ls;
     }
@@ -44,6 +48,7 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     public void addPostTitleInfo(PostTitleInfo postTitleInfo) throws Exception {
         postTitleInfo.setPost_time(new Date());
         postTitleInfoDao.addPostTitleInfo(postTitleInfo);
+        userBaseInfoDao.updateUserPostNum(postTitleInfo.getOwner());
     }
 
     @Override
@@ -59,11 +64,17 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     @Override
     public void deleteByPostTitleId(int user_id, int id) throws Exception {
         postTitleInfoDao.deletePostTitleInfoById(user_id, id);
+        userBaseInfoDao.updateUserPostNum(user_id);
     }
 
     @Override
     public PostTitleInfo getPostTitleById(int id) throws Exception {
         return postTitleInfoDao.getPostTitleById(id);
+    }
+
+    @Override
+    public List<PostTitleInfo> getPostTitleBetweenTime(String date1, String date2) throws Exception {
+        return postTitleInfoDao.getPostTitleBetweenTime(date1, date2);
     }
 
 

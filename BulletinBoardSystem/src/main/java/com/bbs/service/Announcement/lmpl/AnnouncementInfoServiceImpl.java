@@ -17,8 +17,8 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
     private AnnouncementInfoDao announcementInfoDao;
 
     @Override
-    public AnnouncementInfo getRecentAnnouncement() throws Exception{
-        return announcementInfoDao.getRecentAnnouncement();
+    public AnnouncementInfo getRecentAnnouncement(int plate_id, int district_id) throws Exception{
+        return announcementInfoDao.getRecentAnnouncement(plate_id, district_id);
     }
 
 
