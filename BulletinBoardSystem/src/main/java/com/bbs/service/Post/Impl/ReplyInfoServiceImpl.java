@@ -1,5 +1,6 @@
 package com.bbs.service.Post.Impl;
 
+import com.bbs.dao.Post.PostTitleInfoDao;
 import com.bbs.dao.Post.ReplyInfoDao;
 import com.bbs.model.Post.ReplyInfo;
 import com.bbs.service.Post.ReplyInfoService;
@@ -15,10 +16,15 @@ public class ReplyInfoServiceImpl implements ReplyInfoService {
     @Resource
     private ReplyInfoDao replyInfoDao;
 
+    @Resource
+    private PostTitleInfoDao postTitleInfoDao;
+
     @Override
     public void addReplyInfoService(ReplyInfo replyInfo) throws Exception {
         replyInfo.setReply_time(new Date());
         replyInfoDao.addReplyInfo(replyInfo);
+        postTitleInfoDao.updateReplyTime(new Date(), replyInfo.getPost_title_id());
+        postTitleInfoDao.updatePostTitleReplyNum(replyInfo.getPost_title_id());
     }
 
     @Override

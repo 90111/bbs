@@ -4,6 +4,7 @@ import com.bbs.model.Post.PlateInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -12,6 +13,8 @@ import java.util.List;
 public interface PlateInfoDao {
 
     @Select("select * from PlateInfo")
-    public List<PlateInfo> getPlates() throws Exception;
+    List<PlateInfo> getPlates() throws Exception;
 
+    @Select("select * from PlateInfo where id=#{id}")
+    PlateInfo getPlateInfo(int id) throws Exception;
 }

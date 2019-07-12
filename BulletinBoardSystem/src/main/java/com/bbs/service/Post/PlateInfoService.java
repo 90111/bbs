@@ -8,4 +8,6 @@ import java.util.List;
 public interface PlateInfoService {
 
     List<PlateInfo> getPlates() throws Exception;
+
+    PlateInfo getPlateInfo(int district_id) throws Exception;
 }

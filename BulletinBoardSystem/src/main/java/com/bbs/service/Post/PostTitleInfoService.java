@@ -3,6 +3,7 @@ package com.bbs.service.Post;
 import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.model.User.UserCollectionInfo;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -25,4 +26,5 @@ public interface PostTitleInfoService {
     void deleteByPostTitleId(int user_id, int id) throws Exception;
 
     PostTitleInfo getPostTitleById(int id) throws Exception;
+
 }

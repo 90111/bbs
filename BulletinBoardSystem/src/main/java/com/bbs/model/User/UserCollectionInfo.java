@@ -11,11 +11,20 @@ public class UserCollectionInfo {
     private int like_num;
     private int reply_num;
     private int view_num;
-    private boolean liked;
+    private boolean liked = false;
+    private boolean collected = false;
     private int recommend_num;
 
-    public boolean isliked() {
+    public boolean isLiked() {
         return liked;
+    }
+
+    public boolean isCollected() {
+        return collected;
+    }
+
+    public void setCollected(boolean collected) {
+        this.collected = collected;
     }
 
     public void setLiked(boolean likde) {

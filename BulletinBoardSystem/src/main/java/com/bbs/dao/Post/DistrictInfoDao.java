@@ -12,5 +12,8 @@ import java.util.List;
 public interface DistrictInfoDao {
 
     @Select("select * from DistrictInfo where plate_id = #{plate_id}")
-    public List<DistrictInfo> getDistricts(int plate_id) throws Exception;
+    List<DistrictInfo> getDistricts(int plate_id) throws Exception;
+
+    @Select("select * from DistrictInfo where id = #{id}")
+    DistrictInfo getDistrictInfo(int id) throws Exception;
 }

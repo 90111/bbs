@@ -7,5 +7,8 @@ import java.util.List;
 
 public interface DistrictInfoService {
 
-    List<DistrictInfo> getDistricts(int plate_id) throws Exception;
+    List<DistrictInfo> getDistrictInfos(int plate_id) throws Exception;
+
+    DistrictInfo getgetDistrictInfo(int district_id) throws Exception;
+
 }

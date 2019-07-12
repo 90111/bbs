@@ -17,7 +17,12 @@ public class DistrictInfoServiceImpl implements DistrictInfoService {
     private DistrictInfoDao districtInfoDao;
 
     @Override
-    public List<DistrictInfo> getDistricts(int plate_id) throws Exception {
+    public List<DistrictInfo> getDistrictInfos(int plate_id) throws Exception {
         return districtInfoDao.getDistricts(plate_id);
+    }
+
+    @Override
+    public DistrictInfo getgetDistrictInfo(int district_id) throws Exception {
+        return districtInfoDao.getDistrictInfo(district_id);
     }
 }

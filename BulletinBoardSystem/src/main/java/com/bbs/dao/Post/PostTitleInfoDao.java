@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -34,19 +35,25 @@ public interface PostTitleInfoDao {
     public void getPostTitleInfoRecommend(int id) throws Exception;
 
     @Update("update PostTitleInfo set reply_num = (select count(*) from ReplyInfo where post_title_id = #{id}) where PostTitleInfo.id = #{id}")
-    public void updatePostTitleReplyNum(PostTitleInfo postTitleInfo)throws Exception;
+    public void updatePostTitleReplyNum(int id)throws Exception;
 
     @Update("update PostTitleInfo set like_num=(select count(*) from UserLikeInfo where UserLikeInfo.post_title_id=#{post_title_id}) where id=#{post_title_id}")
     public void updatePostTitleLikeNum(int post_title_id) throws Exception;
 
-    @Update("update PostTitleInfo set view_num = view_num+1 where id=#{id}")
-    public void updatePostTitleViewNum(int id) throws Exception;
+    @Update("update PostTitleInfo set recommend_num=(select count(*) from UserLikeInfo where UserLikeInfo.post_title_id=#{post_title_id}) where id=#{post_title_id}")
+    void updatePostTitleRecommendNum(int post_title_id) throws Exception;
 
-    @Select("SELECT PostTitleInfo.id as id, title, owner, nick_name, PostTitleInfo.image, UserBaseInfo.icon, view_num, like_num from PostTitleInfo, UserBaseInfo " +
+    @Update("update PostTitleInfo set view_num = view_num+1 where id=#{id}")
+    void updatePostTitleViewNum(int id) throws Exception;
+
+    @Update("update PostTitleInfo set reply_time=#{reply_time} WHERE id=#{id}")
+    void updateReplyTime(Date reply_time, int id) throws Exception;
+
+    @Select("SELECT PostTitleInfo.id as id, title, owner, nick_name, PostTitleInfo.image, UserBaseInfo.icon, view_num, PostTitleInfo.like_num from PostTitleInfo, UserBaseInfo " +
             "where districtInfo_id = #{id} and UserBaseInfo.user_id = PostTitleInfo.owner")
     List<PostTitleInfo> getPostTitleInfos(int id) throws Exception;
 
-    @Select("select PostTitleInfo.id as id, title, owner, nick_name, content, post_time, PostTitleInfo.image, UserBaseInfo.icon, view_num, PostTitleInfo.like_num, reply_num from PostTitleInfo, UserBaseInfo " +
+    @Select("select PostTitleInfo.id as id, districtInfo_id, title, owner, nick_name, content, post_time, PostTitleInfo.image, UserBaseInfo.icon, view_num, PostTitleInfo.like_num, reply_num from PostTitleInfo, UserBaseInfo " +
             "where UserBaseInfo.user_id=PostTitleInfo.owner and PostTitleInfo.id=#{id}")
     PostTitleInfo getPostTitleContent(int id) throws Exception;
 

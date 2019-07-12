@@ -21,6 +21,15 @@ public class PostTitleInfo {
     private String icon;
     private String nick_name;
     private boolean Liked = false;
+    private boolean collected = false;
+
+    public boolean isCollected() {
+        return collected;
+    }
+
+    public void setCollected(boolean collected) {
+        this.collected = collected;
+    }
 
     public boolean isLiked() {
         return Liked;
