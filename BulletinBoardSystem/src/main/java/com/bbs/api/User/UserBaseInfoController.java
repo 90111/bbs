@@ -2,8 +2,8 @@ package com.bbs.api.User;
 
 
 import com.bbs.model.Post.PostTitleInfo;
+import com.bbs.model.User.UserBaseInfo;
 import com.bbs.model.User.UserCollectionInfo;
-import com.bbs.model.User.UserLoginInfo;
 import com.bbs.service.Post.Impl.PostTitleInfoServiceImpl;
 import com.bbs.service.User.Impl.*;
 import org.apache.shiro.SecurityUtils;
@@ -162,5 +162,10 @@ public class UserBaseInfoController {
         return map;
     }
 
+    @RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
+    public Map updateUserInfo(UserBaseInfo userBaseInfo) {
+        //TODO
+        return null;
+    }
 
 }

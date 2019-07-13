@@ -212,6 +212,7 @@ public class PostController {
     public Map getGreatPostTitles() {
         System.out.println("调用getGreatPostTitles方法");
         Map<String, Object> map = new HashMap<>();
+        Subject currentUser = SecurityUtils.getSubject();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date1 = new Date();
         String date_1 = dateFormat.format(date1);
@@ -219,27 +220,50 @@ public class PostController {
         c.add(Calendar.DATE, - 7);
         Date date2 = c.getTime();
         String date_2 = dateFormat.format(date2);
-        long diff = date1.getTime()-date2.getTime();
+        long diff = -1;
         try {
             List<PostTitleInfo> ls = postInfoService.getPostTitleBetweenTime(date_2, date_1);
             ArrayList<Map<String, Object>> array = new ArrayList<Map<String, Object>>();
-            Map<String, Object> map2 = new HashMap<>();
+            if (currentUser.isAuthenticated()){
+                int user_id = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal()).getId();
+                for (PostTitleInfo info : ls){
+                    userLikeInfoService.checkIsLike(user_id, info.getId());
+                    userCollectionInfoService.checkIsCollected(user_id, info.getId());
+                }
+            }
             for (PostTitleInfo info : ls){
+                Map<String, Object> map2 = new HashMap<>();
                 Date post_time = info.getPost_time();
                 dateFormat.format(post_time);
-                diff = date1.getTime() - post_time.getTime();
+                diff = post_time.getTime() - date1.getTime() + (date1.getTime()-date2.getTime());
+                diff /= 1000000;
+                diff += info.getView_num()*5 + info.getReply_num()*7 + info.getLike_num()*9 + info.getRecommend_num()*10;
                 map2.put("postTitle", info);
                 map2.put("diff", diff);
                 array.add(map2);
             }
+            Collections.sort(array, new Comparator<Map<String, Object>>() {
+                @Override
+                public int compare(Map<String, Object> o1, Map<String, Object> o2) {
+                    Integer o1Value = Integer.parseInt(o1.get("diff").toString());
+                    Integer o2Value = Integer.parseInt(o2.get("diff").toString());
+                    return o2Value.compareTo(o1Value);
+                }
+            });
             map.put("code", "200");
             map.put("msg", "获取精选帖子列表成功");
             map.put("postInfos", array);
-            map.put("diff", diff);
         }catch (Exception e){
             map.put("code", "500");
             map.put("msg", "获取精选帖子列表失败");
         }
         return map;
+    }
+
+
+    @RequestMapping(value = "/getRecommendPostTitles", method = RequestMethod.GET)
+    public Map getRecommendPostTitles() {
+        //TODO
+        return null;
     }
 }

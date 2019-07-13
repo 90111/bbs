@@ -75,7 +75,12 @@ public interface PostTitleInfoDao {
     @Select("select * from PostTitleInfo where id=#{id}")
     PostTitleInfo getPostTitleById(int id) throws Exception;
 
-    @Select("select * from PostTitleInfo where post_time between #{date1} and #{date2}")
+    @Select("SELECT PostTitleInfo.id, DistrictInfo.plate_id, DistrictInfo.id as districtInfo_id, title, owner, post_time, reply_time, " +
+            "UserBaseInfo.nick_name, UserBaseInfo.icon, recommend_num, view_num, PostTitleInfo.like_num, reply_num, " +
+            "PostTitleInfo.image FROM DistrictInfo, PostTitleInfo, UserBaseInfo " +
+            "WHERE PostTitleInfo.districtInfo_id = DistrictInfo.id and PostTitleInfo.owner = UserBaseInfo.user_id " +
+            "and post_time between #{date1} and #{date2}" +
+            "ORDER BY view_num DESC limit 20")
     List<PostTitleInfo> getPostTitleBetweenTime(String date1, String date2) throws Exception;
 
 }

@@ -9,7 +9,7 @@ public interface PlateInfoService {
 
     List<PlateInfo> getPlates() throws Exception;
 
-    PlateInfo getPlateInfo(int district_id) throws Exception;
+    PlateInfo getPlateInfo(int plate_id) throws Exception;
 
     void addPlateInfoByName(String name) throws Exception;
 

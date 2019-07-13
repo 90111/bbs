@@ -28,8 +28,8 @@ public class PlateInfoServiceImpl implements PlateInfoService {
     }
 
     @Override
-    public PlateInfo getPlateInfo(int district_id) throws Exception {
-        return plateInfoDao.getPlateInfo(district_id);
+    public PlateInfo getPlateInfo(int plate_id) throws Exception {
+        return plateInfoDao.getPlateInfo(plate_id);
     }
 
     @Override
