@@ -45,7 +45,7 @@ public interface PostTitleInfoDao {
     @Update("update PostTitleInfo set reply_time=#{reply_time} WHERE id=#{id}")
     void updateReplyTime(Date reply_time, int id) throws Exception;
 
-    @Update("update PostTitleInfo set title=#{title},content=#{content},image=#{image},districtInfo_id=#{district_id},post_time=#{post_tiem} where id=#{id}")
+    @Update("update PostTitleInfo set title=#{title},content=#{content},image=#{image},districtInfo_id=#{districtInfo_id},post_time=#{post_time} where id=#{id}")
     void updatePostTitleInfo(PostTitleInfo postTitleInfo) throws Exception;
 
     @Select("SELECT PostTitleInfo.id as id, title, owner, nick_name, PostTitleInfo.image, UserBaseInfo.icon, view_num, PostTitleInfo.like_num, recommend_num, reply_time, reply_num from PostTitleInfo, UserBaseInfo " +
