@@ -77,5 +77,16 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
         return postTitleInfoDao.getPostTitleBetweenTime(date1, date2);
     }
 
+    @Override
+    public List<PostTitleInfo> getRecommendPostTitles(int district_id) throws Exception {
+        return postTitleInfoDao.getRecommendPostTitles(district_id);
+    }
+
+    @Override
+    public void updatePostTitleInfo(PostTitleInfo postTitleInfo) throws Exception {
+        postTitleInfo.setPost_time(new Date());
+        postTitleInfoDao.updatePostTitleInfo(postTitleInfo);
+    }
+
 
 }

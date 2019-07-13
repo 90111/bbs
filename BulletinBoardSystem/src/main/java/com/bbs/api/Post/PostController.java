@@ -13,6 +13,7 @@ import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
 import javafx.geometry.Pos;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -144,13 +145,41 @@ public class PostController {
     public Map addPostTitleInfo(@RequestBody PostTitleInfo postTitleInfo) {
         System.out.println("调用addPostTitleInfo方法");
         Map<String, Object> map = new HashMap();
+        Subject current = SecurityUtils.getSubject();
         try {
-            postInfoService.addPostTitleInfo(postTitleInfo);
-            map.put("code", "200");
-            map.put("msg", "发布帖子成功");
+            if(current.isAuthenticated()) {
+                int user_id = userLoginInfoService.getUserLoginInfoByName((String) current.getPrincipal()).getId();
+                postTitleInfo.setOwner(user_id);
+                postInfoService.addPostTitleInfo(postTitleInfo);
+                map.put("code", "200");
+                map.put("msg", "发布帖子成功");
+            }
         } catch (Exception e) {
             map.put("code", "500");
             map.put("msg", "发布帖子失败");
+        }
+        return map;
+    }
+
+
+    @RequestMapping(value = "/updatePostTitle", method = RequestMethod.POST)
+    public Map updatePostTItleInfo(@RequestBody PostTitleInfo postTitleInfo) {
+        System.out.println("调用updatePostTItleInfo方法");
+        Map<String, Object> map = new HashMap();
+        Subject current = SecurityUtils.getSubject();
+        try {
+            if(current.isAuthenticated()) {
+                int user_id = userLoginInfoService.getUserLoginInfoByName((String) current.getPrincipal()).getId();
+                postInfoService.updatePostTitleInfo(postTitleInfo);
+                map.put("code", "200");
+                map.put("msg", "修改帖子成功");
+                } else {
+                    map.put("code", "500");
+                    map.put("msg", "用户无权限");
+                }
+        } catch (Exception e) {
+            map.put("code", "500");
+            map.put("msg", "修改帖子失败");
         }
         return map;
     }
@@ -181,7 +210,6 @@ public class PostController {
 
         return map;
     }
-
 
     @RequestMapping(value = "/collect", method = RequestMethod.GET)
     public Map addCollect(int post_title_id) throws Exception {
@@ -262,8 +290,27 @@ public class PostController {
 
 
     @RequestMapping(value = "/getRecommendPostTitles", method = RequestMethod.GET)
-    public Map getRecommendPostTitles() {
-        //TODO
-        return null;
+    public Map getRecommendPostTitles(int district_id) {
+        System.out.println("调用getRecommendPostTitles方法");
+        Map<String, Object> map = new HashMap<>();
+        Subject currentUser = SecurityUtils.getSubject();
+        try {
+            List<PostTitleInfo> ls = postInfoService.getRecommendPostTitles(district_id);
+            if (currentUser.isAuthenticated()){
+                int user_id = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal()).getId();
+                for (PostTitleInfo info : ls){
+                    userLikeInfoService.checkIsLike(user_id, info.getId());
+                    userCollectionInfoService.checkIsCollected(user_id, info.getId());
+                }
+            }
+            map.put("recomdTitles", ls);
+            map.put("code", "200");
+            map.put("msg", "获取分区精品帖成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("code", "500");
+            map.put("msg", "获取分区精品帖失败");
+        }
+        return map;
     }
 }

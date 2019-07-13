@@ -29,4 +29,8 @@ public interface PostTitleInfoService {
 
     List<PostTitleInfo> getPostTitleBetweenTime(String date1, String date2) throws Exception;
 
+    List<PostTitleInfo> getRecommendPostTitles(int district_id) throws Exception;
+
+    void updatePostTitleInfo(PostTitleInfo postTitleInfo) throws Exception;
+
 }

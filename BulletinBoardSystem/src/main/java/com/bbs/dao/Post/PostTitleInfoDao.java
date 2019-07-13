@@ -45,6 +45,9 @@ public interface PostTitleInfoDao {
     @Update("update PostTitleInfo set reply_time=#{reply_time} WHERE id=#{id}")
     void updateReplyTime(Date reply_time, int id) throws Exception;
 
+    @Update("update PostTitleInfo set title=#{title},content=#{content},image=#{image},districtInfo_id=#{district_id},post_time=#{post_tiem} where id=#{id}")
+    void updatePostTitleInfo(PostTitleInfo postTitleInfo) throws Exception;
+
     @Select("SELECT PostTitleInfo.id as id, title, owner, nick_name, PostTitleInfo.image, UserBaseInfo.icon, view_num, PostTitleInfo.like_num, recommend_num, reply_time, reply_num from PostTitleInfo, UserBaseInfo " +
             "where districtInfo_id = #{id} and UserBaseInfo.user_id = PostTitleInfo.owner order by ${orderby} desc limit 20")
     List<PostTitleInfo> getPostTitleInfos(int id, @Param("orderby") String orderby) throws Exception;
@@ -82,5 +85,13 @@ public interface PostTitleInfoDao {
             "and post_time between #{date1} and #{date2}" +
             "ORDER BY view_num DESC limit 20")
     List<PostTitleInfo> getPostTitleBetweenTime(String date1, String date2) throws Exception;
+
+    @Select("SELECT PostTitleInfo.id, DistrictInfo.plate_id, DistrictInfo.id as districtInfo_id, title, owner, post_time, reply_time, " +
+            "UserBaseInfo.nick_name, UserBaseInfo.icon, recommend_num, view_num, PostTitleInfo.like_num, reply_num, " +
+            "PostTitleInfo.image FROM DistrictInfo, PostTitleInfo, UserBaseInfo " +
+            "WHERE PostTitleInfo.districtInfo_id = DistrictInfo.id and PostTitleInfo.owner = UserBaseInfo.user_id " +
+            "and state = 4 and PostTitleInfo.districtInfo_id=#{district_id} " +
+            "ORDER BY `post_time` DESC limit 20")
+    List<PostTitleInfo> getRecommendPostTitles(int district_id) throws Exception;
 
 }
