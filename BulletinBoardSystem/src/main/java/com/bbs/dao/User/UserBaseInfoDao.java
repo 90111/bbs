@@ -4,6 +4,8 @@ import com.bbs.model.User.UserBaseInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 
 @Mapper
 @Component
@@ -32,4 +34,8 @@ public interface UserBaseInfoDao {
 
     @Update("update UserBaseInfo set nick_name=#{nick_name},sex=#{sex},birth=#{birth},icon=#{icon},motto=#{motto} where user_id=#{user_id}")
     void updateUserBaseInfo(UserBaseInfo userBaseInfo) throws Exception;
+
+    @Select("select UserLoginInfo.id as user_id, nick_name, icon, motto from UserFollowInfo, UserBaseInfo, UserLoginInfo " +
+            "where UserFollowInfo.follow_id = UserLoginInfo.id and UserLoginInfo.id = UserBaseInfo.user_id and UserFollowInfo.user_id = #{id} ")
+    List<UserBaseInfo> getFollowList(int id) throws Exception;
 }

@@ -7,6 +7,7 @@ import com.bbs.service.User.UserBaseInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UserBaseInfoServiceImpl implements UserBaseInfoService {
@@ -27,5 +28,10 @@ public class UserBaseInfoServiceImpl implements UserBaseInfoService {
     @Override
     public void updateUserBaseInfo(UserBaseInfo userBaseInfo) throws Exception {
         userBaseInfoDao.updateUserBaseInfo(userBaseInfo);
+    }
+
+    @Override
+    public List<UserBaseInfo> getFollowList(int id) throws Exception {
+        return userBaseInfoDao.getFollowList(id);
     }
 }

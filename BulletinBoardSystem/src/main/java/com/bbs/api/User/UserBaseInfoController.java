@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +41,9 @@ public class UserBaseInfoController {
     @Autowired
     private UserFollowInfoServiceImpl userFollowInfoService;
 
+    /*
+    参数id为user_id
+     */
     @RequestMapping(value = "/baseInfo", method = RequestMethod.POST)
     public Map getBaseInfo(int id) {
         System.out.println("调用getBaseInfo方法");
@@ -181,5 +183,25 @@ public class UserBaseInfoController {
         return map;
     }
 
+    @RequestMapping(value = "/getFollowList", method = RequestMethod.GET)
+    public Map getFollowList() {
+        System.out.println("调用getFollowList方法");
+        Map<String, Object> map = new HashMap<>();
+        Subject currentUser = SecurityUtils.getSubject();
+        try {
+            if(currentUser.isAuthenticated()){
+                int user_id = userLoginInfoService.getUserLoginInfoByName((String)currentUser.getPrincipal()).getId();
+                List<UserBaseInfo> ls = baseInfoService.getFollowList(user_id);
+                if (ls == null) return null;
+                map.put("ls", ls);
+                map.put("code", "200");
+                map.put("msg", "操作成功");
+            }
+        }catch (Exception e){
+            map.put("code", "500");
+            map.put("msg", "操作失败");
+        }
+        return map;
+    }
 
 }
