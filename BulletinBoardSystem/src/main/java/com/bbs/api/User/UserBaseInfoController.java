@@ -181,10 +181,5 @@ public class UserBaseInfoController {
         return map;
     }
 
-    @RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
-    public Map updateUserInfo(UserBaseInfo userBaseInfo) {
-        //TODO
-        return null;
-    }
 
 }

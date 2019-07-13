@@ -5,8 +5,10 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.filter.authz.AuthorizationFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -133,8 +135,6 @@ public class ShiroConfiguration {
 //        filterChainDefinitionMap.put("/**", "authc");
 //        //配置shiro默认登录界面地址，前后端分离中登录界面跳转应由前端路由控制，后台仅返回json数据
 //        shiroFilterFactoryBean.setLoginUrl("/user/unlogin");
-//        // 登录成功后要跳转的链接 自行处理。不用shiro进行跳转
-//        // shiroFilterFactoryBean.setSuccessUrl("user/index");
 //        //未授权界面;
 //        shiroFilterFactoryBean.setUnauthorizedUrl("/user/unauth");
 //        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
@@ -187,5 +187,15 @@ public class ShiroConfiguration {
 //        sessionManager.setGlobalSessionTimeout(1800000L);
 //        sessionManager.setDeleteInvalidSessions(true);
 //        return sessionManager;
+//    }
+//
+//    @Bean(name = "exceptionHandler")
+//    public HandlerExceptionResolver handlerExceptionResolver() {
+//        return new MyExceptionHandler();
+//    }
+//
+//    @Bean(name="myFilter")
+//    public AuthorizationFilter authorizationFilter(){
+//
 //    }
 //}
