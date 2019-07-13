@@ -94,4 +94,7 @@ public interface PostTitleInfoDao {
             "ORDER BY `post_time` DESC limit 20")
     List<PostTitleInfo> getRecommendPostTitles(int district_id) throws Exception;
 
+    @Select("SELECT id, title from PostTitleInfo where title like #{postTitle}")
+    List<PostTitleInfo> searchPost(String postTitle) throws Exception;
+
 }

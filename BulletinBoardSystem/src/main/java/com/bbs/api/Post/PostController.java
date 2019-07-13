@@ -313,4 +313,27 @@ public class PostController {
         }
         return map;
     }
+
+
+    @RequestMapping(value = "/searchPost", method = RequestMethod.GET)
+    public Map searchPost(String postTitle) {
+        System.out.println("调用searchPost方法");
+        if (postTitle.isEmpty() || postTitle==null || postTitle.equals("")){
+            return null;
+        }
+        Map<String, Object> map = new HashMap<>();
+        try {
+            List<PostTitleInfo> ls = postInfoService.searchPost(postTitle);
+            if (ls==null){
+                return null;
+            }
+            map.put("code", "200");
+            map.put("msg", "操作成功");
+            map.put("ls", ls);
+        }catch (Exception e){
+            map.put("code", "500");
+            map.put("msg", "操作失败");
+        }
+        return map;
+    }
 }

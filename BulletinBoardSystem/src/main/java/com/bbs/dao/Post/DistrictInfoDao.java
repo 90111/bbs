@@ -22,6 +22,9 @@ public interface DistrictInfoDao {
     @Update("UPDATE DistrictInfo set district_name = #{district_name} WHERE id = #{id}")
     void updateDistrictInfo(DistrictInfo districtInfo) throws Exception;
 
+    @Update("update DistrictInfo set post_num = (SELECT COUNT(*) from PostTitleInfo WHERE districtInfo_id=#{id}) where id=#{id}")
+    void updateDistrictPostNum(int id) throws Exception;
+
     @Delete("DELETE FROM DistrictInfo WHERE id = #{id}")
     void deleteDistrictInfo(int id) throws Exception;
 }

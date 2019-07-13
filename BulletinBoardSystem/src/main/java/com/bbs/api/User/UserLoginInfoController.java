@@ -56,8 +56,6 @@ public class UserLoginInfoController extends BaseController{
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println("login方法调用完毕");
         return jsonObject.toString();
     }
 
@@ -146,7 +144,8 @@ public class UserLoginInfoController extends BaseController{
                 UserLoginInfo info = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal());
                 map.put("code", "200");
                 map.put("msg", "请求成功");
-                map.put("userInfo", info);
+                map.put("user_id", info.getUser_name());
+                map.put("mail", info.getMail());
             }else{
                 map.put("code", "500");
                 map.put("msg", "用户未登录");
@@ -168,9 +167,12 @@ public class UserLoginInfoController extends BaseController{
                 UserLoginInfo info = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal());
                 if (info.getPassword().equals(oldPwd)){
                     userLoginInfoService.updateUserPwd(info.getId(), newPwd);
+                    map.put("code", "200");
+                    map.put("msg", "修改密码成功");
+                }else {
+                    map.put("code", "500");
+                    map.put("msg", "旧密码输入错误");
                 }
-                map.put("code", "200");
-                map.put("msg", "修改密码成功");
             }else{
                 map.put("code", "500");
                 map.put("msg", "用户未登录");

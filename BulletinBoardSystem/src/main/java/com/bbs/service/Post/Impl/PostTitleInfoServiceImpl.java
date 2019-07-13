@@ -1,5 +1,7 @@
 package com.bbs.service.Post.Impl;
 
+import com.bbs.dao.Post.DistrictInfoDao;
+import com.bbs.dao.Post.PlateInfoDao;
 import com.bbs.dao.Post.PostTitleInfoDao;
 import com.bbs.dao.User.UserBaseInfoDao;
 import com.bbs.model.Post.PostTitleInfo;
@@ -20,6 +22,12 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
 
     @Resource
     private UserBaseInfoDao userBaseInfoDao;
+
+    @Resource
+    private DistrictInfoDao districtInfoDao;
+
+    @Resource
+    private PlateInfoDao plateInfoDao;
 
     @Override
     public List<PostTitleInfo> getPostTitleInfos(int id, String s) throws Exception {
@@ -49,6 +57,8 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
         postTitleInfo.setPost_time(new Date());
         postTitleInfoDao.addPostTitleInfo(postTitleInfo);
         userBaseInfoDao.updateUserPostNum(postTitleInfo.getOwner());
+        districtInfoDao.updateDistrictPostNum(postTitleInfo.getDistrictInfo_id());
+        plateInfoDao.updatePlatePostNum(districtInfoDao.getDistrictInfo(postTitleInfo.getDistrictInfo_id()).getPlate_id());
     }
 
     @Override
@@ -63,8 +73,11 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
 
     @Override
     public void deleteByPostTitleId(int user_id, int id) throws Exception {
+        PostTitleInfo postTitleInfo = postTitleInfoDao.getPostTitleById(user_id);
         postTitleInfoDao.deletePostTitleInfoById(user_id, id);
         userBaseInfoDao.updateUserPostNum(user_id);
+        districtInfoDao.updateDistrictPostNum(postTitleInfo.getDistrictInfo_id());
+        plateInfoDao.updatePlatePostNum(districtInfoDao.getDistrictInfo(postTitleInfo.getDistrictInfo_id()).getPlate_id());
     }
 
     @Override
@@ -86,6 +99,15 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     public void updatePostTitleInfo(PostTitleInfo postTitleInfo) throws Exception {
         postTitleInfo.setPost_time(new Date());
         postTitleInfoDao.updatePostTitleInfo(postTitleInfo);
+    }
+
+    @Override
+    public List<PostTitleInfo> searchPost(String postTitle) throws Exception {
+        try {
+            return postTitleInfoDao.searchPost("%"+postTitle+"%");
+        }catch (Exception e){
+            return null;
+        }
     }
 
 

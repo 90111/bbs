@@ -33,4 +33,6 @@ public interface PostTitleInfoService {
 
     void updatePostTitleInfo(PostTitleInfo postTitleInfo) throws Exception;
 
+    List<PostTitleInfo> searchPost(String postTitle) throws Exception;
+
 }
