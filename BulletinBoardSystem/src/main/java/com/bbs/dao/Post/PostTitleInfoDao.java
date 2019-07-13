@@ -36,7 +36,7 @@ public interface PostTitleInfoDao {
     @Update("update PostTitleInfo set like_num=(select count(*) from UserLikeInfo where UserLikeInfo.post_title_id=#{post_title_id}) where id=#{post_title_id}")
     public void updatePostTitleLikeNum(int post_title_id) throws Exception;
 
-    @Update("update PostTitleInfo set recommend_num=(select count(*) from UserLikeInfo where UserLikeInfo.post_title_id=#{post_title_id}) where id=#{post_title_id}")
+    @Update("update PostTitleInfo set recommend_num=(select count(*) from CollectionInfo where CollectionInfo.post_title_id=#{post_title_id}) where id=#{post_title_id}")
     void updatePostTitleRecommendNum(int post_title_id) throws Exception;
 
     @Update("update PostTitleInfo set view_num = view_num+1 where id=#{id}")

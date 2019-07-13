@@ -12,4 +12,5 @@ public interface UserLoginInfoService {
 
     UserLoginInfo getUserLoginInfoByMail(String mail) throws Exception;
 
+
 }

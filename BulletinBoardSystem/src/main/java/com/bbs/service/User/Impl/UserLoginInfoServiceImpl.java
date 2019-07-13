@@ -33,7 +33,7 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService {
     @Override
     public void addUserLoginInfo(UserLoginInfo userLoginInfo) throws Exception {
         userLoginInfoDao.addUserLoginInfo(userLoginInfo);
-        userBaseInfoDao.addUserBaseInfo(userLoginInfo.getId());
+        userBaseInfoDao.addUserBaseInfo(userLoginInfo.getId(), userLoginInfo.getUser_name());
     }
 
     @Override

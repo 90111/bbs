@@ -10,6 +10,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,9 +44,9 @@ public class UserBaseInfoController {
 
     @RequestMapping(value = "/baseInfo", method = RequestMethod.POST)
     public Map getBaseInfo(int id) {
+        System.out.println("调用getBaseInfo方法");
         Map<String, Object> map = new HashMap<>();
         Subject currentUser = SecurityUtils.getSubject();
-        System.out.println("调用getBaseInfo方法");
         try {
             if (currentUser.isAuthenticated()){
                 int user_id = userLoginInfoService.getUserLoginInfoByName((String)currentUser.getPrincipal()).getId();
@@ -58,6 +59,24 @@ public class UserBaseInfoController {
             e.printStackTrace();
             map.put("code", "500");
             map.put("msg", "个人信息获取失败");
+        }
+        return map;
+    }
+
+    @RequestMapping(value = "/updateBaseInfo", method = RequestMethod.POST)
+    public Map updateBaseInfo(@RequestBody UserBaseInfo userBaseInfo) {
+        System.out.println("调用updateBaseInfo方法");
+        Map<String, Object> map = new HashMap<>();
+        Subject currentUser = SecurityUtils.getSubject();
+        try {
+            int user_id = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal()).getId();
+            userBaseInfo.setUser_id(user_id);
+            baseInfoService.updateUserBaseInfo(userBaseInfo);
+            map.put("code", "200");
+            map.put("msg", "修改个人信息成功");
+        }catch (Exception e){
+            map.put("code", "500");
+            map.put("msg", "修改个人信息失败");
         }
         return map;
     }

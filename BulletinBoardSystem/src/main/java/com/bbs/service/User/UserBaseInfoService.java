@@ -8,4 +8,6 @@ public interface UserBaseInfoService {
     UserBaseInfo getUserBaseInfoByUserId(int user_id)throws Exception;
 
     void updateUserLikeNum(int user_id) throws Exception;
+
+    void updateUserBaseInfo(UserBaseInfo userBaseInfo) throws Exception;
 }

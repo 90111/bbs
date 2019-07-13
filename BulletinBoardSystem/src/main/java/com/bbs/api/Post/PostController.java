@@ -255,8 +255,8 @@ public class PostController {
             if (currentUser.isAuthenticated()){
                 int user_id = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal()).getId();
                 for (PostTitleInfo info : ls){
-                    userLikeInfoService.checkIsLike(user_id, info.getId());
-                    userCollectionInfoService.checkIsCollected(user_id, info.getId());
+                    info.setLiked(userLikeInfoService.checkIsLike(user_id, info.getId()));
+                    info.setCollected(userCollectionInfoService.checkIsCollected(user_id, info.getId()));
                 }
             }
             for (PostTitleInfo info : ls){
@@ -299,8 +299,8 @@ public class PostController {
             if (currentUser.isAuthenticated()){
                 int user_id = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal()).getId();
                 for (PostTitleInfo info : ls){
-                    userLikeInfoService.checkIsLike(user_id, info.getId());
-                    userCollectionInfoService.checkIsCollected(user_id, info.getId());
+                    info.setLiked(userLikeInfoService.checkIsLike(user_id, info.getId()));
+                    info.setCollected(userCollectionInfoService.checkIsCollected(user_id, info.getId()));
                 }
             }
             map.put("recomdTitles", ls);
