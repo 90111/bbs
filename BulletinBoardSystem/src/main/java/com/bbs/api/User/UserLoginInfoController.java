@@ -136,4 +136,49 @@ public class UserLoginInfoController extends BaseController{
         }
         return map;
     }
+
+    @RequestMapping(value = "/changePwd", method = RequestMethod.GET)
+    public Map changePwd() {
+        Subject currentUser = SecurityUtils.getSubject();
+        Map<String, Object> map = new HashMap<>();
+        try{
+            if(currentUser.isAuthenticated()) {
+                UserLoginInfo info = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal());
+                map.put("code", "200");
+                map.put("msg", "请求成功");
+                map.put("userInfo", info);
+            }else{
+                map.put("code", "500");
+                map.put("msg", "用户未登录");
+            }
+        }catch (Exception e){
+            map.put("code", "500");
+                map.put("msg", "请求失败");
+        }
+        return map;
+    }
+
+    @RequestMapping(value = "/changePwd", method = RequestMethod.POST)
+    public Map changePwd(String oldPwd, String newPwd) {
+        System.out.println("调用changePwd方法");
+        Map<String, Object> map = new HashMap<>();
+        Subject currentUser = SecurityUtils.getSubject();
+        try{
+            if(currentUser.isAuthenticated()){
+                UserLoginInfo info = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal());
+                if (info.getPassword().equals(oldPwd)){
+                    userLoginInfoService.updateUserPwd(info.getId(), newPwd);
+                }
+                map.put("code", "200");
+                map.put("msg", "修改密码成功");
+            }else{
+                map.put("code", "500");
+                map.put("msg", "用户未登录");
+            }
+        }catch (Exception e){
+            map.put("code", "500");
+            map.put("msg", "修改密码失败");
+        }
+        return map;
+    }
 }

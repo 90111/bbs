@@ -196,6 +196,6 @@ public class ShiroConfiguration {
 //
 //    @Bean(name="myFilter")
 //    public AuthorizationFilter authorizationFilter(){
-//
+//        return new MyFilter();
 //    }
 //}

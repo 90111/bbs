@@ -32,5 +32,6 @@ public interface UserLoginInfoDao {
     UserLoginInfo getUserLoginInfoByMail(String mail)throws Exception;
 
     @Update("update UserLoginInfo set password=#{password} where id=#{id}")
-    void updateUserLoginInfo(UserLoginInfo userLoginInfo) throws Exception;
+    void updateUserPwd(int id, String password) throws Exception;
+
 }

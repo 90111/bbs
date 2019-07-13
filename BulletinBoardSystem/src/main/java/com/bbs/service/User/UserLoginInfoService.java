@@ -12,5 +12,6 @@ public interface UserLoginInfoService {
 
     UserLoginInfo getUserLoginInfoByMail(String mail) throws Exception;
 
+    void updateUserPwd(int id, String newPwd) throws Exception;
 
 }

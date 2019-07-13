@@ -51,5 +51,10 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService {
         return userLoginInfo;
     }
 
+    @Override
+    public void updateUserPwd(int id, String newPwd) throws Exception {
+        userLoginInfoDao.updateUserPwd(id, newPwd);
+    }
+
 
 }
