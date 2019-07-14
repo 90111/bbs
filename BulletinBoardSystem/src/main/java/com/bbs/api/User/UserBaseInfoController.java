@@ -184,19 +184,15 @@ public class UserBaseInfoController {
     }
 
     @RequestMapping(value = "/getFollowList", method = RequestMethod.GET)
-    public Map getFollowList() {
+    public Map getFollowList(int user_id) {
         System.out.println("调用getFollowList方法");
         Map<String, Object> map = new HashMap<>();
-        Subject currentUser = SecurityUtils.getSubject();
         try {
-            if(currentUser.isAuthenticated()){
-                int user_id = userLoginInfoService.getUserLoginInfoByName((String)currentUser.getPrincipal()).getId();
                 List<UserBaseInfo> ls = baseInfoService.getFollowList(user_id);
                 if (ls == null) return null;
                 map.put("ls", ls);
                 map.put("code", "200");
                 map.put("msg", "操作成功");
-            }
         }catch (Exception e){
             map.put("code", "500");
             map.put("msg", "操作失败");
@@ -204,4 +200,20 @@ public class UserBaseInfoController {
         return map;
     }
 
+    @RequestMapping(value = "/getFansList", method = RequestMethod.GET)
+    public Map getFansList(int user_id) {
+        System.out.println("调用getFansList方法");
+        Map<String, Object> map = new HashMap<>();
+        try {
+            List<UserBaseInfo> ls = baseInfoService.getFansList(user_id);
+            if (ls == null) return null;
+            map.put("ls", ls);
+            map.put("code", "200");
+            map.put("msg", "操作成功");
+        }catch (Exception e){
+            map.put("code", "500");
+            map.put("msg", "操作失败");
+        }
+        return map;
+    }
 }

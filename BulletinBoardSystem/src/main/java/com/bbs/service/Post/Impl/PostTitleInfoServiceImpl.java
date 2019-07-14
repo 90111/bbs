@@ -7,6 +7,8 @@ import com.bbs.dao.User.UserBaseInfoDao;
 import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.model.User.UserCollectionInfo;
 import com.bbs.service.Post.PostTitleInfoService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -44,7 +46,10 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
 
     @Override
     public List<PostTitleInfo> getPostTitleInfosByTime(String s) throws Exception {
-        return postTitleInfoDao.getPostTitleInfosByTime(s);
+        PageHelper.startPage(1, 5);
+        List<PostTitleInfo> ls = postTitleInfoDao.getPostTitleInfosByTime(s);
+//        Page<PostTitleInfo> pageInfo = new Page<>(ls);
+        return ls;
     }
 
     @Override

@@ -14,4 +14,6 @@ public interface UserBaseInfoService {
     void updateUserBaseInfo(UserBaseInfo userBaseInfo) throws Exception;
 
     List<UserBaseInfo> getFollowList(int id) throws Exception;
+
+    List<UserBaseInfo> getFansList(int id) throws Exception;
 }

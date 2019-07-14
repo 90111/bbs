@@ -8,6 +8,7 @@
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/api/Post/DistrictController.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/model/User/UserBaseInfo.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/api/Post/ReplyInfoController.java
+/Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/config/MyExceptionHandler.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/model/User/ResponseModel.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/service/Post/PlateInfoService.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/service/Announcement/lmpl/AnnouncementInfoServiceImpl.java

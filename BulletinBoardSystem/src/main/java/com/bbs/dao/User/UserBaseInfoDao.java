@@ -38,4 +38,8 @@ public interface UserBaseInfoDao {
     @Select("select UserLoginInfo.id as user_id, nick_name, icon, motto from UserFollowInfo, UserBaseInfo, UserLoginInfo " +
             "where UserFollowInfo.follow_id = UserLoginInfo.id and UserLoginInfo.id = UserBaseInfo.user_id and UserFollowInfo.user_id = #{id} ")
     List<UserBaseInfo> getFollowList(int id) throws Exception;
+
+    @Select("select UserLoginInfo.id as user_id, nick_name, icon, motto from UserFollowInfo, UserBaseInfo, UserLoginInfo " +
+            "where UserFollowInfo.user_id = UserLoginInfo.id and UserLoginInfo.id = UserBaseInfo.user_id and UserFollowInfo.follow_id = #{id}")
+    List<UserBaseInfo> getFansList(int id) throws Exception;
 }

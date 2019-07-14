@@ -34,4 +34,9 @@ public class UserBaseInfoServiceImpl implements UserBaseInfoService {
     public List<UserBaseInfo> getFollowList(int id) throws Exception {
         return userBaseInfoDao.getFollowList(id);
     }
+
+    @Override
+    public List<UserBaseInfo> getFansList(int id) throws Exception {
+        return userBaseInfoDao.getFansList(id);
+    }
 }

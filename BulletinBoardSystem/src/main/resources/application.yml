@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: root
+    password: 12345678
+    url: jdbc:mysql://39.108.208.140:3306/bbs?useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+
+  banner:
+    charset: utf-8
+
+pagehelper:
+  helperDialect: sqlserver
+  reasonable: true
+  supportMethodsArguments: true
+  pageSizeZero: true
+  params: count=countSql
