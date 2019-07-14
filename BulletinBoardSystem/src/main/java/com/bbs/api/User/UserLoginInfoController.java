@@ -183,4 +183,12 @@ public class UserLoginInfoController extends BaseController{
         }
         return map;
     }
+
+    @RequestMapping(value = "/notLogin", method = RequestMethod.GET)
+    private Map notLogin() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", "500");
+        map.put("msg", "您还未登录");
+        return map;
+    }
 }
