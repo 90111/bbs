@@ -2,6 +2,7 @@ package com.bbs.service.Post;
 
 import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.model.User.UserCollectionInfo;
+import com.github.pagehelper.PageInfo;
 
 import java.util.Date;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.Map;
 
 public interface PostTitleInfoService {
 
-    List<PostTitleInfo> getPostTitleInfos(int id, String s) throws Exception;
+    PageInfo<PostTitleInfo> getPostTitleInfos(int id, String s, int page) throws Exception;
 
     PostTitleInfo getPostTitleContent(int id) throws Exception;
 
@@ -34,5 +35,7 @@ public interface PostTitleInfoService {
     void updatePostTitleInfo(PostTitleInfo postTitleInfo) throws Exception;
 
     List<PostTitleInfo> searchPost(String postTitle) throws Exception;
+
+    PageInfo<PostTitleInfo> getInfos() throws Exception;
 
 }

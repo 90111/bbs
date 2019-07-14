@@ -4,11 +4,17 @@ import com.bbs.dao.Post.DistrictInfoDao;
 import com.bbs.dao.Post.PlateInfoDao;
 import com.bbs.dao.Post.PostTitleInfoDao;
 import com.bbs.dao.User.UserBaseInfoDao;
+import com.bbs.dao.User.UserCollectionInfoDao;
+import com.bbs.dao.User.UserLikeInfoDao;
+import com.bbs.dao.User.UserLoginInfoDao;
 import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.model.User.UserCollectionInfo;
 import com.bbs.service.Post.PostTitleInfoService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,11 +37,34 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     @Resource
     private PlateInfoDao plateInfoDao;
 
-    @Override
-    public List<PostTitleInfo> getPostTitleInfos(int id, String s) throws Exception {
-        List<PostTitleInfo> ls = postTitleInfoDao.getPostTitleInfos(id, s);
+    @Resource
+    private UserLoginInfoDao userLoginInfoDao;
 
-        return ls;
+    @Resource
+    private UserLikeInfoDao userLikeInfoDao;
+
+    @Resource
+    private UserCollectionInfoDao userCollectionInfoDao;
+
+    @Override
+    public PageInfo<PostTitleInfo> getPostTitleInfos(int id, String s, int page) throws Exception {
+        PageHelper.startPage(page, 20);
+        Subject currentUser = SecurityUtils.getSubject();
+        List<PostTitleInfo> ls = postTitleInfoDao.getPostTitleInfos(id, s);
+        if (currentUser.isAuthenticated()) {
+            String username = (String) currentUser.getPrincipal();
+            int user_id = userLoginInfoDao.getUserLoginInfoByName(username).getId();
+            for (PostTitleInfo info : ls){
+                if ((userCollectionInfoDao.checkIsCollected(user_id, info.getId()) == 1)){
+                    info.setCollected(true);
+                }
+                if ((userLikeInfoDao.checkIsLike(user_id, info.getId())) == 1){
+                    info.setLiked(true);
+                }
+            }
+        }
+        PageInfo<PostTitleInfo> pageInfoDemo = new PageInfo<PostTitleInfo>(ls);
+        return pageInfoDemo;
     }
 
     @Override
@@ -46,9 +75,10 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
 
     @Override
     public List<PostTitleInfo> getPostTitleInfosByTime(String s) throws Exception {
-        PageHelper.startPage(1, 5);
+//        PageHelper.startPage(1, 5);
         List<PostTitleInfo> ls = postTitleInfoDao.getPostTitleInfosByTime(s);
-//        Page<PostTitleInfo> pageInfo = new Page<>(ls);
+//        PageInfo<PostTitleInfo> pageInfo = new PageInfo<PostTitleInfo>(ls);
+//        System.out.println(pageInfo.getTotal());
         return ls;
     }
 
@@ -113,6 +143,14 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
         }catch (Exception e){
             return null;
         }
+    }
+
+    @Override
+    public PageInfo<PostTitleInfo> getInfos() throws Exception {
+        PageHelper.startPage(2, 5);
+        List<PostTitleInfo> learnResourceList = postTitleInfoDao.getInfos();
+        PageInfo<PostTitleInfo> pageInfoDemo = new PageInfo<PostTitleInfo>(learnResourceList);
+        return pageInfoDemo;
     }
 
 

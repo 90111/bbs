@@ -49,7 +49,7 @@ public interface PostTitleInfoDao {
     void updatePostTitleInfo(PostTitleInfo postTitleInfo) throws Exception;
 
     @Select("SELECT PostTitleInfo.id as id, title, owner, nick_name, PostTitleInfo.image, UserBaseInfo.icon, view_num, PostTitleInfo.like_num, recommend_num, reply_time, reply_num from PostTitleInfo, UserBaseInfo " +
-            "where districtInfo_id = #{id} and UserBaseInfo.user_id = PostTitleInfo.owner order by ${orderby} desc limit 20")
+            "where districtInfo_id = #{id} and UserBaseInfo.user_id = PostTitleInfo.owner order by ${orderby} desc")
     List<PostTitleInfo> getPostTitleInfos(int id, @Param("orderby") String orderby) throws Exception;
 
     @Select("select PostTitleInfo.id as id, districtInfo_id, title, owner, nick_name, content, post_time, PostTitleInfo.image, UserBaseInfo.icon, view_num, PostTitleInfo.like_num, recommend_num,reply_num from PostTitleInfo, UserBaseInfo " +
@@ -96,5 +96,8 @@ public interface PostTitleInfoDao {
 
     @Select("SELECT id, title from PostTitleInfo where title like #{postTitle}")
     List<PostTitleInfo> searchPost(String postTitle) throws Exception;
+
+    @Select("select * from PostTitleInfo order by id")
+    List<PostTitleInfo> getInfos() throws Exception;
 
 }

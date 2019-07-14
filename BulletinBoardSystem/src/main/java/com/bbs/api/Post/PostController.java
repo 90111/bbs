@@ -10,6 +10,7 @@ import com.bbs.service.User.Impl.UserCollectionInfoServiceImpl;
 import com.bbs.service.User.Impl.UserLikeInfoServiceImpl;
 import com.bbs.service.User.Impl.UserBaseInfoServiceImpl;
 import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
+import com.github.pagehelper.PageInfo;
 import javafx.geometry.Pos;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -53,24 +54,21 @@ public class PostController {
 
 
     @RequestMapping(value = "/getPostTitles", method = RequestMethod.GET)
-    public Map getPostTitlesByDistrictId(int id, String orderby) {
+    public Map getPostTitlesByDistrictId(int id, String orderby, int page) {
         System.out.println("调用getPostTitlesByDistrictId方法");
 
         Map<String, Object> map = new HashMap<>();
-        Subject currentUser = SecurityUtils.getSubject();
+
         try{
-            List<PostTitleInfo> ls = postInfoService.getPostTitleInfos(id, orderby);
-            if (currentUser.isAuthenticated()) {
-                String username = (String) currentUser.getPrincipal();
-                int user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
-                for (PostTitleInfo info : ls){
-                    info.setCollected(userCollectionInfoService.checkIsCollected(user_id, info.getId()));
-                    info.setLiked(userLikeInfoService.checkIsLike(user_id, info.getId()));
-                }
-            }
+
+//            List<PostTitleInfo> ls = postInfoService.getPostTitleInfos(id, orderby);
+            PageInfo pageObj = postInfoService.getPostTitleInfos(id, orderby, page);
+            List<Map<String, Object>> ls = pageObj.getList();
+
             map.put("code", "200");
             map.put("msg", "获取分区帖子成功");
             map.put("postInfos", ls);
+            map.put("num", pageObj.getTotal());
         }catch (Exception e){
             map.put("code", "500");
             map.put("msg", "获取分区帖子失败");
