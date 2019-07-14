@@ -13,9 +13,11 @@ import com.bbs.service.Post.PostTitleInfoService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -74,12 +76,24 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     }
 
     @Override
-    public List<PostTitleInfo> getPostTitleInfosByTime(String s) throws Exception {
-//        PageHelper.startPage(1, 5);
+    public PageInfo<PostTitleInfo> getPostTitleInfosByTime(String s, int page) throws Exception {
+        PageHelper.startPage(page, 20);
         List<PostTitleInfo> ls = postTitleInfoDao.getPostTitleInfosByTime(s);
-//        PageInfo<PostTitleInfo> pageInfo = new PageInfo<PostTitleInfo>(ls);
-//        System.out.println(pageInfo.getTotal());
-        return ls;
+        Subject currentUser = SecurityUtils.getSubject();
+        if (currentUser.isAuthenticated()) {
+            String username = (String) currentUser.getPrincipal();
+            int user_id = userLoginInfoDao.getUserLoginInfoByName(username).getId();
+            for (PostTitleInfo info : ls){
+                if ((userCollectionInfoDao.checkIsCollected(user_id, info.getId()) == 1)){
+                    info.setCollected(true);
+                }
+                if ((userLikeInfoDao.checkIsLike(user_id, info.getId())) == 1){
+                    info.setLiked(true);
+                }
+            }
+        }
+        PageInfo<PostTitleInfo> pageInfoDemo = new PageInfo<PostTitleInfo>(ls);
+        return pageInfoDemo;
     }
 
     @Override

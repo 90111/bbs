@@ -14,7 +14,7 @@ public interface PostTitleInfoService {
 
     PostTitleInfo getPostTitleContent(int id) throws Exception;
 
-    List<PostTitleInfo> getPostTitleInfosByTime(String s) throws Exception;
+    PageInfo<PostTitleInfo> getPostTitleInfosByTime(String s, int page) throws Exception;
 
     List<PostTitleInfo> getUserRecentPostTitleByUserId(int id) throws Exception;
 

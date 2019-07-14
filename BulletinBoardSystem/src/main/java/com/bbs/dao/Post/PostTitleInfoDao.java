@@ -48,7 +48,7 @@ public interface PostTitleInfoDao {
     @Update("update PostTitleInfo set title=#{title},content=#{content},image=#{image},districtInfo_id=#{districtInfo_id},post_time=#{post_time} where id=#{id}")
     void updatePostTitleInfo(PostTitleInfo postTitleInfo) throws Exception;
 
-    @Select("SELECT PostTitleInfo.id as id, title, owner, nick_name, PostTitleInfo.image, UserBaseInfo.icon, view_num, PostTitleInfo.like_num, recommend_num, reply_time, reply_num from PostTitleInfo, UserBaseInfo " +
+    @Select("SELECT PostTitleInfo.id as id, title, districtInfo_id, owner, nick_name, PostTitleInfo.image, UserBaseInfo.icon, view_num, PostTitleInfo.like_num, recommend_num, reply_time, reply_num from PostTitleInfo, UserBaseInfo " +
             "where districtInfo_id = #{id} and UserBaseInfo.user_id = PostTitleInfo.owner order by ${orderby} desc")
     List<PostTitleInfo> getPostTitleInfos(int id, @Param("orderby") String orderby) throws Exception;
 
@@ -60,7 +60,7 @@ public interface PostTitleInfoDao {
             "UserBaseInfo.nick_name, UserBaseInfo.icon, recommend_num, view_num, PostTitleInfo.like_num, reply_num, " +
             "PostTitleInfo.image FROM DistrictInfo, PostTitleInfo, UserBaseInfo " +
             "WHERE PostTitleInfo.districtInfo_id = DistrictInfo.id and PostTitleInfo.owner = UserBaseInfo.user_id " +
-            "ORDER BY ${orderby} DESC limit 20")
+            "ORDER BY ${orderby} DESC")
     List<PostTitleInfo> getPostTitleInfosByTime(@Param("orderby") String orderby) throws Exception;
 
     @Select("SELECT id, title, view_num, like_num, image FROM PostTitleInfo WHERE owner=#{user_id} " +

@@ -56,20 +56,15 @@ public class PostController {
     @RequestMapping(value = "/getPostTitles", method = RequestMethod.GET)
     public Map getPostTitlesByDistrictId(int id, String orderby, int page) {
         System.out.println("调用getPostTitlesByDistrictId方法");
-
         Map<String, Object> map = new HashMap<>();
-
-        try{
-
-//            List<PostTitleInfo> ls = postInfoService.getPostTitleInfos(id, orderby);
+        try {
             PageInfo pageObj = postInfoService.getPostTitleInfos(id, orderby, page);
             List<Map<String, Object>> ls = pageObj.getList();
-
             map.put("code", "200");
             map.put("msg", "获取分区帖子成功");
             map.put("postInfos", ls);
             map.put("num", pageObj.getTotal());
-        }catch (Exception e){
+        } catch (Exception e) {
             map.put("code", "500");
             map.put("msg", "获取分区帖子失败");
         }
@@ -112,24 +107,17 @@ public class PostController {
 
 
     @RequestMapping(value = "/getIndexPostTitles", method = RequestMethod.GET)
-    public Map getIndexPostTitles() {
+    public Map getIndexPostTitles(int page) {
         System.out.println("调用getIndexPostTitles方法");
         Map<String, Object> map = new HashMap<>();
         try {
-            Subject currentUser = SecurityUtils.getSubject();
-            String s = "post_time";
-            List<PostTitleInfo> ls = postInfoService.getPostTitleInfosByTime(s);
-            if (currentUser.isAuthenticated()) {
-                String username = (String) currentUser.getPrincipal();
-                int user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
-                for (PostTitleInfo info : ls) {
-                    info.setCollected(userCollectionInfoService.checkIsCollected(user_id, info.getId()));
-                    info.setLiked(userLikeInfoService.checkIsLike(user_id, info.getId()));
-                }
-            }
+            PageInfo pageObj = postInfoService.getPostTitleInfosByTime("post_time", page);
+            List<Map<String, Object>> ls = pageObj.getList();
+
             map.put("code", "200");
             map.put("msg", "获取首页帖子成功");
             map.put("PostTitleList", ls);
+            map.put("num", pageObj.getTotal());
         } catch (Exception e) {
             e.printStackTrace();
             map.put("code", "500");
@@ -145,7 +133,7 @@ public class PostController {
         Map<String, Object> map = new HashMap();
         Subject current = SecurityUtils.getSubject();
         try {
-            if(current.isAuthenticated()) {
+            if (current.isAuthenticated()) {
                 int user_id = userLoginInfoService.getUserLoginInfoByName((String) current.getPrincipal()).getId();
                 postTitleInfo.setOwner(user_id);
                 postInfoService.addPostTitleInfo(postTitleInfo);
@@ -166,15 +154,15 @@ public class PostController {
         Map<String, Object> map = new HashMap();
         Subject current = SecurityUtils.getSubject();
         try {
-            if(current.isAuthenticated()) {
+            if (current.isAuthenticated()) {
                 int user_id = userLoginInfoService.getUserLoginInfoByName((String) current.getPrincipal()).getId();
                 postInfoService.updatePostTitleInfo(postTitleInfo);
                 map.put("code", "200");
                 map.put("msg", "修改帖子成功");
-                } else {
-                    map.put("code", "500");
-                    map.put("msg", "用户无权限");
-                }
+            } else {
+                map.put("code", "500");
+                map.put("msg", "用户无权限");
+            }
         } catch (Exception e) {
             map.put("code", "500");
             map.put("msg", "修改帖子失败");
@@ -243,27 +231,27 @@ public class PostController {
         Date date1 = new Date();
         String date_1 = dateFormat.format(date1);
         Calendar c = Calendar.getInstance();
-        c.add(Calendar.DATE, - 7);
+        c.add(Calendar.DATE, -7);
         Date date2 = c.getTime();
         String date_2 = dateFormat.format(date2);
         long diff = -1;
         try {
             List<PostTitleInfo> ls = postInfoService.getPostTitleBetweenTime(date_2, date_1);
             ArrayList<Map<String, Object>> array = new ArrayList<Map<String, Object>>();
-            if (currentUser.isAuthenticated()){
+            if (currentUser.isAuthenticated()) {
                 int user_id = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal()).getId();
-                for (PostTitleInfo info : ls){
+                for (PostTitleInfo info : ls) {
                     info.setLiked(userLikeInfoService.checkIsLike(user_id, info.getId()));
                     info.setCollected(userCollectionInfoService.checkIsCollected(user_id, info.getId()));
                 }
             }
-            for (PostTitleInfo info : ls){
+            for (PostTitleInfo info : ls) {
                 Map<String, Object> map2 = new HashMap<>();
                 Date post_time = info.getPost_time();
                 dateFormat.format(post_time);
-                diff = post_time.getTime() - date1.getTime() + (date1.getTime()-date2.getTime());
+                diff = post_time.getTime() - date1.getTime() + (date1.getTime() - date2.getTime());
                 diff /= 1000000;
-                diff += info.getView_num()*5 + info.getReply_num()*7 + info.getLike_num()*9 + info.getRecommend_num()*10;
+                diff += info.getView_num() * 5 + info.getReply_num() * 7 + info.getLike_num() * 9 + info.getRecommend_num() * 10;
                 map2.put("postTitle", info);
                 map2.put("diff", diff);
                 array.add(map2);
@@ -279,7 +267,7 @@ public class PostController {
             map.put("code", "200");
             map.put("msg", "获取精选帖子列表成功");
             map.put("postInfos", array);
-        }catch (Exception e){
+        } catch (Exception e) {
             map.put("code", "500");
             map.put("msg", "获取精选帖子列表失败");
         }
@@ -294,9 +282,9 @@ public class PostController {
         Subject currentUser = SecurityUtils.getSubject();
         try {
             List<PostTitleInfo> ls = postInfoService.getRecommendPostTitles(district_id);
-            if (currentUser.isAuthenticated()){
+            if (currentUser.isAuthenticated()) {
                 int user_id = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal()).getId();
-                for (PostTitleInfo info : ls){
+                for (PostTitleInfo info : ls) {
                     info.setLiked(userLikeInfoService.checkIsLike(user_id, info.getId()));
                     info.setCollected(userCollectionInfoService.checkIsCollected(user_id, info.getId()));
                 }
@@ -304,7 +292,7 @@ public class PostController {
             map.put("recomdTitles", ls);
             map.put("code", "200");
             map.put("msg", "获取分区精品帖成功");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             map.put("code", "500");
             map.put("msg", "获取分区精品帖失败");
@@ -316,19 +304,19 @@ public class PostController {
     @RequestMapping(value = "/searchPost", method = RequestMethod.GET)
     public Map searchPost(String postTitle) {
         System.out.println("调用searchPost方法");
-        if (postTitle.isEmpty() || postTitle==null || postTitle.equals("")){
+        if (postTitle.isEmpty() || postTitle == null || postTitle.equals("")) {
             return null;
         }
         Map<String, Object> map = new HashMap<>();
         try {
             List<PostTitleInfo> ls = postInfoService.searchPost(postTitle);
-            if (ls==null){
+            if (ls == null) {
                 return null;
             }
             map.put("code", "200");
             map.put("msg", "操作成功");
             map.put("ls", ls);
-        }catch (Exception e){
+        } catch (Exception e) {
             map.put("code", "500");
             map.put("msg", "操作失败");
         }
