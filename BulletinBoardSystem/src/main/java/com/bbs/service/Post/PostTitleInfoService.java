@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface PostTitleInfoService {
 
-    PageInfo<PostTitleInfo> getPostTitleInfos(int id, String s, int page) throws Exception;
+    PageInfo<PostTitleInfo> getPostTitleInfos(int id, String s, int page, int size) throws Exception;
 
     PostTitleInfo getPostTitleContent(int id) throws Exception;
 
-    PageInfo<PostTitleInfo> getPostTitleInfosByTime(String s, int page) throws Exception;
+    PageInfo<PostTitleInfo> getPostTitleInfosByTime(String s, int page, int size) throws Exception;
 
     List<PostTitleInfo> getUserRecentPostTitleByUserId(int id) throws Exception;
 
@@ -34,7 +34,7 @@ public interface PostTitleInfoService {
 
     List<PostTitleInfo> searchPost(String postTitle) throws Exception;
 
-    List<PostTitleInfo> getPostTitleInfosByColum(String colum_name, String s, String nick_name) throws Exception;
+    PageInfo getPostTitleInfosByColum(String colum_name, String s, String nick_name, int page, int size) throws Exception;
 
     void batchDelete(List<PostTitleInfo> ls) throws Exception;
 

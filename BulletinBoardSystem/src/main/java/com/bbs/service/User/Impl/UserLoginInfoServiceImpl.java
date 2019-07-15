@@ -3,12 +3,16 @@ package com.bbs.service.User.Impl;
 
 import com.bbs.dao.User.UserBaseInfoDao;
 import com.bbs.dao.User.UserLoginInfoDao;
+import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.model.User.RoleInfo;
 import com.bbs.model.User.UserLoginInfo;
 import com.bbs.service.User.UserLoginInfoService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UserLoginInfoServiceImpl implements UserLoginInfoService {
@@ -37,9 +41,14 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService {
     }
 
     @Override
-    public void deleteUserLoginInfoById(int id) throws Exception {
-        userLoginInfoDao.deleteUserLoginInfoById(id);
-        userBaseInfoDao.deleteUserBaseInfoById(id);
+    public void deleteUserLoginInfoById(List<UserLoginInfo> ls) throws Exception {
+        StringBuilder sb = new StringBuilder();
+        for (UserLoginInfo info : ls){
+            sb.append("'").append(info.getId()).append("'").append(",");
+        }
+        sb.deleteCharAt(sb.length()-1);
+        String s = sb.toString();
+        userLoginInfoDao.deleteUserLoginInfoById(s);
     }
 
     @Override
@@ -56,5 +65,17 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService {
         userLoginInfoDao.updateUserPwd(id, newPwd);
     }
 
+    @Override
+    public PageInfo<UserLoginInfo> getUserLoginInfos(int page) throws Exception {
+        PageHelper.startPage(page, 20);
+        List<UserLoginInfo> ls = userLoginInfoDao.getUserLoginInfos();
+        PageInfo<UserLoginInfo> pageInfoDemo = new PageInfo<UserLoginInfo>(ls);
+        return pageInfoDemo;
+    }
+
+    @Override
+    public int getUserNum() throws Exception {
+        return userLoginInfoDao.getUserNum();
+    }
 
 }

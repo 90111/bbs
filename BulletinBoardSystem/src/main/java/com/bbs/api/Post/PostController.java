@@ -50,11 +50,11 @@ public class PostController {
 
 
     @RequestMapping(value = "/getPostTitles", method = RequestMethod.GET)
-    public Map getPostTitlesByDistrictId(int id, String orderby, int page) {
+    public Map getPostTitlesByDistrictId(int id, String orderby, int page, int size) {
         System.out.println("调用getPostTitlesByDistrictId方法");
         Map<String, Object> map = new HashMap<>();
         try {
-            PageInfo pageObj = postInfoService.getPostTitleInfos(id, orderby, page);
+            PageInfo pageObj = postInfoService.getPostTitleInfos(id, orderby, page, size);
             List<Map<String, Object>> ls = pageObj.getList();
             map.put("code", "200");
             map.put("msg", "获取分区帖子成功");
@@ -103,11 +103,11 @@ public class PostController {
 
 
     @RequestMapping(value = "/getIndexPostTitles", method = RequestMethod.GET)
-    public Map getIndexPostTitles(int page) {
+    public Map getIndexPostTitles(int page, int size) {
         System.out.println("调用getIndexPostTitles方法");
         Map<String, Object> map = new HashMap<>();
         try {
-            PageInfo pageObj = postInfoService.getPostTitleInfosByTime("post_time", page);
+            PageInfo pageObj = postInfoService.getPostTitleInfosByTime("post_time", page, size);
             List<Map<String, Object>> ls = pageObj.getList();
 
             map.put("code", "200");

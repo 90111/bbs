@@ -25,13 +25,18 @@ public interface UserLoginInfoDao {
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     void addUserLoginInfo(UserLoginInfo userLoginInfo) throws Exception;
 
-    @Delete("delete from UserLoginInfo where id = #{id}")
-    void deleteUserLoginInfoById(int id) throws Exception;
-
     @Select("select * from UserLoginInfo where mail = #{mail}")
     UserLoginInfo getUserLoginInfoByMail(String mail)throws Exception;
 
     @Update("update UserLoginInfo set password=#{password} where id=#{id}")
     void updateUserPwd(int id, String password) throws Exception;
 
+    @Select("select * from UserLoginInfo order by id")
+    List<UserLoginInfo> getUserLoginInfos() throws Exception;
+
+    @Delete("delete from UserLoginInfo where id in (${s})")
+    void deleteUserLoginInfoById(@Param("s") String s) throws Exception;
+
+    @Select("select count(*) from UserLoginInfo")
+    int getUserNum() throws Exception;
 }

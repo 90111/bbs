@@ -1,6 +1,9 @@
 package com.bbs.service.User;
 
 import com.bbs.model.User.UserLoginInfo;
+import com.github.pagehelper.PageInfo;
+
+import java.util.List;
 
 public interface UserLoginInfoService {
 
@@ -8,10 +11,14 @@ public interface UserLoginInfoService {
 
     void addUserLoginInfo(UserLoginInfo userLoginInfo) throws Exception;
 
-    void deleteUserLoginInfoById(int id) throws Exception;
+    void deleteUserLoginInfoById(List<UserLoginInfo> ls) throws Exception;
 
     UserLoginInfo getUserLoginInfoByMail(String mail) throws Exception;
 
     void updateUserPwd(int id, String newPwd) throws Exception;
+
+    PageInfo getUserLoginInfos(int page) throws Exception;
+
+    int getUserNum() throws Exception;
 
 }

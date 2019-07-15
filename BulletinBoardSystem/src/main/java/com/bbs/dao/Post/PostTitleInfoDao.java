@@ -99,22 +99,6 @@ public interface PostTitleInfoDao {
     List<PostTitleInfo> getPostTitleInfosByColum2(@Param("colum_name") String colum_name, String s, String nick_name) throws Exception;
 
 
-    @DeleteProvider(type = Provider.class, method = "batchDelete")
-    int batchDelete(Map students);
-
-    class Provider {
-        /* 批量删除 */
-        public String batchDelete(Map map) {
-            List<PostTitleInfo> students = (List<PostTitleInfo>) map.get("list");
-            StringBuilder sb = new StringBuilder();
-            sb.append("DELETE FROM PostTitleInfo WHERE id IN (");
-            for (int i = 0; i < students.size(); i++) {
-                sb.append("'").append(students.get(i).getId()).append("'");
-                if (i < students.size() - 1)
-                    sb.append(",");
-            }
-            sb.append(")");
-            return sb.toString();
-        }
-    }
+    @Delete("delete from PostTitleInfo where id in (${s})")
+    int batchDelete(@Param("s") String s);
 }

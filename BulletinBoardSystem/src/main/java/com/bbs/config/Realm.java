@@ -4,10 +4,7 @@ import com.bbs.model.User.FunctionInfo;
 import com.bbs.model.User.RoleInfo;
 import com.bbs.model.User.UserLoginInfo;
 import com.bbs.service.User.UserLoginInfoService;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -56,7 +53,10 @@ public class Realm extends AuthorizingRealm {
         }
         if (userLoginInfo == null){
                 return null;
-            }
+        }
+        if (userLoginInfo.getState() != 1){
+            throw new LockedAccountException();
+        }
         SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(userLoginInfo.getUser_name(), userLoginInfo.getPassword(), getName());
 
         return simpleAuthenticationInfo;

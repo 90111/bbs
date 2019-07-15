@@ -48,10 +48,13 @@ public class UserLoginInfoController extends BaseController{
             jsonObject.put("user_name", info.getUser_name());
             jsonObject.put("icon", userBaseInfoService.getUserBaseInfoByUserId(info.getId()).getIcon());
         } catch (IncorrectCredentialsException e) {
+            jsonObject.put("code", 500);
             jsonObject.put("msg", "密码错误");
         } catch (LockedAccountException e) {
+            jsonObject.put("code", 500);
             jsonObject.put("msg", "登录失败，该用户已被冻结");
         } catch (AuthenticationException e) {
+            jsonObject.put("code", 500);
             jsonObject.put("msg", "该用户不存在");
         } catch (Exception e) {
             e.printStackTrace();

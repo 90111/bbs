@@ -49,8 +49,8 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     private UserCollectionInfoDao userCollectionInfoDao;
 
     @Override
-    public PageInfo<PostTitleInfo> getPostTitleInfos(int id, String s, int page) throws Exception {
-        PageHelper.startPage(page, 20);
+    public PageInfo<PostTitleInfo> getPostTitleInfos(int id, String s, int page, int size) throws Exception {
+        PageHelper.startPage(page, size);
         Subject currentUser = SecurityUtils.getSubject();
         List<PostTitleInfo> ls = postTitleInfoDao.getPostTitleInfos(id, s);
         if (currentUser.isAuthenticated()) {
@@ -76,8 +76,8 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     }
 
     @Override
-    public PageInfo<PostTitleInfo> getPostTitleInfosByTime(String s, int page) throws Exception {
-        PageHelper.startPage(page, 20);
+    public PageInfo<PostTitleInfo> getPostTitleInfosByTime(String s, int page, int size) throws Exception {
+        PageHelper.startPage(page, size);
         List<PostTitleInfo> ls = postTitleInfoDao.getPostTitleInfosByTime(s);
         Subject currentUser = SecurityUtils.getSubject();
         if (currentUser.isAuthenticated()) {
@@ -160,21 +160,31 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     }
 
     @Override
-    public List<PostTitleInfo> getPostTitleInfosByColum(String colum_name, String s, String nick_name) throws Exception {
+    public PageInfo getPostTitleInfosByColum(String colum_name, String s, String nick_name, int page, int size) throws Exception {
+        List<PostTitleInfo> ls;
         try {
-            if (nick_name.equals("") || nick_name==null)
-                return postTitleInfoDao.getPostTitleInfosByColum(colum_name, "%" + s + "%");
+            PageHelper.startPage(page, size);
+            if (nick_name.equals("") || nick_name == null)
+                ls = postTitleInfoDao.getPostTitleInfosByColum(colum_name, "%" + s + "%");
             else
-                return postTitleInfoDao.getPostTitleInfosByColum2(colum_name, "%" + s + "%", nick_name);
+                ls = postTitleInfoDao.getPostTitleInfosByColum2(colum_name, "%" + s + "%", nick_name);
+            PageInfo<PostTitleInfo> pageInfoDemo = new PageInfo<PostTitleInfo>(ls);
+            return pageInfoDemo;
         } catch (Exception e) {
             return null;
         }
     }
 
+
     @Override
     public void batchDelete(List<PostTitleInfo> ls) throws Exception {
-//        postTitleInfoDao.batchDelete(ls);
+        StringBuilder sb = new StringBuilder();
+        for (PostTitleInfo info : ls){
+            sb.append("'").append(info.getId()).append("'").append(",");
+        }
+        sb.deleteCharAt(sb.length()-1);
+        String s = sb.toString();
+        postTitleInfoDao.batchDelete(s);
     }
-
 
 }
