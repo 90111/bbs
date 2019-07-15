@@ -11,10 +11,7 @@ import com.bbs.service.User.Impl.UserLikeInfoServiceImpl;
 import com.bbs.service.User.Impl.UserBaseInfoServiceImpl;
 import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
 import com.github.pagehelper.PageInfo;
-import javafx.geometry.Pos;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -323,26 +319,4 @@ public class PostController {
         return map;
     }
 
-
-    @RequestMapping(value = "/searchByColum", method = RequestMethod.GET)
-    public Map searchPost(String colum_name, String s) {
-        System.out.println("调用searchByColum方法");
-        if (s.isEmpty() || s == null || s.equals("")) {
-            return null;
-        }
-        Map<String, Object> map = new HashMap<>();
-        try {
-            List<PostTitleInfo> ls = postInfoService.getPostTitleInfosByColum(colum_name, s);
-            if (ls == null) {
-                return null;
-            }
-            map.put("code", "200");
-            map.put("msg", "操作成功");
-            map.put("ls", ls);
-        } catch (Exception e) {
-            map.put("code", "500");
-            map.put("msg", "操作失败");
-        }
-        return map;
-    }
 }

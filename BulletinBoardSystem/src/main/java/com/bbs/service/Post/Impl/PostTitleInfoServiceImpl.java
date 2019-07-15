@@ -56,11 +56,11 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
         if (currentUser.isAuthenticated()) {
             String username = (String) currentUser.getPrincipal();
             int user_id = userLoginInfoDao.getUserLoginInfoByName(username).getId();
-            for (PostTitleInfo info : ls){
-                if ((userCollectionInfoDao.checkIsCollected(user_id, info.getId()) == 1)){
+            for (PostTitleInfo info : ls) {
+                if ((userCollectionInfoDao.checkIsCollected(user_id, info.getId()) == 1)) {
                     info.setCollected(true);
                 }
-                if ((userLikeInfoDao.checkIsLike(user_id, info.getId())) == 1){
+                if ((userLikeInfoDao.checkIsLike(user_id, info.getId())) == 1) {
                     info.setLiked(true);
                 }
             }
@@ -83,11 +83,11 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
         if (currentUser.isAuthenticated()) {
             String username = (String) currentUser.getPrincipal();
             int user_id = userLoginInfoDao.getUserLoginInfoByName(username).getId();
-            for (PostTitleInfo info : ls){
-                if ((userCollectionInfoDao.checkIsCollected(user_id, info.getId()) == 1)){
+            for (PostTitleInfo info : ls) {
+                if ((userCollectionInfoDao.checkIsCollected(user_id, info.getId()) == 1)) {
                     info.setCollected(true);
                 }
-                if ((userLikeInfoDao.checkIsLike(user_id, info.getId())) == 1){
+                if ((userLikeInfoDao.checkIsLike(user_id, info.getId())) == 1) {
                     info.setLiked(true);
                 }
             }
@@ -123,7 +123,7 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     @Override
     public void deleteByPostTitleId(int user_id, int id) throws Exception {
         PostTitleInfo postTitleInfo = postTitleInfoDao.getPostTitleById(user_id);
-        postTitleInfoDao.deletePostTitleInfoById(user_id, id);
+        postTitleInfoDao.deletePostTitleInfoById(id);
         userBaseInfoDao.updateUserPostNum(user_id);
         districtInfoDao.updateDistrictPostNum(postTitleInfo.getDistrictInfo_id());
         plateInfoDao.updatePlatePostNum(districtInfoDao.getDistrictInfo(postTitleInfo.getDistrictInfo_id()).getPlate_id());
@@ -153,19 +153,27 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     @Override
     public List<PostTitleInfo> searchPost(String postTitle) throws Exception {
         try {
-            return postTitleInfoDao.searchPost("%"+postTitle+"%");
-        }catch (Exception e){
+            return postTitleInfoDao.searchPost("%" + postTitle + "%");
+        } catch (Exception e) {
             return null;
         }
     }
 
     @Override
-    public List<PostTitleInfo> getPostTitleInfosByColum(String colum_name, String s) throws Exception {
+    public List<PostTitleInfo> getPostTitleInfosByColum(String colum_name, String s, String nick_name) throws Exception {
         try {
-            return postTitleInfoDao.getPostTitleInfosByColum(colum_name,"%"+s+"%");
-        }catch (Exception e){
+            if (nick_name.equals("") || nick_name==null)
+                return postTitleInfoDao.getPostTitleInfosByColum(colum_name, "%" + s + "%");
+            else
+                return postTitleInfoDao.getPostTitleInfosByColum2(colum_name, "%" + s + "%", nick_name);
+        } catch (Exception e) {
             return null;
         }
+    }
+
+    @Override
+    public void batchDelete(List<PostTitleInfo> ls) throws Exception {
+//        postTitleInfoDao.batchDelete(ls);
     }
 
 

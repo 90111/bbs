@@ -5,8 +5,7 @@ import com.bbs.model.User.UserCollectionInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Mapper
 @Component
@@ -15,8 +14,8 @@ public interface PostTitleInfoDao {
     @Insert("insert into PostTitleInfo (districtInfo_id,title,owner,content,post_time, image) VALUES (#{districtInfo_id},#{title},#{owner},#{content},#{post_time}, #{image})")
     public void addPostTitleInfo(PostTitleInfo postTitleInfo) throws Exception;
 
-    @Delete("delete from PostTitleInfo where owner = #{owner} and id=#{id}")
-    public void deletePostTitleInfoById(int owner, int id) throws Exception;
+    @Delete("delete from PostTitleInfo where id=#{id}")
+    public void deletePostTitleInfoById(int id) throws Exception;
 
     @Update("update PostTitleInfo set reply_num = (select count(*) from ReplyInfo where post_title_id = #{id}) where PostTitleInfo.id = #{id}")
     public void updatePostTitleReplyNum(int id)throws Exception;
@@ -91,4 +90,31 @@ public interface PostTitleInfoDao {
             "WHERE PostTitleInfo.districtInfo_id = DistrictInfo.id and PostTitleInfo.owner = UserBaseInfo.user_id " +
             "and ${colum_name} like #{s}")
     List<PostTitleInfo> getPostTitleInfosByColum(@Param("colum_name") String colum_name, String s) throws Exception;
+
+    @Select("SELECT PostTitleInfo.id, DistrictInfo.plate_id, DistrictInfo.id as districtInfo_id, title, owner, reply_time, " +
+            "UserBaseInfo.nick_name, UserBaseInfo.icon, post_time, recommend_num, view_num, PostTitleInfo.like_num, reply_num, " +
+            "PostTitleInfo.image FROM DistrictInfo, PostTitleInfo, UserBaseInfo " +
+            "WHERE PostTitleInfo.districtInfo_id = DistrictInfo.id and PostTitleInfo.owner = UserBaseInfo.user_id " +
+            "and ${colum_name} like #{s} and UserBaseInfo.nick_name=#{nick_name}")
+    List<PostTitleInfo> getPostTitleInfosByColum2(@Param("colum_name") String colum_name, String s, String nick_name) throws Exception;
+
+
+    @DeleteProvider(type = Provider.class, method = "batchDelete")
+    int batchDelete(Map students);
+
+    class Provider {
+        /* 批量删除 */
+        public String batchDelete(Map map) {
+            List<PostTitleInfo> students = (List<PostTitleInfo>) map.get("list");
+            StringBuilder sb = new StringBuilder();
+            sb.append("DELETE FROM PostTitleInfo WHERE id IN (");
+            for (int i = 0; i < students.size(); i++) {
+                sb.append("'").append(students.get(i).getId()).append("'");
+                if (i < students.size() - 1)
+                    sb.append(",");
+            }
+            sb.append(")");
+            return sb.toString();
+        }
+    }
 }
