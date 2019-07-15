@@ -4,6 +4,7 @@ package com.bbs.api.User;
 import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.model.User.UserBaseInfo;
 import com.bbs.model.User.UserCollectionInfo;
+import com.bbs.service.Message.Impl.MessageInfoInfoServiceImpl;
 import com.bbs.service.Post.Impl.PostTitleInfoServiceImpl;
 import com.bbs.service.User.Impl.*;
 import org.apache.shiro.SecurityUtils;
@@ -40,6 +41,9 @@ public class UserBaseInfoController {
 
     @Autowired
     private UserFollowInfoServiceImpl userFollowInfoService;
+
+    @Autowired
+    private MessageInfoInfoServiceImpl messageInfoInfoService;
 
     /*
     参数id为user_id
@@ -170,7 +174,9 @@ public class UserBaseInfoController {
             if (currentUser.isAuthenticated()){
                 int user_id = userLoginInfoService.getUserLoginInfoByName((String)currentUser.getPrincipal()).getId();
                 userFollowInfoService.changeFollowed(user_id, follow_id);
+                messageInfoInfoService.addMessage(user_id, follow_id);
                 map.put("code", "200");
+                map.put("msg", "操作成功");
             }else {
                 map.put("code", "500");
                 map.put("msg", "未登录");

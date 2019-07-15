@@ -18,18 +18,6 @@ public interface PostTitleInfoDao {
     @Delete("delete from PostTitleInfo where owner = #{owner} and id=#{id}")
     public void deletePostTitleInfoById(int owner, int id) throws Exception;
 
-    @Select("select reply_num,reply_time from PostTitleInfo where id = #{id}")
-    public void getPostTitleInfoReply(int id) throws Exception;
-
-    @Select("select view_num from PostTitleInfo where id = #{id}")
-    public void getPostTitleInfoView(int id) throws Exception;
-
-    @Select("select like_num from PostTitleInfo where id = #{id}")
-    public void getPostTitleInfoLike(int id) throws Exception;
-
-    @Select("select recommend_num from PostTitleInfo where id = #{id}")
-    public void getPostTitleInfoRecommend(int id) throws Exception;
-
     @Update("update PostTitleInfo set reply_num = (select count(*) from ReplyInfo where post_title_id = #{id}) where PostTitleInfo.id = #{id}")
     public void updatePostTitleReplyNum(int id)throws Exception;
 
@@ -57,7 +45,7 @@ public interface PostTitleInfoDao {
     PostTitleInfo getPostTitleContent(int id) throws Exception;
 
     @Select("SELECT PostTitleInfo.id, DistrictInfo.plate_id, DistrictInfo.id as districtInfo_id, title, owner, reply_time, " +
-            "UserBaseInfo.nick_name, UserBaseInfo.icon, recommend_num, view_num, PostTitleInfo.like_num, reply_num, " +
+            "UserBaseInfo.nick_name, UserBaseInfo.icon, post_time, recommend_num, view_num, PostTitleInfo.like_num, reply_num, " +
             "PostTitleInfo.image FROM DistrictInfo, PostTitleInfo, UserBaseInfo " +
             "WHERE PostTitleInfo.districtInfo_id = DistrictInfo.id and PostTitleInfo.owner = UserBaseInfo.user_id " +
             "ORDER BY ${orderby} DESC")
@@ -97,7 +85,10 @@ public interface PostTitleInfoDao {
     @Select("SELECT id, title from PostTitleInfo where title like #{postTitle}")
     List<PostTitleInfo> searchPost(String postTitle) throws Exception;
 
-    @Select("select * from PostTitleInfo order by id")
-    List<PostTitleInfo> getInfos() throws Exception;
-
+    @Select("SELECT PostTitleInfo.id, DistrictInfo.plate_id, DistrictInfo.id as districtInfo_id, title, owner, reply_time, " +
+            "UserBaseInfo.nick_name, UserBaseInfo.icon, post_time, recommend_num, view_num, PostTitleInfo.like_num, reply_num, " +
+            "PostTitleInfo.image FROM DistrictInfo, PostTitleInfo, UserBaseInfo " +
+            "WHERE PostTitleInfo.districtInfo_id = DistrictInfo.id and PostTitleInfo.owner = UserBaseInfo.user_id " +
+            "and ${colum_name} like #{s}")
+    List<PostTitleInfo> getPostTitleInfosByColum(@Param("colum_name") String colum_name, String s) throws Exception;
 }

@@ -4,9 +4,7 @@ import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.model.User.UserCollectionInfo;
 import com.github.pagehelper.PageInfo;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 public interface PostTitleInfoService {
 
@@ -36,6 +34,6 @@ public interface PostTitleInfoService {
 
     List<PostTitleInfo> searchPost(String postTitle) throws Exception;
 
-    PageInfo<PostTitleInfo> getInfos() throws Exception;
+    List<PostTitleInfo> getPostTitleInfosByColum(String colum_name, String s) throws Exception;
 
 }

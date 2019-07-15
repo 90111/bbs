@@ -160,11 +160,12 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     }
 
     @Override
-    public PageInfo<PostTitleInfo> getInfos() throws Exception {
-        PageHelper.startPage(2, 5);
-        List<PostTitleInfo> learnResourceList = postTitleInfoDao.getInfos();
-        PageInfo<PostTitleInfo> pageInfoDemo = new PageInfo<PostTitleInfo>(learnResourceList);
-        return pageInfoDemo;
+    public List<PostTitleInfo> getPostTitleInfosByColum(String colum_name, String s) throws Exception {
+        try {
+            return postTitleInfoDao.getPostTitleInfosByColum(colum_name,"%"+s+"%");
+        }catch (Exception e){
+            return null;
+        }
     }
 
 

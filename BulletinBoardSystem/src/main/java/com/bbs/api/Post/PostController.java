@@ -322,4 +322,27 @@ public class PostController {
         }
         return map;
     }
+
+
+    @RequestMapping(value = "/searchByColum", method = RequestMethod.GET)
+    public Map searchPost(String colum_name, String s) {
+        System.out.println("调用searchByColum方法");
+        if (s.isEmpty() || s == null || s.equals("")) {
+            return null;
+        }
+        Map<String, Object> map = new HashMap<>();
+        try {
+            List<PostTitleInfo> ls = postInfoService.getPostTitleInfosByColum(colum_name, s);
+            if (ls == null) {
+                return null;
+            }
+            map.put("code", "200");
+            map.put("msg", "操作成功");
+            map.put("ls", ls);
+        } catch (Exception e) {
+            map.put("code", "500");
+            map.put("msg", "操作失败");
+        }
+        return map;
+    }
 }
