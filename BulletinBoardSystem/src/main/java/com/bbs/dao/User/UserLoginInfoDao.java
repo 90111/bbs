@@ -15,6 +15,9 @@ public interface UserLoginInfoDao {
     @Select("select * from UserLoginInfo where user_name = #{user_name}")
     UserLoginInfo getUserLoginInfoByName(String user_name) throws Exception;
 
+    @Select("select * from UserLoginInfo where id = #{id}")
+    UserLoginInfo getUserLoginInfoById(int id) throws Exception;
+
     @Select("SELECT * from RoleInfo where id in (select role_info_id from RoleUserInfo where user_info_id = #{id})")
     List<RoleInfo> LoadRolePermission(int id) throws Exception;
 

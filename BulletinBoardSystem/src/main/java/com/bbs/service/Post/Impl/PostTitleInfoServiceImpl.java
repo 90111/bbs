@@ -192,4 +192,11 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
         postTitleInfoDao.changePostState(id, colum_name, state);
     }
 
+    @Override
+    public void changePostDis(int id, String colum_name, int state) throws Exception {
+        postTitleInfoDao.changePostState(id, colum_name, state);
+        districtInfoDao.updateDistrictPostNum(id);
+        districtInfoDao.updateDistrictPostNum(state);
+    }
+
 }

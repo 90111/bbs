@@ -68,7 +68,7 @@ public class Post {
         System.out.println("调用changePostDis方法");
         Map<String, Object> map = new HashMap<>();
         try{
-            postInfoService.changePostState(post_id, colum_name, dis_id);
+            postInfoService.changePostDis(post_id, colum_name, dis_id);
             map.put("code", "200");
             map.put("msg", "操作成功");
         }catch (Exception e){

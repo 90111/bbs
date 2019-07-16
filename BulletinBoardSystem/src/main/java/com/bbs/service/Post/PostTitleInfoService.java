@@ -40,4 +40,6 @@ public interface PostTitleInfoService {
 
     void changePostState(int id, String colum_name, int state) throws Exception;
 
+    void changePostDis(int id, String colum_name, int state) throws Exception;
+
 }
