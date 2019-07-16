@@ -7,6 +7,7 @@ import com.bbs.model.User.UserCollectionInfo;
 import com.bbs.service.Message.Impl.MessageInfoInfoServiceImpl;
 import com.bbs.service.Post.Impl.PostTitleInfoServiceImpl;
 import com.bbs.service.User.Impl.*;
+import com.bbs.service.User.UserLoginInfoService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
@@ -96,9 +97,10 @@ public class UserBaseInfoController {
         try {
             List<PostTitleInfo> ls = postTitleInfoService.getUserPostTitleByUserId(id);
             if (currentUser.isAuthenticated()){
+                int user_id = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal()).getId();
                 for (PostTitleInfo info : ls){
-                    info.setLiked(userLikeInfoService.checkIsLike(id, info.getId()));
-                    info.setCollected(userCollectionInfoService.checkIsCollected(id, info.getId()));
+                    info.setLiked(userLikeInfoService.checkIsLike(user_id, info.getId()));
+                    info.setCollected(userCollectionInfoService.checkIsCollected(user_id, info.getId()));
                 }
             }
             map.put("code", "200");

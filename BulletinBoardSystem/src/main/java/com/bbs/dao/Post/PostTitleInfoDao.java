@@ -45,7 +45,7 @@ public interface PostTitleInfoDao {
 
     @Select("SELECT PostTitleInfo.id, DistrictInfo.plate_id, DistrictInfo.id as districtInfo_id, title, owner, reply_time, " +
             "UserBaseInfo.nick_name, UserBaseInfo.icon, post_time, recommend_num, view_num, PostTitleInfo.like_num, reply_num, " +
-            "PostTitleInfo.image FROM DistrictInfo, PostTitleInfo, UserBaseInfo " +
+            "PostTitleInfo.image, PostTitleInfo.state FROM DistrictInfo, PostTitleInfo, UserBaseInfo " +
             "WHERE PostTitleInfo.districtInfo_id = DistrictInfo.id and PostTitleInfo.owner = UserBaseInfo.user_id " +
             "ORDER BY ${orderby} DESC")
     List<PostTitleInfo> getPostTitleInfosByTime(@Param("orderby") String orderby) throws Exception;
@@ -54,7 +54,7 @@ public interface PostTitleInfoDao {
             "ORDER BY `post_time` DESC limit 2")
     List<PostTitleInfo> getUserRecentPostTitleByUserId(int user_id) throws Exception;
 
-    @Select("SELECT id, title, view_num, like_num, image FROM PostTitleInfo WHERE owner=#{user_id} " +
+    @Select("SELECT id, title, view_num, like_num, view_num, reply_num, recommend_num, image FROM PostTitleInfo WHERE owner=#{user_id} " +
             "ORDER BY `post_time` DESC")
     List<PostTitleInfo> getUserPostTitleByUserId(int user_id) throws Exception;
 
@@ -86,14 +86,14 @@ public interface PostTitleInfoDao {
 
     @Select("SELECT PostTitleInfo.id, DistrictInfo.plate_id, DistrictInfo.id as districtInfo_id, title, owner, reply_time, " +
             "UserBaseInfo.nick_name, UserBaseInfo.icon, post_time, recommend_num, view_num, PostTitleInfo.like_num, reply_num, " +
-            "PostTitleInfo.image FROM DistrictInfo, PostTitleInfo, UserBaseInfo " +
+            "PostTitleInfo.image, PostTitleInfo.state FROM DistrictInfo, PostTitleInfo, UserBaseInfo " +
             "WHERE PostTitleInfo.districtInfo_id = DistrictInfo.id and PostTitleInfo.owner = UserBaseInfo.user_id " +
             "and ${colum_name} like #{s}")
     List<PostTitleInfo> getPostTitleInfosByColum(@Param("colum_name") String colum_name, String s) throws Exception;
 
     @Select("SELECT PostTitleInfo.id, DistrictInfo.plate_id, DistrictInfo.id as districtInfo_id, title, owner, reply_time, " +
             "UserBaseInfo.nick_name, UserBaseInfo.icon, post_time, recommend_num, view_num, PostTitleInfo.like_num, reply_num, " +
-            "PostTitleInfo.image FROM DistrictInfo, PostTitleInfo, UserBaseInfo " +
+            "PostTitleInfo.image, PostTitleInfo.state FROM DistrictInfo, PostTitleInfo, UserBaseInfo " +
             "WHERE PostTitleInfo.districtInfo_id = DistrictInfo.id and PostTitleInfo.owner = UserBaseInfo.user_id " +
             "and ${colum_name} like #{s} and UserBaseInfo.nick_name=#{nick_name}")
     List<PostTitleInfo> getPostTitleInfosByColum2(@Param("colum_name") String colum_name, String s, String nick_name) throws Exception;
@@ -101,4 +101,7 @@ public interface PostTitleInfoDao {
 
     @Delete("delete from PostTitleInfo where id in (${s})")
     int batchDelete(@Param("s") String s);
+
+    @Update("update PostTitleInfo set state = #{state} where id=#{id}")
+    void changePostState(int id, int state) throws Exception;
 }

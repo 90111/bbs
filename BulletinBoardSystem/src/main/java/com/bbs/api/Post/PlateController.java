@@ -25,48 +25,4 @@ public class PlateController {
         return plateInfoServiceImpl.getPlates();
     }
 
-    @RequestMapping(value = "/addPlates",method = RequestMethod.POST)
-    public Map addPlates(String name){
-        System.out.println("增加板块");
-        Map<String,Object> map=new HashMap<>();
-        try {
-            plateInfoServiceImpl.addPlateInfoByName(name);
-            map.put("code",200);
-            map.put("msg", "增加板块成功");
-        }catch (Exception e){
-            map.put("code",500);
-            map.put("msg", "增加板块失败");
-        }
-        return map;
-    }
-
-    @RequestMapping(value = "/updatePlates",method = RequestMethod.POST)
-    public Map updatePlates(@RequestBody PlateInfo plateInfo){
-        System.out.println("修改板块");
-        Map<String,Object> map=new HashMap<>();
-        try {
-            plateInfoServiceImpl.updatePlateInfo(plateInfo);
-            map.put("code",200);
-            map.put("msg", "修改板块成功");
-        }catch (Exception e){
-            map.put("code",500);
-            map.put("msg", "修改板块失败");
-        }
-        return map;
-    }
-
-    @RequestMapping(value = "/deletePlates",method = RequestMethod.POST)
-    public Map deletePlates(int id){
-        System.out.println("删除板块");
-        Map<String,Object> map=new HashMap<>();
-        try {
-            plateInfoServiceImpl.deletePlateInfoById(id);
-            map.put("code",200);
-            map.put("msg", "删除板块成功");
-        }catch (Exception e){
-            map.put("code",500);
-            map.put("msg", "删除板块失败");
-        }
-        return map;
-    }
 }

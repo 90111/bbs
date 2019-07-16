@@ -38,4 +38,6 @@ public interface PostTitleInfoService {
 
     void batchDelete(List<PostTitleInfo> ls) throws Exception;
 
+    void changePostState(int id, int state) throws Exception;
+
 }

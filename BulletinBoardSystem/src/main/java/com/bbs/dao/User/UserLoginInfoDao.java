@@ -37,6 +37,6 @@ public interface UserLoginInfoDao {
     @Delete("delete from UserLoginInfo where id in (${s})")
     void deleteUserLoginInfoById(@Param("s") String s) throws Exception;
 
-    @Select("select count(*) from UserLoginInfo")
-    int getUserNum() throws Exception;
+    @Update("update UserLoginInfo set state=#{state} where id=#{id}")
+    void changeUserState(int id, int state) throws Exception;
 }

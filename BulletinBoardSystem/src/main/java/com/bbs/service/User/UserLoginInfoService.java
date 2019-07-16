@@ -19,6 +19,6 @@ public interface UserLoginInfoService {
 
     PageInfo getUserLoginInfos(int page) throws Exception;
 
-    int getUserNum() throws Exception;
+    void changeUserState(int user_id, int state) throws Exception;
 
 }

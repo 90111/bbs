@@ -74,8 +74,9 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService {
     }
 
     @Override
-    public int getUserNum() throws Exception {
-        return userLoginInfoDao.getUserNum();
+    public void changeUserState(int user_id, int state) throws Exception {
+        userLoginInfoDao.changeUserState(user_id, state);
     }
+
 
 }

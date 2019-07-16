@@ -187,4 +187,9 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
         postTitleInfoDao.batchDelete(s);
     }
 
+    @Override
+    public void changePostState(int id, int state) throws Exception {
+        postTitleInfoDao.changePostState(id, state);
+    }
+
 }
