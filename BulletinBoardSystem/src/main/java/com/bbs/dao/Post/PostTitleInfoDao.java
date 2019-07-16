@@ -102,6 +102,6 @@ public interface PostTitleInfoDao {
     @Delete("delete from PostTitleInfo where id in (${s})")
     int batchDelete(@Param("s") String s);
 
-    @Update("update PostTitleInfo set state = #{state} where id=#{id}")
-    void changePostState(int id, int state) throws Exception;
+    @Update("update PostTitleInfo set ${colum_name} = #{state} where id=#{id}")
+    void changePostState(int id, @Param("colum_name") String colum_name,int state) throws Exception;
 }

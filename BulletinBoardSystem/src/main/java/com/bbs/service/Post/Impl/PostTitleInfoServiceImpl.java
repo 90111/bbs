@@ -188,8 +188,8 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     }
 
     @Override
-    public void changePostState(int id, int state) throws Exception {
-        postTitleInfoDao.changePostState(id, state);
+    public void changePostState(int id, String colum_name, int state) throws Exception {
+        postTitleInfoDao.changePostState(id, colum_name, state);
     }
 
 }

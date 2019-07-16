@@ -51,7 +51,6 @@ public class User {
         System.out.println("调用getUsers方法");
         Map<String, Object> map = new HashMap<>();
         try{
-            ArrayList<Map<String, Object>> array = new ArrayList<Map<String, Object>>();
             PageInfo pageObj1 = userLoginInfoService.getUserLoginInfos(page);
             PageInfo pageObj2 = userBaseInfoService.getUserBaseInfos(page);
             List<Map<String, Object>> ls1 = pageObj1.getList();
@@ -68,11 +67,11 @@ public class User {
     }
 
     @RequestMapping(value = "/changeUserState", method = RequestMethod.POST)
-    public Map changeUserState(int user_id, int state){
+    public Map changeUserState(int user_id, String colum_name, int state){
         System.out.println("调用changeUserState方法");
         Map<String, Object> map = new HashMap<>();
         try {
-            userLoginInfoService.changeUserState(user_id, state);
+            userLoginInfoService.changeUserState(user_id, colum_name, state);
             map.put("code", "200");
             map.put("msg", "操作成功");
         }catch (Exception e){
@@ -83,6 +82,21 @@ public class User {
         return map;
     }
 
+    @RequestMapping(value = "/searchUser", method = RequestMethod.GET)
+    public Map searchUser(String colum_name, String s){
+        System.out.println("调用searchUser方法");
+        Map<String, Object> map = new HashMap<>();
+        try {
+            map.put("ls", userLoginInfoService.searchUser(colum_name, s));
+            map.put("code", "200");
+            map.put("msg", "操作成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("code", "500");
+            map.put("msg", "操作失败");
+        }
+        return map;
+    }
 
 
 

@@ -19,6 +19,8 @@ public interface UserLoginInfoService {
 
     PageInfo getUserLoginInfos(int page) throws Exception;
 
-    void changeUserState(int user_id, int state) throws Exception;
+    void changeUserState(int user_id, String colum_name, int state) throws Exception;
+
+    List<UserLoginInfo> searchUser(String colum_name, String s) throws Exception;
 
 }

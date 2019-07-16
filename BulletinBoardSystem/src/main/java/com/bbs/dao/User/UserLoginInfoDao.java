@@ -37,6 +37,9 @@ public interface UserLoginInfoDao {
     @Delete("delete from UserLoginInfo where id in (${s})")
     void deleteUserLoginInfoById(@Param("s") String s) throws Exception;
 
-    @Update("update UserLoginInfo set state=#{state} where id=#{id}")
-    void changeUserState(int id, int state) throws Exception;
+    @Update("update UserLoginInfo set ${colum_name}=#{state} where id=#{id}")
+    void changeUserState(String colum_name, int id, int state) throws Exception;
+
+    @Select("select * from UserLoginInfo, UserBaseInfo where ${colum_name} like #{s} and UserLoginInfo.id=UserBaseInfo.user_id")
+    List<UserLoginInfo> getUserLoginInfoByColum(String colum_name,  String s) throws Exception;
 }

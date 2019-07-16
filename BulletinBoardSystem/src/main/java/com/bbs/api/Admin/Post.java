@@ -48,10 +48,27 @@ public class Post {
     }
 
     @RequestMapping(value = "/changePostState", method = RequestMethod.POST)
-    public Map changePostState(int post_id, int state){
+    public Map changePostState(int post_id, int state, String colum_name){
+        System.out.println("调用changePostState方法");
         Map<String, Object> map = new HashMap<>();
         try{
-            postInfoService.changePostState(post_id, state);
+            postInfoService.changePostState(post_id, colum_name, state);
+            map.put("code", "200");
+            map.put("msg", "操作成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("code", "500");
+            map.put("msg", "操作失败");
+        }
+        return map;
+    }
+
+    @RequestMapping(value = "/changePostDis", method = RequestMethod.POST)
+    public Map changePostDis(int post_id, int dis_id, String colum_name){
+        System.out.println("调用changePostDis方法");
+        Map<String, Object> map = new HashMap<>();
+        try{
+            postInfoService.changePostState(post_id, colum_name, dis_id);
             map.put("code", "200");
             map.put("msg", "操作成功");
         }catch (Exception e){

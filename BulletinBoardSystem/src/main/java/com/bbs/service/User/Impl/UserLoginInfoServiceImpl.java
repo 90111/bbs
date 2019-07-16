@@ -12,6 +12,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -24,11 +25,11 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService {
 
     public UserLoginInfo getUserLoginInfoByName(String username) throws Exception {
         UserLoginInfo userLoginInfo = userLoginInfoDao.getUserLoginInfoByName(username);
-        if (userLoginInfo == null){
+        if (userLoginInfo == null) {
             return null;
         }
         userLoginInfo.setRoleInfos(userLoginInfoDao.LoadRolePermission(userLoginInfo.getId()));
-        for (RoleInfo roleInfo : userLoginInfo.getRoleInfos()){
+        for (RoleInfo roleInfo : userLoginInfo.getRoleInfos()) {
             roleInfo.setFunctionInfos(userLoginInfoDao.getFunctions(roleInfo.getId()));
         }
         return userLoginInfo;
@@ -43,10 +44,10 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService {
     @Override
     public void deleteUserLoginInfoById(List<UserLoginInfo> ls) throws Exception {
         StringBuilder sb = new StringBuilder();
-        for (UserLoginInfo info : ls){
+        for (UserLoginInfo info : ls) {
             sb.append("'").append(info.getId()).append("'").append(",");
         }
-        sb.deleteCharAt(sb.length()-1);
+        sb.deleteCharAt(sb.length() - 1);
         String s = sb.toString();
         userLoginInfoDao.deleteUserLoginInfoById(s);
     }
@@ -54,7 +55,7 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService {
     @Override
     public UserLoginInfo getUserLoginInfoByMail(String mail) throws Exception {
         UserLoginInfo userLoginInfo = userLoginInfoDao.getUserLoginInfoByMail(mail);
-        if (userLoginInfo == null){
+        if (userLoginInfo == null) {
             return null;
         }
         return userLoginInfo;
@@ -74,9 +75,17 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService {
     }
 
     @Override
-    public void changeUserState(int user_id, int state) throws Exception {
-        userLoginInfoDao.changeUserState(user_id, state);
+    public void changeUserState(int user_id, String colum_name, int state) throws Exception {
+        userLoginInfoDao.changeUserState(colum_name, user_id, state);
     }
 
-
+    @Override
+    public List<UserLoginInfo> searchUser(String colum_name, String s) throws Exception {
+        List<UserLoginInfo> ls = new LinkedList<>();
+        ls = userLoginInfoDao.getUserLoginInfoByColum(colum_name, "%" + s + "%");
+        for (UserLoginInfo info : ls){
+            info.setUserBaseInfo(userBaseInfoDao.getUserBaseInfoByUserId(info.getId()));
+        }
+        return ls;
+    }
 }
