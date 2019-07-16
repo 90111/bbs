@@ -39,4 +39,9 @@ public class DistrictInfoServiceImpl implements DistrictInfoService {
     public void deleteDistrictInfo(int id) throws Exception{
         districtInfoDao.deleteDistrictInfo(id);
     }
+
+    @Override
+    public DistrictInfo getDistrictByPlateAndName(int plate_id, String name) throws Exception {
+        return districtInfoDao.getDistrictByPlateAndName(plate_id, name);
+    }
 }

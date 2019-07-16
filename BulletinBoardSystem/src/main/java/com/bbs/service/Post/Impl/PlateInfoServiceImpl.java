@@ -2,7 +2,10 @@ package com.bbs.service.Post.Impl;
 
 import com.bbs.dao.Post.DistrictInfoDao;
 import com.bbs.dao.Post.PlateInfoDao;
+import com.bbs.dao.User.DistrictModeratorInfoDao;
+import com.bbs.model.Post.DistrictInfo;
 import com.bbs.model.Post.PlateInfo;
+import com.bbs.model.User.DistrictModeratorInfo;
 import com.bbs.service.Post.PlateInfoService;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +19,15 @@ public class PlateInfoServiceImpl implements PlateInfoService {
     private PlateInfoDao plateInfoDao;
 
     @Resource
-    DistrictInfoDao districtInfoDao;
+    private DistrictInfoDao districtInfoDao;
+
+    @Resource
+    private DistrictModeratorInfoDao districtModeratorInfoDao;
 
     @Override
     public List<PlateInfo> getPlates() throws Exception {
         List<PlateInfo> ls = plateInfoDao.getPlates();
-        for (PlateInfo p : ls){
+        for (PlateInfo p : ls) {
             p.setDistrictInfos(districtInfoDao.getDistricts(p.getId()));
         }
         return ls;
@@ -33,17 +39,25 @@ public class PlateInfoServiceImpl implements PlateInfoService {
     }
 
     @Override
-    public void addPlateInfoByName(String name) throws Exception{
+    public PlateInfo getPlateInfoByName(String name) throws Exception {
+        return plateInfoDao.getPlateInfoByName(name);
+    }
+
+    @Override
+    public void addPlateInfoByName(String name) throws Exception {
         plateInfoDao.addPlateInfoByName(name);
+
     }
 
     @Override
-    public void updatePlateInfo(PlateInfo plateInfo) throws Exception{
-        plateInfoDao.updatePlateInfo(plateInfo);
+    public void updatePlateInfo(int id, String name) throws Exception {
+        plateInfoDao.updatePlateInfo(id, name);
     }
 
     @Override
-    public void deletePlateInfoById(int id) throws Exception{
+    public void deletePlateInfoById(int id) throws Exception {
+        districtModeratorInfoDao.updateUserRole(id);
+        districtModeratorInfoDao.deleteInfo("plate_id", id);
         plateInfoDao.deletePlateInfoById(id);
     }
 }

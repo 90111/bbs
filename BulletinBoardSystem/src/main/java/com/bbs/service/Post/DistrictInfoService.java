@@ -16,4 +16,6 @@ public interface DistrictInfoService {
     void updateDistrictInfo(DistrictInfo districtInfo) throws Exception;
 
     void deleteDistrictInfo(int id) throws Exception;
+
+    DistrictInfo getDistrictByPlateAndName(int plate_id, String name) throws Exception;
 }

@@ -11,9 +11,11 @@ public interface PlateInfoService {
 
     PlateInfo getPlateInfo(int plate_id) throws Exception;
 
+    PlateInfo getPlateInfoByName(String name) throws Exception;
+
     void addPlateInfoByName(String name) throws Exception;
 
-    void updatePlateInfo(PlateInfo plateInfo) throws Exception;
+    void updatePlateInfo(int id, String name) throws Exception;
 
     void deletePlateInfoById(int id) throws Exception;
 }
