@@ -6,6 +6,7 @@ import com.bbs.model.User.DistrictModeratorInfo;
 import com.bbs.service.Post.Impl.DistrictInfoServiceImpl;
 import com.bbs.service.User.Impl.DistrictModeratorInfoServiceImpl;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -18,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RequiresAuthentication
-@RequiresRoles("admin")
+@RequiresRoles({"admin", "moderator","district_owner"})
 @RestController
 @RequestMapping("/admin")
 public class District {
@@ -29,7 +30,7 @@ public class District {
     @Autowired
     private DistrictModeratorInfoServiceImpl districtModeratorInfoService;
 
-
+    @RequiresPermissions("createDistrict")
     @RequestMapping(value = "/addDistricts", method = RequestMethod.POST)
     public Map addDistricts(int plate_id, String district_name) {
         System.out.println("增加分区");

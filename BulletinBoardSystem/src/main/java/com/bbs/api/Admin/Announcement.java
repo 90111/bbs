@@ -20,7 +20,7 @@ import java.util.Map;
 
 @RestController
 @RequiresAuthentication
-@RequiresRoles("admin")
+@RequiresRoles({"admin", "moderator","district_owner"})
 @RequestMapping("/admin")
 public class Announcement {
 

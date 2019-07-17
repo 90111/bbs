@@ -2,6 +2,7 @@ package com.bbs.api.Admin;
 
 import com.bbs.model.User.RoleInfo;
 import com.bbs.model.User.UserLoginInfo;
+import com.bbs.service.User.Impl.UserBaseInfoServiceImpl;
 import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -25,6 +26,9 @@ public class Login {
     @Autowired
     private UserLoginInfoServiceImpl userLoginInfoService;
 
+    @Autowired
+    private UserBaseInfoServiceImpl userBaseInfoService;
+
     @RequestMapping(value = "/adminLogin", method = RequestMethod.POST)
     public Map adminLogin(@RequestBody UserLoginInfo userLoginInfo) throws Exception{
         Map<String, Object> map = new HashMap<>();
@@ -34,7 +38,8 @@ public class Login {
         currentUser.login(usernamePasswordToken);
         UserLoginInfo info = userLoginInfoService.getUserLoginInfoByName((String)currentUser.getPrincipal());
         info.setRoleInfos(userLoginInfoService.getRole(info.getId()));
-        if(currentUser.hasRole("admin")){
+        info.setUserBaseInfo(userBaseInfoService.getUserBaseInfoByUserId(info.getId()));
+        if(currentUser.hasRole("admin") || currentUser.hasRole("moderator") || currentUser.hasRole("district_owner")){
             map.put("code", "200");
             map.put("data", info);
             map.put("msg", "登录成功");
