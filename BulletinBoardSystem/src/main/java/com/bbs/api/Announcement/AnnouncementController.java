@@ -57,34 +57,8 @@ public class AnnouncementController {
     }
 
 
-    @RequestMapping(value = "/deteleAnnouncement", method = RequestMethod.POST)
-    public Map deteleAnnouncement(int id){
-        System.out.println("删除公告");
-        Map<String,Object> map=new HashMap<>();
-        try {
-            announcementInfoService.deleteAnnouncementInfoById(id);
-            map.put("code",200);
-            map.put("msg", "删除公告成功");
-        }catch (Exception e){
-            map.put("code",500);
-            map.put("msg", "删除公告失败");
-        }
-        return map;
-    }
 
-    @RequestMapping(value = "/addAnnouncement",method = RequestMethod.POST)
-    public Map addAnnouncement(@RequestBody AnnouncementInfo announcementInfo){
-        System.out.println("添加公告");
-        Map<String,Object> map=new HashMap<>();
-        try {
-            announcementInfoService.addAnnouncementInfo(announcementInfo);
-            map.put("code",200);
-            map.put("msg", "添加公告成功");
-        }catch (Exception e){
-            map.put("code",500);
-            map.put("msg", "添加公告失败");
-        }
-        return map;
-    }
+
+
 
 }

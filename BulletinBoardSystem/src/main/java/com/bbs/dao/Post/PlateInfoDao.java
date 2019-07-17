@@ -31,4 +31,5 @@ public interface PlateInfoDao {
 
     @Delete("DELETE FROM PlateInfo WHERE id = #{id}")
     void deletePlateInfoById(int id) throws Exception;
+
 }

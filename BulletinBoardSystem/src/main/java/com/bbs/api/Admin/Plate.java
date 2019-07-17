@@ -54,9 +54,15 @@ public class Plate {
         System.out.println("修改板块");
         Map<String,Object> map=new HashMap<>();
         try {
-            plateInfoService.updatePlateInfo(id, name);
-            map.put("code",200);
-            map.put("msg", "修改板块成功");
+            PlateInfo info = plateInfoService.getPlateInfoByName(name);
+            if (info == null){
+                plateInfoService.updatePlateInfo(id, name);
+                map.put("code",200);
+                map.put("msg", "修改板块成功");
+            }else{
+                map.put("code",500);
+                map.put("msg", "修改失败，该板块已存在");
+            }
         }catch (Exception e){
             map.put("code",500);
             map.put("msg", "修改板块失败");

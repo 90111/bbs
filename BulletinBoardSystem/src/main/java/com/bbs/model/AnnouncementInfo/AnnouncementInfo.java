@@ -1,5 +1,7 @@
 package com.bbs.model.AnnouncementInfo;
 
+import com.bbs.model.User.UserBaseInfo;
+
 import java.util.Date;
 
 public class AnnouncementInfo {
@@ -7,9 +9,36 @@ public class AnnouncementInfo {
     private int owner;
     private int plate_id=-1;
     private int district_id=-1;
+    private String plate_name;
+    private String district_name;
     private Date post_time;
     private String title;
     private String content;
+    private UserBaseInfo userBaseInfo;
+
+    public UserBaseInfo getUserBaseInfo() {
+        return userBaseInfo;
+    }
+
+    public void setUserBaseInfo(UserBaseInfo userBaseInfo) {
+        this.userBaseInfo = userBaseInfo;
+    }
+
+    public String getPlate_name() {
+        return plate_name;
+    }
+
+    public void setPlate_name(String plate_name) {
+        this.plate_name = plate_name;
+    }
+
+    public String getDistrict_name() {
+        return district_name;
+    }
+
+    public void setDistrict_name(String district_name) {
+        this.district_name = district_name;
+    }
 
     public String getTitle() {
         return title;

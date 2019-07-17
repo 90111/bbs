@@ -19,4 +19,13 @@ public interface AnnouncementInfoDao {
     @Insert("insert into AnnouncementInfo (owner, post_time, content) values (#{owner}, #{post_time}, #{content})")
     void addAnnouncementInfo(AnnouncementInfo announcementInfo) throws Exception;
 
+    @Select("select * from AnnouncementInfo order by id")
+    List<AnnouncementInfo> getAnnounceInfos() throws Exception;
+
+    @Select("select * from AnnouncementInfo where plate_id = #{plate_id}")
+    List<AnnouncementInfo> getAnnounceInfosByPlateId(int plate_id) throws Exception;
+
+    @Select("select * from AnnouncementInfo where district_id = #{district_id}")
+    List<AnnouncementInfo> getAnnounceInfosByDistrictId(int district_id) throws Exception;
+
 }

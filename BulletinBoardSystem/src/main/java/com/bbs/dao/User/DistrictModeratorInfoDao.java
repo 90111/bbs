@@ -23,6 +23,6 @@ public interface DistrictModeratorInfoDao {
     @Update("update UserLoginInfo, DistrictModeratorInfo set role = 1 where UserLoginInfo.id=DistrictModeratorInfo.user_id and plate_id=#{plate_id}")
     void updateUserRole(int plate_id)throws Exception;
 
-    @Select("select * from DistrictModeratorInfo where plate_id=#{plate_id} and district_id=#{district_id}")
+    @Select("select * from DistrictModeratorInfo where district_id=#{district_id}")
     List<DistrictModeratorInfo> getInfo(int plate_id, int district_id) throws Exception;
 }

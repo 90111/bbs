@@ -5,6 +5,8 @@ import com.bbs.model.Post.DistrictInfo;
 import com.bbs.model.User.DistrictModeratorInfo;
 import com.bbs.service.Post.Impl.DistrictInfoServiceImpl;
 import com.bbs.service.User.Impl.DistrictModeratorInfoServiceImpl;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +27,8 @@ public class District {
     @Autowired
     private DistrictModeratorInfoServiceImpl districtModeratorInfoService;
 
+//    @RequiresAuthentication
+//    @RequiresRoles("aa")
     @RequestMapping(value = "/addDistricts", method = RequestMethod.POST)
     public Map addDistricts(int plate_id, String district_name) {
         System.out.println("增加分区");
@@ -51,9 +55,15 @@ public class District {
         System.out.println("修改分区");
         Map<String, Object> map = new HashMap<>();
         try {
-            districtInfoService.updateDistrictInfo(districtInfo);
-            map.put("code", 200);
-            map.put("msg", "修改分区成功");
+            DistrictInfo info = districtInfoService.getDistrictByPlateAndName(districtInfo.getPlate_id(), districtInfo.getDistrict_name());
+            if (info==null){
+                districtInfoService.updateDistrictInfo(districtInfo);
+                map.put("code", 200);
+                map.put("msg", "修改分区成功");
+            }else {
+                map.put("code", 500);
+                map.put("msg", "修改失败，该板块下已有该分区");
+            }
         } catch (Exception e) {
             map.put("code", 500);
             map.put("msg", "修改分区失败");

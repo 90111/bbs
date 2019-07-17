@@ -5,8 +5,11 @@ import com.bbs.dao.Post.PlateInfoDao;
 import com.bbs.dao.User.DistrictModeratorInfoDao;
 import com.bbs.model.Post.DistrictInfo;
 import com.bbs.model.Post.PlateInfo;
+import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.model.User.DistrictModeratorInfo;
 import com.bbs.service.Post.PlateInfoService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -60,4 +63,5 @@ public class PlateInfoServiceImpl implements PlateInfoService {
         districtModeratorInfoDao.deleteInfo("plate_id", id);
         plateInfoDao.deletePlateInfoById(id);
     }
+
 }

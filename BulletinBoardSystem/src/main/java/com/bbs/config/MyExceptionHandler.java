@@ -27,6 +27,7 @@ public class MyExceptionHandler implements HandlerExceptionResolver {
             attributes.put("code", "1000002");
             attributes.put("msg", "用户无权限");
         } else {
+            ex.printStackTrace();
             attributes.put("code", "1000003");
             attributes.put("msg", ex.getMessage());
         }
