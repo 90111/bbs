@@ -1,6 +1,7 @@
 package com.bbs.api.User;
 
 
+import com.bbs.dao.User.RoleUserInfoDao;
 import com.bbs.model.User.UserLoginInfo;
 import com.bbs.service.User.Impl.UserBaseInfoServiceImpl;
 import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
@@ -9,6 +10,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.subject.Subject;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +24,7 @@ import java.util.Map;
 
 
 @RestController
-public class UserLoginInfoController extends BaseController{
+public class UserLoginInfoController {
 
     @Autowired
     private UserLoginInfoServiceImpl userLoginInfoService;
@@ -78,10 +80,10 @@ public class UserLoginInfoController extends BaseController{
         JSONObject jsonObject = new JSONObject();
         UserLoginInfo userLoginInfo1 = null;
         userLoginInfo1 = userLoginInfoService.getUserLoginInfoByName(userLoginInfo.getUser_name());
-        if (userLoginInfo1 == null){
+        if (userLoginInfo1 == null) {
             jsonObject.put("code", "200");
             jsonObject.put("msg", "该用户名可用");
-        }else{
+        } else {
             jsonObject.put("code", "500");
             jsonObject.put("msg", "用户名不可用，已存在该用户名");
         }
@@ -94,10 +96,10 @@ public class UserLoginInfoController extends BaseController{
         JSONObject jsonObject = new JSONObject();
         UserLoginInfo userLoginInfo1 = null;
         userLoginInfo1 = userLoginInfoService.getUserLoginInfoByMail(userLoginInfo.getMail());
-        if (userLoginInfo1 == null){
+        if (userLoginInfo1 == null) {
             jsonObject.put("code", "200");
             jsonObject.put("msg", "该邮箱未被注册");
-        }else{
+        } else {
             jsonObject.put("code", "500");
             jsonObject.put("msg", "该邮箱已被注册");
         }
@@ -108,12 +110,12 @@ public class UserLoginInfoController extends BaseController{
     public Map logout() {
         System.out.println("调用logout方法");
         Map<String, Object> map = new HashMap<>();
-        try{
+        try {
             Subject currentUser = SecurityUtils.getSubject();
             currentUser.logout();
             map.put("code", "200");
             map.put("msg", "退出成功");
-        }catch (Exception e){
+        } catch (Exception e) {
             map.put("code", "500");
             map.put("msg", "退出失败");
         }
@@ -125,62 +127,54 @@ public class UserLoginInfoController extends BaseController{
     public Map checkSession() throws Exception {
         Map<String, Object> map = new HashMap<>();
         Subject currentUser = SecurityUtils.getSubject();
-        if (currentUser.isAuthenticated()){
+        if (currentUser.isAuthenticated()) {
             String username = currentUser.getPrincipal().toString();
             int id = userLoginInfoService.getUserLoginInfoByName(username).getId();
             map.put("code", "200");
             map.put("msg", "已登录");
             map.put("id", id);
-        }else{
+        } else {
             map.put("code", "500");
             map.put("msg", "未登录");
         }
         return map;
     }
 
+    @RequiresAuthentication
     @RequestMapping(value = "/changePwd", method = RequestMethod.GET)
     public Map changePwd() {
         Subject currentUser = SecurityUtils.getSubject();
         Map<String, Object> map = new HashMap<>();
-        try{
-            if(currentUser.isAuthenticated()) {
-                UserLoginInfo info = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal());
-                map.put("code", "200");
-                map.put("msg", "请求成功");
-                map.put("user_id", info.getUser_name());
-                map.put("mail", info.getMail());
-            }else{
-                map.put("code", "500");
-                map.put("msg", "用户未登录");
-            }
-        }catch (Exception e){
+        try {
+            UserLoginInfo info = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal());
+            map.put("code", "200");
+            map.put("msg", "请求成功");
+            map.put("user_id", info.getUser_name());
+            map.put("mail", info.getMail());
+        } catch (Exception e) {
             map.put("code", "500");
-                map.put("msg", "请求失败");
+            map.put("msg", "请求失败");
         }
         return map;
     }
 
+    @RequiresAuthentication
     @RequestMapping(value = "/changePwd", method = RequestMethod.POST)
     public Map changePwd(String oldPwd, String newPwd) {
         System.out.println("调用changePwd方法");
         Map<String, Object> map = new HashMap<>();
         Subject currentUser = SecurityUtils.getSubject();
-        try{
-            if(currentUser.isAuthenticated()){
-                UserLoginInfo info = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal());
-                if (info.getPassword().equals(oldPwd)){
-                    userLoginInfoService.updateUserPwd(info.getId(), newPwd);
-                    map.put("code", "200");
-                    map.put("msg", "修改密码成功");
-                }else {
-                    map.put("code", "500");
-                    map.put("msg", "旧密码输入错误");
-                }
-            }else{
+        try {
+            UserLoginInfo info = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal());
+            if (info.getPassword().equals(oldPwd)) {
+                userLoginInfoService.updateUserPwd(info.getId(), newPwd);
+                map.put("code", "200");
+                map.put("msg", "修改密码成功");
+            } else {
                 map.put("code", "500");
-                map.put("msg", "用户未登录");
+                map.put("msg", "旧密码输入错误");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             map.put("code", "500");
             map.put("msg", "修改密码失败");
         }

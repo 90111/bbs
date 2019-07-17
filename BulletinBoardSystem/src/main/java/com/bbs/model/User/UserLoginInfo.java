@@ -6,7 +6,6 @@ public class UserLoginInfo {
 
     private int id;
     private int state;
-    private int role;
     private String user_name;
     private String password;
     private String mail;
@@ -39,14 +38,6 @@ public class UserLoginInfo {
 
     public void setState(int state) {
         this.state = state;
-    }
-
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
-        this.role = role;
     }
 
     public String getUser_name() {

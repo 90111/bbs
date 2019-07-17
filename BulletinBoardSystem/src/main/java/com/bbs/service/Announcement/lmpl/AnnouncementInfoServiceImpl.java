@@ -37,10 +37,6 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
     }
 
 
-    @Override
-    public void deleteAnnouncementInfoById (int id) throws Exception{
-        announcementInfoDao.deleteAnnouncementInfoById(id);
-    }
 
     @Override
     public void addAnnouncementInfo(AnnouncementInfo announcementInfo) throws Exception{
@@ -67,9 +63,9 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
     }
 
     @Override
-    public PageInfo<AnnouncementInfo> getAnnounceInfos2(int plate_id, int page, int size) throws Exception {
+    public PageInfo<AnnouncementInfo> getAnnounceInfos(int plate_id, int page, int size) throws Exception {
         PageHelper.startPage(page, size);
-        List<AnnouncementInfo> ls2 = announcementInfoDao.getAnnounceInfosByPlateId(plate_id);
+        List<AnnouncementInfo> ls2 = announcementInfoDao.getAnnounceInfosByPlateId(plate_id, -1);
         for (AnnouncementInfo info : ls2){
             info.setUserBaseInfo(userBaseInfoDao.getUserBaseInfoByUserId(info.getOwner()));
         }
@@ -80,9 +76,9 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
 
 
     @Override
-    public PageInfo<AnnouncementInfo> getAnnounceInfos(int district_id, int page, int size) throws Exception {
+    public PageInfo<AnnouncementInfo> getAnnounceInfos2(int district_id, int page, int size) throws Exception {
         PageHelper.startPage(page, size);
-        List<AnnouncementInfo> ls2 = announcementInfoDao.getAnnounceInfosByDistrictId(district_id);
+        List<AnnouncementInfo> ls2 = announcementInfoDao.getAnnounceInfosByPlateId(-1, district_id);
         for (AnnouncementInfo info : ls2){
             info.setUserBaseInfo(userBaseInfoDao.getUserBaseInfoByUserId(info.getOwner()));
         }
@@ -91,5 +87,14 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
         return pageInfoDemo;
     }
 
-
+    @Override
+    public void batchDelete(List<AnnouncementInfo> ls) throws Exception {
+        StringBuilder sb = new StringBuilder();
+        for (AnnouncementInfo info : ls){
+            sb.append("'").append(info.getId()).append("'").append(",");
+        }
+        sb.deleteCharAt(sb.length()-1);
+        String s = sb.toString();
+        announcementInfoDao.batchDelete(s);
+    }
 }

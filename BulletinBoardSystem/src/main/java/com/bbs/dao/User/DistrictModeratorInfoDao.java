@@ -14,8 +14,11 @@ public interface DistrictModeratorInfoDao {
     @Insert("insert into DistrictModeratorInfo (user_id,plate_id,district_id) values(#{user_id},#{plate_id},#{district_id})")
     void addInfo(DistrictModeratorInfo districtModeratorInfo) throws Exception;
 
-    @Delete("delete from DistrictModeratorInfo where ${colum_name}=#{s}")
-    void deleteInfo(String colum_name, int s) throws Exception;
+    @Delete("delete from DistrictModeratorInfo where ${colum_name}=#{id} and user_id=#{user_id}")
+    void deleteInfo(String colum_name, int user_id, int id) throws Exception;
+
+    @Delete("delete from DistrictModeratorInfo where ${colum_name}=#{id}")
+    void deleteInfo2(String colum_name, int id) throws Exception;
 
     @Update("update DistrictModeratorInfo set plate_id=#{plate_id}, district_id=#{district_id} where user_id=#{user_id}")
     void updateInfo(DistrictModeratorInfo districtModeratorInfo) throws Exception;
@@ -25,4 +28,7 @@ public interface DistrictModeratorInfoDao {
 
     @Select("select * from DistrictModeratorInfo where district_id=#{district_id}")
     List<DistrictModeratorInfo> getInfo(int plate_id, int district_id) throws Exception;
+
+    @Select("select * from DistrictModeratorInfo where user_id=#{user_id}")
+    List<DistrictModeratorInfo> getDisModerInfos(int user_id) throws Exception;
 }

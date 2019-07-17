@@ -2,6 +2,7 @@ package com.bbs.service.User.Impl;
 
 
 import com.bbs.dao.User.DistrictModeratorInfoDao;
+import com.bbs.dao.User.RoleUserInfoDao;
 import com.bbs.dao.User.UserBaseInfoDao;
 import com.bbs.dao.User.UserLoginInfoDao;
 import com.bbs.model.User.DistrictModeratorInfo;
@@ -20,20 +21,32 @@ public class DistrictModeratorInfoServiceImpl implements DistrictModeratorInfoSe
     private DistrictModeratorInfoDao districtModeratorInfoDao;
 
     @Resource
-    private UserLoginInfoDao userLoginInfoDao;
+    private RoleUserInfoDao roleUserInfoDao;
 
     @Resource
     private UserBaseInfoDao userBaseInfoDao;
 
+
     @Override
     public void addInfo(DistrictModeratorInfo districtModeratorInfo, int role) throws Exception {
         districtModeratorInfoDao.addInfo(districtModeratorInfo);
-        userLoginInfoDao.getUserLoginInfoById(districtModeratorInfo.getUser_id()).setRole(role);
+        if (role > roleUserInfoDao.getRoleUserInfo(districtModeratorInfo.getUser_id()).getRole_info_id())
+            roleUserInfoDao.changeUserRole(role, districtModeratorInfo.getUser_id());
     }
 
     @Override
-    public void deleteInfo(String colum_name, int s) throws Exception {
-        districtModeratorInfoDao.deleteInfo(colum_name,s);
+    public void deleteInfo(String colum_name, int user_id, int id) throws Exception {
+        districtModeratorInfoDao.deleteInfo(colum_name,user_id, id);
+        int role = 1;
+        List<DistrictModeratorInfo> ls = districtModeratorInfoDao.getDisModerInfos(user_id);
+        if (ls != null) role = 2;
+        for (DistrictModeratorInfo info : ls){
+            if (info.getDistrict_id() == -1){
+                role = 3;
+                break;
+            }
+        }
+        roleUserInfoDao.changeUserRole(role, user_id);
     }
 
     @Override

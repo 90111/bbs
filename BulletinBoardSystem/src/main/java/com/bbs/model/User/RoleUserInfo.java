@@ -2,17 +2,17 @@ package com.bbs.model.User;
 
 public class RoleUserInfo {
 
-    private int id;
+//    private int id;
     private int role_info_id;
     private int user_info_id;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     public int getRole_info_id() {
         return role_info_id;

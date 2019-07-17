@@ -5,6 +5,8 @@ import com.bbs.model.User.DistrictModeratorInfo;
 import com.bbs.model.User.UserBaseInfo;
 import com.bbs.service.Post.Impl.PlateInfoServiceImpl;
 import com.bbs.service.User.Impl.DistrictModeratorInfoServiceImpl;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+@RequiresAuthentication
+@RequiresRoles("admin")
 @RestController
 @RequestMapping("/admin")
 public class Plate {
@@ -121,11 +125,11 @@ public class Plate {
     }
 
     @RequestMapping(value = "/deletePlateModerator", method = RequestMethod.GET)
-    public Map deletePlateInfo(int user_id){
+    public Map deletePlateInfo(int user_id, int plate_id){
         System.out.println("调用deletePlateModerator方法");
         Map<String, Object> map = new HashMap<>();
         try {
-           districtModeratorInfoService.deleteInfo("user_id", user_id);
+           districtModeratorInfoService.deleteInfo("plate_id", user_id, plate_id);
             map.put("code", "200");
             map.put("msg", "操作成功");
         }catch (Exception e){

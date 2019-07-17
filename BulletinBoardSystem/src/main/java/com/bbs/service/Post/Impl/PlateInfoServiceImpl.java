@@ -60,7 +60,7 @@ public class PlateInfoServiceImpl implements PlateInfoService {
     @Override
     public void deletePlateInfoById(int id) throws Exception {
         districtModeratorInfoDao.updateUserRole(id);
-        districtModeratorInfoDao.deleteInfo("plate_id", id);
+        districtModeratorInfoDao.deleteInfo2("plate_id", id);
         plateInfoDao.deletePlateInfoById(id);
     }
 

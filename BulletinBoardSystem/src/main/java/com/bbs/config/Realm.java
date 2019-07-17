@@ -25,8 +25,9 @@ public class Realm extends AuthorizingRealm {
             userLoginInfo = userLoginInfoService.getUserLoginInfoByName(username);
             for (RoleInfo role : userLoginInfo.getRoleInfos()){
                 simpleAuthorizationInfo.addRole(role.getCode());
+                System.out.println(role.getCode());
                 for (FunctionInfo functionInfo : role.getFunctionInfos()){
-                    System.out.println(functionInfo.getCode());
+//                    System.out.println(functionInfo.getCode());
                     simpleAuthorizationInfo.addStringPermission(functionInfo.getCode());
                 }
             }

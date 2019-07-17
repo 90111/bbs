@@ -12,6 +12,7 @@ import com.bbs.service.User.Impl.UserBaseInfoServiceImpl;
 import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -123,19 +124,18 @@ public class PostController {
     }
 
 
+    @RequiresAuthentication
     @RequestMapping(value = "/addPostTitle", method = RequestMethod.POST)
     public Map addPostTitleInfo(@RequestBody PostTitleInfo postTitleInfo) {
         System.out.println("调用addPostTitleInfo方法");
         Map<String, Object> map = new HashMap();
         Subject current = SecurityUtils.getSubject();
         try {
-            if (current.isAuthenticated()) {
-                int user_id = userLoginInfoService.getUserLoginInfoByName((String) current.getPrincipal()).getId();
-                postTitleInfo.setOwner(user_id);
-                postInfoService.addPostTitleInfo(postTitleInfo);
-                map.put("code", "200");
-                map.put("msg", "发布帖子成功");
-            }
+            int user_id = userLoginInfoService.getUserLoginInfoByName((String) current.getPrincipal()).getId();
+            postTitleInfo.setOwner(user_id);
+            postInfoService.addPostTitleInfo(postTitleInfo);
+            map.put("code", "200");
+            map.put("msg", "发布帖子成功");
         } catch (Exception e) {
             map.put("code", "500");
             map.put("msg", "发布帖子失败");
@@ -144,20 +144,18 @@ public class PostController {
     }
 
 
+    @RequiresAuthentication
     @RequestMapping(value = "/updatePostTitle", method = RequestMethod.POST)
     public Map updatePostTItleInfo(@RequestBody PostTitleInfo postTitleInfo) {
         System.out.println("调用updatePostTItleInfo方法");
         Map<String, Object> map = new HashMap();
         Subject current = SecurityUtils.getSubject();
         try {
-            if (current.isAuthenticated()) {
-                int user_id = userLoginInfoService.getUserLoginInfoByName((String) current.getPrincipal()).getId();
+            int user_id = userLoginInfoService.getUserLoginInfoByName((String) current.getPrincipal()).getId();
+            if (postTitleInfo.getOwner() == user_id) {
                 postInfoService.updatePostTitleInfo(postTitleInfo);
                 map.put("code", "200");
                 map.put("msg", "修改帖子成功");
-            } else {
-                map.put("code", "500");
-                map.put("msg", "用户无权限");
             }
         } catch (Exception e) {
             map.put("code", "500");
@@ -166,55 +164,44 @@ public class PostController {
         return map;
     }
 
+    @RequiresAuthentication
     @RequestMapping(value = "/like", method = RequestMethod.GET)
     public Map addLike(int post_title_id) throws Exception {
         System.out.println("调用addLike方法");
         Map<String, Object> map = new HashMap<>();
         Subject currentUser = SecurityUtils.getSubject();
-        if (currentUser.isAuthenticated()) {
-            String username = (String) currentUser.getPrincipal();
-            int user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
-            try {
-                userLikeInfoService.changeLike(user_id, post_title_id);
-                userBaseInfoService.updateUserLikeNum(postInfoService.getPostTitleById(post_title_id).getOwner());
-                map.put("code", "200");
-                map.put("msg", "操作成功");
-                return map;
-            } catch (Exception e) {
-                e.printStackTrace();
-                map.put("code", "500");
-                map.put("msg", "操作失败");
-                return map;
-            }
+        String username = (String) currentUser.getPrincipal();
+        int user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
+        try {
+            userLikeInfoService.changeLike(user_id, post_title_id);
+            userBaseInfoService.updateUserLikeNum(postInfoService.getPostTitleById(post_title_id).getOwner());
+            map.put("code", "200");
+            map.put("msg", "操作成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("code", "500");
+            map.put("msg", "操作失败");
         }
-        map.put("code", "500");
-        map.put("msg", "用户未登录");
-
         return map;
     }
 
+    @RequiresAuthentication
     @RequestMapping(value = "/collect", method = RequestMethod.GET)
     public Map addCollect(int post_title_id) throws Exception {
         System.out.println("调用addCollection");
         Map<String, Object> map = new HashMap<>();
         Subject currentUser = SecurityUtils.getSubject();
         String username = (String) currentUser.getPrincipal();
-        if (currentUser.isAuthenticated()) {
-            int user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
-            try {
-                userCollectionInfoService.changeCollection(user_id, post_title_id);
-                map.put("code", "200");
-                map.put("msg", "操作成功");
-                return map;
-            } catch (Exception e) {
-                e.printStackTrace();
-                map.put("code", "500");
-                map.put("msg", "操作失败");
-                return map;
-            }
+        int user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
+        try {
+            userCollectionInfoService.changeCollection(user_id, post_title_id);
+            map.put("code", "200");
+            map.put("msg", "操作成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("code", "500");
+            map.put("msg", "操作失败");
         }
-        map.put("code", "500");
-        map.put("msg", "用户未登录");
         return map;
     }
 

@@ -6,6 +6,8 @@ import com.bbs.service.Post.Impl.PostTitleInfoServiceImpl;
 import com.bbs.service.User.Impl.UserBaseInfoServiceImpl;
 import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
 import com.github.pagehelper.PageInfo;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@RequiresAuthentication
+@RequiresRoles("admin")
 @RestController
 @RequestMapping("/admin")
 public class User {

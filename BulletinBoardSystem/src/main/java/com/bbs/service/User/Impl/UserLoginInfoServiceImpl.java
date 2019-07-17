@@ -1,14 +1,18 @@
 package com.bbs.service.User.Impl;
 
 
+import com.bbs.dao.User.RoleInfoDao;
+import com.bbs.dao.User.RoleUserInfoDao;
 import com.bbs.dao.User.UserBaseInfoDao;
 import com.bbs.dao.User.UserLoginInfoDao;
 import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.model.User.RoleInfo;
+import com.bbs.model.User.RoleUserInfo;
 import com.bbs.model.User.UserLoginInfo;
 import com.bbs.service.User.UserLoginInfoService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,6 +26,12 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService {
     private UserLoginInfoDao userLoginInfoDao;
     @Resource
     private UserBaseInfoDao userBaseInfoDao;
+
+    @Resource
+    private RoleInfoDao roleInfoDao;
+    @Resource
+    private RoleUserInfoDao roleUserInfoDao;
+
 
     public UserLoginInfo getUserLoginInfoByName(String username) throws Exception {
         UserLoginInfo userLoginInfo = userLoginInfoDao.getUserLoginInfoByName(username);
@@ -39,6 +49,7 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService {
     public void addUserLoginInfo(UserLoginInfo userLoginInfo) throws Exception {
         userLoginInfoDao.addUserLoginInfo(userLoginInfo);
         userBaseInfoDao.addUserBaseInfo(userLoginInfo.getId(), userLoginInfo.getUser_name());
+        roleUserInfoDao.addRoleUserInfo(userLoginInfo.getId());
     }
 
     @Override
@@ -70,6 +81,10 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService {
     public PageInfo<UserLoginInfo> getUserLoginInfos(int page) throws Exception {
         PageHelper.startPage(page, 20);
         List<UserLoginInfo> ls = userLoginInfoDao.getUserLoginInfos();
+        for (UserLoginInfo info : ls){
+            List<RoleInfo> roleInfoList = roleInfoDao.getRoles(roleUserInfoDao.getRoleUserInfo(info.getId()).getRole_info_id());
+            info.setRoleInfos(roleInfoList);
+        }
         PageInfo<UserLoginInfo> pageInfoDemo = new PageInfo<UserLoginInfo>(ls);
         return pageInfoDemo;
     }
@@ -87,5 +102,10 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService {
             info.setUserBaseInfo(userBaseInfoDao.getUserBaseInfoByUserId(info.getId()));
         }
         return ls;
+    }
+
+    @Override
+    public List<RoleInfo> getRole(int user_id) throws Exception {
+        return roleInfoDao.getRoles(roleUserInfoDao.getRoleUserInfo(user_id).getRole_info_id());
     }
 }

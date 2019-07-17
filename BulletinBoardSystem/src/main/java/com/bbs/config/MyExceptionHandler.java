@@ -22,7 +22,7 @@ public class MyExceptionHandler implements HandlerExceptionResolver {
         Map<String, Object> attributes = new HashMap<String, Object>();
         if (ex instanceof UnauthenticatedException) {
             attributes.put("code", "1000001");
-            attributes.put("msg", "token错误");
+            attributes.put("msg", "未登录");
         } else if (ex instanceof UnauthorizedException) {
             attributes.put("code", "1000002");
             attributes.put("msg", "用户无权限");

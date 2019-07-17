@@ -34,6 +34,7 @@
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/api/Admin/User.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/service/User/UserBaseInfoService.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/model/Message/MessageInfo.java
+/Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/api/Admin/Announcement.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/model/User/FunctionInfo.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/model/User/RoleUserInfo.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/service/User/DistrictModeratorInfoService.java

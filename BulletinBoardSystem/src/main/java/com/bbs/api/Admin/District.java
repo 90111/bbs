@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
+@RequiresAuthentication
+@RequiresRoles("admin")
 @RestController
 @RequestMapping("/admin")
 public class District {
@@ -27,8 +29,7 @@ public class District {
     @Autowired
     private DistrictModeratorInfoServiceImpl districtModeratorInfoService;
 
-//    @RequiresAuthentication
-//    @RequiresRoles("aa")
+
     @RequestMapping(value = "/addDistricts", method = RequestMethod.POST)
     public Map addDistricts(int plate_id, String district_name) {
         System.out.println("增加分区");
@@ -122,11 +123,11 @@ public class District {
     }
 
     @RequestMapping(value = "/deleteDisOwner", method = RequestMethod.GET)
-    public Map deletePlateInfo(int user_id) {
+    public Map deletePlateInfo(int user_id, int district_id) {
         System.out.println("调用deleteDisOwner方法");
         Map<String, Object> map = new HashMap<>();
         try {
-            districtModeratorInfoService.deleteInfo("user_id", user_id);
+            districtModeratorInfoService.deleteInfo("district_id", user_id, district_id);
             map.put("code", "200");
             map.put("msg", "操作成功");
         } catch (Exception e) {

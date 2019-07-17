@@ -9,7 +9,7 @@ public interface DistrictModeratorInfoService {
 
     void addInfo(DistrictModeratorInfo districtModeratorInfo, int role) throws Exception;
 
-    void deleteInfo(String colum_name, int user_id) throws Exception;
+    void deleteInfo(String colum_name, int user_id, int id) throws Exception;
 
     void updateInfo(DistrictModeratorInfo districtModeratorInfo) throws Exception;
 
