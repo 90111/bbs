@@ -43,7 +43,7 @@ public class AnnouncementController {
                 int plateId = -1;
                 plateId = announcementInfo.getPlate_id();
                 if (districtId != -1){
-                    map.put("district_name", districtInfoService.getgetDistrictInfo(districtId).getDistrict_name());
+                    map.put("district_name", districtInfoService.getDistrictInfo(districtId).getDistrict_name());
                 }
                 if(plateId != -1){
                     map.put("plate_name", plateInfoService.getPlateInfo(plate_id).getPlate_name());

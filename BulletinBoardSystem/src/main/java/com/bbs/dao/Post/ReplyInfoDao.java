@@ -20,4 +20,7 @@ public interface ReplyInfoDao {
     @Select("select ReplyInfo.id, ReplyInfo.user_id, ReplyInfo.content, UserBaseInfo.nick_name, UserBaseInfo.icon, ReplyInfo.reply_time from ReplyInfo, UserBaseInfo where post_title_id=#{post_title_id} and ReplyInfo.user_id = UserBaseInfo.user_id")
     List<ReplyInfo> getReplyInfos(int post_title_id) throws Exception;
 
+    //获取当日回复数据
+    @Select("SELECT COUNT(id) FROM ReplyInfo WHERE DATE(reply_time)=CURDATE()")
+    int selectReplyNowNum() throws Exception;
 }

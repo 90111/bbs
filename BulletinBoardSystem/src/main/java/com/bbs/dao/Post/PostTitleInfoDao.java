@@ -35,8 +35,9 @@ public interface PostTitleInfoDao {
     @Update("update PostTitleInfo set title=#{title},content=#{content},image=#{image},districtInfo_id=#{districtInfo_id},post_time=#{post_time} where id=#{id}")
     void updatePostTitleInfo(PostTitleInfo postTitleInfo) throws Exception;
 
-    @Select("SELECT PostTitleInfo.id as id, title, districtInfo_id, owner, nick_name, PostTitleInfo.image, UserBaseInfo.icon, view_num, PostTitleInfo.like_num, recommend_num, reply_time, reply_num from PostTitleInfo, UserBaseInfo " +
-            "where districtInfo_id = #{id} and UserBaseInfo.user_id = PostTitleInfo.owner order by ${orderby} desc")
+    @Select("SELECT PostTitleInfo.id as id, title, districtInfo_id, DistrictInfo.plate_id, owner, nick_name, PostTitleInfo.image, UserBaseInfo.icon, view_num, " +
+            "PostTitleInfo.like_num, recommend_num, reply_time, reply_num, PostTitleInfo.state from PostTitleInfo, UserBaseInfo, DistrictInfo " +
+            "where districtInfo_id = #{id} and UserBaseInfo.user_id = PostTitleInfo.owner and DistrictInfo.id=districtInfo_id order by ${orderby} desc")
     List<PostTitleInfo> getPostTitleInfos(int id, @Param("orderby") String orderby) throws Exception;
 
     @Select("select PostTitleInfo.id as id, districtInfo_id, title, owner, nick_name, content, post_time, PostTitleInfo.image, UserBaseInfo.icon, view_num, PostTitleInfo.like_num, recommend_num,reply_num from PostTitleInfo, UserBaseInfo " +
@@ -104,4 +105,10 @@ public interface PostTitleInfoDao {
 
     @Update("update PostTitleInfo set ${colum_name} = #{state} where id=#{id}")
     void changePostState(int id, @Param("colum_name") String colum_name,int state) throws Exception;
+
+
+    //获取当日发帖数据
+    @Select("SELECT COUNT(id) FROM PostTitleInfo WHERE DATE(post_time)=CURDATE()")
+    int selectPostNowNum() throws Exception;
+
 }

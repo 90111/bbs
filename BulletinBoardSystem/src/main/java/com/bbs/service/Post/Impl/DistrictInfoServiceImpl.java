@@ -22,7 +22,7 @@ public class DistrictInfoServiceImpl implements DistrictInfoService {
     }
 
     @Override
-    public DistrictInfo getgetDistrictInfo(int district_id) throws Exception {
+    public DistrictInfo getDistrictInfo(int district_id) throws Exception {
         return districtInfoDao.getDistrictInfo(district_id);
     }
     @Override
@@ -37,6 +37,7 @@ public class DistrictInfoServiceImpl implements DistrictInfoService {
 
     @Override
     public void deleteDistrictInfo(int id) throws Exception{
+
         districtInfoDao.deleteDistrictInfo(id);
     }
 

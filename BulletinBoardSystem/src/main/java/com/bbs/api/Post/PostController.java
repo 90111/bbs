@@ -83,7 +83,7 @@ public class PostController {
         }
         try {
             PostTitleInfo info = postInfoService.getPostTitleContent(id);
-            DistrictInfo disInfo = districtInfoService.getgetDistrictInfo(info.getDistrictInfo_id());
+            DistrictInfo disInfo = districtInfoService.getDistrictInfo(info.getDistrictInfo_id());
             if (user_id != -1) {
                 info.setCollected(userCollectionInfoService.checkIsCollected(user_id, id));
                 info.setLiked(userLikeInfoService.checkIsLike(user_id, id));
@@ -152,10 +152,14 @@ public class PostController {
         Subject current = SecurityUtils.getSubject();
         try {
             int user_id = userLoginInfoService.getUserLoginInfoByName((String) current.getPrincipal()).getId();
-            if (postTitleInfo.getOwner() == user_id) {
+            PostTitleInfo info = postInfoService.getPostTitleById(postTitleInfo.getId());
+            if (info.getOwner() == user_id) {
                 postInfoService.updatePostTitleInfo(postTitleInfo);
                 map.put("code", "200");
                 map.put("msg", "修改帖子成功");
+            }else{
+                map.put("code", "200");
+                map.put("msg", "您不是当前帖子所有人，修改失败");
             }
         } catch (Exception e) {
             map.put("code", "500");

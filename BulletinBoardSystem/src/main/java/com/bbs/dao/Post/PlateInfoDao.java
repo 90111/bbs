@@ -14,6 +14,9 @@ public interface PlateInfoDao {
     @Select("select * from PlateInfo order by post_num")
     List<PlateInfo> getPlates() throws Exception;
 
+    @Select("select * from PlateInfo where id in (${s})")
+    List<PlateInfo> getPlatesById(@Param("s") String s) throws Exception;
+
     @Select("select * from PlateInfo where id=#{id}")
     PlateInfo getPlateInfo(int id) throws Exception;
 

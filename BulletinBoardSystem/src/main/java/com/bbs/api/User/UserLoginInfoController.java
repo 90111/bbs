@@ -129,10 +129,12 @@ public class UserLoginInfoController {
         Subject currentUser = SecurityUtils.getSubject();
         if (currentUser.isAuthenticated()) {
             String username = currentUser.getPrincipal().toString();
-            int id = userLoginInfoService.getUserLoginInfoByName(username).getId();
+            UserLoginInfo user = new UserLoginInfo();
+            user.setId(userLoginInfoService.getUserLoginInfoByName(username).getId());
+            user.setRoleInfos(userLoginInfoService.getRole(user.getId()));
             map.put("code", "200");
             map.put("msg", "已登录");
-            map.put("id", id);
+            map.put("data", user);
         } else {
             map.put("code", "500");
             map.put("msg", "未登录");

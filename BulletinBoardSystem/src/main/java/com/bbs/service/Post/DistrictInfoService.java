@@ -9,7 +9,7 @@ public interface DistrictInfoService {
 
     List<DistrictInfo> getDistrictInfos(int plate_id) throws Exception;
 
-    DistrictInfo getgetDistrictInfo(int district_id) throws Exception;
+    DistrictInfo getDistrictInfo(int district_id) throws Exception;
 
     void addDistrictInfo(int id,String name) throws Exception;
 

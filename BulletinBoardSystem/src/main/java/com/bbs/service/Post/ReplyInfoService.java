@@ -9,4 +9,6 @@ public interface ReplyInfoService {
     void addReplyInfoService(ReplyInfo replyInfo) throws Exception;
 
     List<ReplyInfo> getReplyInfos(int post_title_id) throws Exception;
+
+    int selectReplyNowNum() throws Exception;
 }

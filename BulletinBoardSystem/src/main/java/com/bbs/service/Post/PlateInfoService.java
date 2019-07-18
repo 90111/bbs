@@ -1,6 +1,7 @@
 package com.bbs.service.Post;
 
 import com.bbs.model.Post.PlateInfo;
+import com.bbs.model.User.DistrictModeratorInfo;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
@@ -19,6 +20,8 @@ public interface PlateInfoService {
     void updatePlateInfo(int id, String name) throws Exception;
 
     void deletePlateInfoById(int id) throws Exception;
+
+    List<PlateInfo> getPlatesById(List<DistrictModeratorInfo> districtModeratorInfos) throws Exception;
 
 
 }

@@ -28,8 +28,15 @@ public class DistrictModeratorInfoServiceImpl implements DistrictModeratorInfoSe
 
 
     @Override
-    public void addInfo(DistrictModeratorInfo districtModeratorInfo, int role) throws Exception {
-        districtModeratorInfoDao.addInfo(districtModeratorInfo);
+    public void addModerInfo(DistrictModeratorInfo districtModeratorInfo, int role) throws Exception {
+        districtModeratorInfoDao.addModerInfo(districtModeratorInfo);
+        if (role > roleUserInfoDao.getRoleUserInfo(districtModeratorInfo.getUser_id()).getRole_info_id())
+            roleUserInfoDao.changeUserRole(role, districtModeratorInfo.getUser_id());
+    }
+
+    @Override
+    public void addDisInfo(DistrictModeratorInfo districtModeratorInfo, int role) throws Exception {
+        districtModeratorInfoDao.addDisInfo(districtModeratorInfo);
         if (role > roleUserInfoDao.getRoleUserInfo(districtModeratorInfo.getUser_id()).getRole_info_id())
             roleUserInfoDao.changeUserRole(role, districtModeratorInfo.getUser_id());
     }
@@ -38,10 +45,10 @@ public class DistrictModeratorInfoServiceImpl implements DistrictModeratorInfoSe
     public void deleteInfo(String colum_name, int user_id, int id) throws Exception {
         districtModeratorInfoDao.deleteInfo(colum_name,user_id, id);
         int role = 1;
-        List<DistrictModeratorInfo> ls = districtModeratorInfoDao.getDisModerInfos(user_id);
-        if (ls != null) role = 2;
+        List<DistrictModeratorInfo> ls = districtModeratorInfoDao.getDisModerInfosById("user_id", user_id);
+        if (ls.size() != 0) role = 2;
         for (DistrictModeratorInfo info : ls){
-            if (info.getDistrict_id() == -1){
+            if (info.getDistrict_id() == 0){
                 role = 3;
                 break;
             }
@@ -55,13 +62,33 @@ public class DistrictModeratorInfoServiceImpl implements DistrictModeratorInfoSe
     }
 
     @Override
-    public List<UserBaseInfo> getInfo(int plate_id, int district_id) throws Exception {
-        List<DistrictModeratorInfo> ls = districtModeratorInfoDao.getInfo(plate_id, district_id);
-        List<UserBaseInfo> ls2 = new LinkedList<>();
-        for (DistrictModeratorInfo info : ls){
-            UserBaseInfo user = userBaseInfoDao.getUserBaseInfoByUserId(info.getUser_id());
-            ls2.add(user);
+    public List<DistrictModeratorInfo> getInfo(String colum_name, int district_id) throws Exception {
+        List<DistrictModeratorInfo> ls = null;
+        if (colum_name.equals("plate_id")){
+            ls = districtModeratorInfoDao.getModeratorInfo(colum_name, district_id);
+        }else{
+            ls = districtModeratorInfoDao.getDisInfo(colum_name, district_id);
         }
-        return ls2;
+        return ls;
+    }
+
+    @Override
+    public List<DistrictModeratorInfo> getDisModerInfosById(String colum_name, int user_id) throws Exception {
+        return districtModeratorInfoDao.getDisModerInfosById(colum_name, user_id);
+    }
+
+    @Override
+    public List<DistrictModeratorInfo> getUserDis(int user_id) throws Exception {
+        return districtModeratorInfoDao.getUserDis(user_id);
+    }
+
+    @Override
+    public List<DistrictModeratorInfo> getModeratorInfo(String colum_name, int plate_id) throws Exception {
+        return districtModeratorInfoDao.getModeratorInfo(colum_name, plate_id);
+    }
+
+    @Override
+    public void deleteInfoByPlateId(int plate_id) throws Exception {
+        districtModeratorInfoDao.deleteInfoByPlateId(plate_id);
     }
 }

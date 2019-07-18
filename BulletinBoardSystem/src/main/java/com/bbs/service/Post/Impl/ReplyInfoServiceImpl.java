@@ -31,4 +31,9 @@ public class ReplyInfoServiceImpl implements ReplyInfoService {
     public List<ReplyInfo> getReplyInfos(int post_title_id) throws Exception {
         return replyInfoDao.getReplyInfos(post_title_id);
     }
+
+    @Override
+    public int selectReplyNowNum() throws Exception{
+        return replyInfoDao.selectReplyNowNum();
+    }
 }

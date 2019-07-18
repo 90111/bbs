@@ -1,6 +1,7 @@
 package com.bbs.service.Post;
 
 import com.bbs.model.Post.PostTitleInfo;
+import com.bbs.model.User.DistrictModeratorInfo;
 import com.bbs.model.User.UserCollectionInfo;
 import com.github.pagehelper.PageInfo;
 
@@ -41,5 +42,9 @@ public interface PostTitleInfoService {
     void changePostState(int id, String colum_name, int state) throws Exception;
 
     void changePostDis(int id, String colum_name, int state) throws Exception;
+
+    PageInfo<PostTitleInfo> getPostTitleInfos(int id, String s, int page, int size, int flag) throws Exception;
+
+    int selectPostNowNum() throws Exception;
 
 }

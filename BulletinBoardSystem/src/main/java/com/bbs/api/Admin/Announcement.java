@@ -5,7 +5,9 @@ import com.bbs.service.Announcement.lmpl.AnnouncementInfoServiceImpl;
 import com.bbs.service.Post.Impl.PlateInfoServiceImpl;
 import com.bbs.service.User.Impl.DistrictModeratorInfoServiceImpl;
 import com.github.pagehelper.PageInfo;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +22,14 @@ import java.util.Map;
 
 @RestController
 @RequiresAuthentication
-@RequiresRoles({"admin", "moderator","district_owner"})
+@RequiresRoles(value = {"admin", "moderator","district_owner"}, logical= Logical.OR)
 @RequestMapping("/admin")
 public class Announcement {
 
     @Autowired
     private AnnouncementInfoServiceImpl announcementInfoService;
 
+    @RequiresRoles("admin")
     @RequestMapping(value = "/getAnnouncements", method = RequestMethod.GET)
     public Map getAnnouncements(int page, int size){
         System.out.println("调用getAnnouncements方法");
@@ -109,6 +112,7 @@ public class Announcement {
         return map;
     }
 
+    @RequiresPermissions("deleteAnnouncement")
     @RequestMapping(value = "/deteleAnnouncement", method = RequestMethod.POST)
     public Map deteleAnnouncement(@RequestBody List<AnnouncementInfo> ls){
         System.out.println("删除公告");
@@ -124,6 +128,7 @@ public class Announcement {
         return map;
     }
 
+    @RequiresPermissions("createAnnouncement")
     @RequestMapping(value = "/addAnnouncement",method = RequestMethod.POST)
     public Map addAnnouncement(@RequestBody AnnouncementInfo announcementInfo){
         System.out.println("添加公告");

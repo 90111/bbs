@@ -23,6 +23,7 @@
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/service/Post/PostTitleInfoService.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/api/Announcement/AnnouncementController.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/service/Post/Impl/PostTitleInfoServiceImpl.java
+/Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/service/User/UserRoleInfoService.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/service/Message/Impl/MessageInfoInfoServiceImpl.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/service/User/UserLoginInfoService.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/dao/Post/PostTitleInfoDao.java
@@ -37,6 +38,7 @@
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/api/Admin/Announcement.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/model/User/FunctionInfo.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/model/User/RoleUserInfo.java
+/Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/service/User/Impl/UserRoleInfoServiceImpl.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/service/User/DistrictModeratorInfoService.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/config/CommonIntercepter.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/model/User/RoleFunctionPermission.java
@@ -56,6 +58,7 @@
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/service/Message/MessageInfoService.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/dao/User/RoleInfoDao.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/config/ShiroConfiguration.java
+/Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/dao/User/RoleUserInfoDao.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/service/Post/ReplyInfoService.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/model/Post/PostTitleInfo.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/service/User/UserCollectionInfoService.java
@@ -74,3 +77,4 @@
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/service/User/Impl/UserBaseInfoServiceImpl.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/config/CorsConfiguration.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/model/User/UserCollectionInfo.java
+/Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/api/Admin/Login.java
