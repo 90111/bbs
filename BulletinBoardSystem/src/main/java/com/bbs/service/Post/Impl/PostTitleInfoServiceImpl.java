@@ -1,5 +1,6 @@
 package com.bbs.service.Post.Impl;
 
+
 import com.bbs.dao.Post.DistrictInfoDao;
 import com.bbs.dao.Post.PlateInfoDao;
 import com.bbs.dao.Post.PostTitleInfoDao;
@@ -8,6 +9,7 @@ import com.bbs.dao.User.UserCollectionInfoDao;
 import com.bbs.dao.User.UserLikeInfoDao;
 import com.bbs.dao.User.UserLoginInfoDao;
 import com.bbs.model.Post.PostTitleInfo;
+import com.bbs.model.User.DistrictModeratorInfo;
 import com.bbs.model.User.UserCollectionInfo;
 import com.bbs.service.Post.PostTitleInfoService;
 import com.github.pagehelper.Page;
@@ -48,6 +50,10 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     @Resource
     private UserCollectionInfoDao userCollectionInfoDao;
 
+    /*
+    id:分区id
+    s：orderby
+     */
     @Override
     public PageInfo<PostTitleInfo> getPostTitleInfos(int id, String s, int page, int size) throws Exception {
         PageHelper.startPage(page, size);
@@ -65,6 +71,13 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
                 }
             }
         }
+        PageInfo<PostTitleInfo> pageInfoDemo = new PageInfo<PostTitleInfo>(ls);
+        return pageInfoDemo;
+    }
+
+    public PageInfo<PostTitleInfo> getPostTitleInfos(int id, String s, int page, int size, int flag) throws Exception {
+        PageHelper.startPage(page, size);
+        List<PostTitleInfo> ls = postTitleInfoDao.getPostTitleInfos(id, s);
         PageInfo<PostTitleInfo> pageInfoDemo = new PageInfo<PostTitleInfo>(ls);
         return pageInfoDemo;
     }
@@ -197,6 +210,12 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
         postTitleInfoDao.changePostState(id, colum_name, state);
         districtInfoDao.updateDistrictPostNum(id);
         districtInfoDao.updateDistrictPostNum(state);
+    }
+
+
+    @Override
+    public int selectPostNowNum() throws Exception{
+        return postTitleInfoDao.selectPostNowNum();
     }
 
 }
