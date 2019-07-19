@@ -6,10 +6,7 @@ import com.bbs.model.User.UserLoginInfo;
 import com.bbs.service.User.Impl.UserBaseInfoServiceImpl;
 import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.subject.Subject;
 import org.json.JSONException;
@@ -49,15 +46,6 @@ public class UserLoginInfoController {
             jsonObject.put("id", info.getId());
             jsonObject.put("user_name", info.getUser_name());
             jsonObject.put("icon", userBaseInfoService.getUserBaseInfoByUserId(info.getId()).getIcon());
-        } catch (IncorrectCredentialsException e) {
-            jsonObject.put("code", 500);
-            jsonObject.put("msg", "密码错误");
-        } catch (LockedAccountException e) {
-            jsonObject.put("code", 500);
-            jsonObject.put("msg", "登录失败，该用户已被冻结");
-        } catch (AuthenticationException e) {
-            jsonObject.put("code", 500);
-            jsonObject.put("msg", "该用户不存在");
         } catch (Exception e) {
             e.printStackTrace();
         }

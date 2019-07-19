@@ -36,7 +36,7 @@ public class User {
 
     @RequestMapping(value = "/deleteUsers", method = RequestMethod.POST)
     public Map deleteUsers(@RequestBody List<UserLoginInfo> ls) {
-        System.out.println("调用deleteUsers");
+//        System.out.println("调用deleteUsers");
         Map<String, Object> map = new HashMap<>();
         try{
             userLoginInfoService.deleteUserLoginInfoById(ls);
@@ -53,7 +53,7 @@ public class User {
 
     @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
     public Map getUsers(int page){
-        System.out.println("调用getUsers方法");
+//        System.out.println("调用getUsers方法");
         Map<String, Object> map = new HashMap<>();
         try{
             PageInfo pageObj1 = userLoginInfoService.getUserLoginInfos(page);
@@ -73,7 +73,7 @@ public class User {
 
     @RequestMapping(value = "/changeUserState", method = RequestMethod.POST)
     public Map changeUserState(int user_id, String colum_name, int state){
-        System.out.println("调用changeUserState方法");
+//        System.out.println("调用changeUserState方法");
         Map<String, Object> map = new HashMap<>();
         try {
             userLoginInfoService.changeUserState(user_id, colum_name, state);
@@ -89,7 +89,7 @@ public class User {
 
     @RequestMapping(value = "/searchUser", method = RequestMethod.GET)
     public Map searchUser(String colum_name, String s){
-        System.out.println("调用searchUser方法");
+//        System.out.println("调用searchUser方法");
         Map<String, Object> map = new HashMap<>();
         try {
             map.put("ls", userLoginInfoService.searchUser(colum_name, s));

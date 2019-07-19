@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public interface PlateInfoDao {
 
-    @Select("select * from PlateInfo order by post_num")
+    @Select("select * from PlateInfo order by id")
     List<PlateInfo> getPlates() throws Exception;
 
     @Select("select * from PlateInfo where id in (${s})")

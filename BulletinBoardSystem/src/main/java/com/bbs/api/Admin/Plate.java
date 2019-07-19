@@ -99,7 +99,7 @@ public class Plate {
     @RequiresPermissions("updatePlate")
     @RequestMapping(value = "/updatePlates",method = RequestMethod.POST)
     public Map updatePlates(int id, String name){
-        System.out.println("修改板块");
+//        System.out.println("修改板块");
         Map<String,Object> map=new HashMap<>();
         try {
             PlateInfo info = plateInfoService.getPlateInfoByName(name);
@@ -121,7 +121,7 @@ public class Plate {
     @RequiresPermissions("deletePlate")
     @RequestMapping(value = "/deletePlate",method = RequestMethod.POST)
     public Map deletePlates(int plate_id){
-        System.out.println("删除板块");
+//        System.out.println("删除板块");
         Map<String,Object> map=new HashMap<>();
         try {
             List<DistrictModeratorInfo> ls1 = districtModeratorInfoService.getDisModerInfosById("plate_id", plate_id);
@@ -151,14 +151,16 @@ public class Plate {
     @RequiresPermissions("addModerator")
     @RequestMapping(value = "/addPlateModerator", method = RequestMethod.POST)
     public Map addPlateModerator(@RequestBody DistrictModeratorInfo districtModeratorInfo){
-        System.out.println("调用addPlateModerator方法");
+//        System.out.println("调用addPlateModerator方法");
         Map<String, Object> map = new HashMap<>();
         try {
             List<DistrictModeratorInfo> info = districtModeratorInfoService.getDisModerInfosById("plate_id", districtModeratorInfo.getPlate_id());
-            if (info.size() != 0){
-                map.put("code", "500");
-                map.put("msg", "该用户已是该版版主");
-                return map;
+            for (DistrictModeratorInfo i : info){
+                if (i.getUser_id() == districtModeratorInfo.getUser_id()){
+                    map.put("code", "500");
+                    map.put("msg", "该用户已是该版版主");
+                    return map;
+                }
             }
             districtModeratorInfoService.addModerInfo(districtModeratorInfo, 3);
             map.put("code", "200");
@@ -176,7 +178,7 @@ public class Plate {
 
     @RequestMapping(value = "/getPlateModerator", method = RequestMethod.GET)
     public Map getPlateInfo(int plate_id){
-        System.out.println("调用getPlateModerator方法");
+//        System.out.println("调用getPlateModerator方法");
         Map<String, Object> map = new HashMap<>();
         try {
             List<DistrictModeratorInfo> ls = districtModeratorInfoService.getInfo("plate_id", plate_id);
@@ -199,7 +201,7 @@ public class Plate {
     @RequiresPermissions("deleteModerator")
     @RequestMapping(value = "/deletePlateModerator", method = RequestMethod.GET)
     public Map deletePlateInfo(int user_id, int plate_id){
-        System.out.println("调用deletePlateModerator方法");
+//        System.out.println("调用deletePlateModerator方法");
         Map<String, Object> map = new HashMap<>();
         try {
            districtModeratorInfoService.deleteInfo("plate_id", user_id, plate_id);

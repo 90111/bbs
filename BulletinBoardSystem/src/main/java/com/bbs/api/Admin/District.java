@@ -44,7 +44,7 @@ public class District {
 
     @RequestMapping(value = "/getDis", method = RequestMethod.GET)
     public Map getDis() {
-        System.out.println("调用getDis方法");
+//        System.out.println("调用getDis方法");
         Map<String, Object> map = new HashMap<>();
         Subject currentUser = SecurityUtils.getSubject();
         String username = (String) currentUser.getPrincipal();
@@ -75,7 +75,7 @@ public class District {
     @RequiresPermissions("createDistrict")
     @RequestMapping(value = "/addDistricts", method = RequestMethod.POST)
     public Map addDistricts(int plate_id, String district_name) {
-        System.out.println("增加分区");
+//        System.out.println("增加分区");
         Map<String, Object> map = new HashMap<>();
         try {
             DistrictInfo info = districtInfoService.getDistrictByPlateAndName(plate_id, district_name);
@@ -148,10 +148,12 @@ public class District {
         Map<String, Object> map = new HashMap<>();
         try {
             List<DistrictModeratorInfo> info = districtModeratorInfoService.getDisModerInfosById("district_id", districtModeratorInfo.getDistrict_id());
-            if (info.size() != 0){
-                map.put("code", "500");
-                map.put("msg", "该用户已是该区区主");
-                return map;
+            for (DistrictModeratorInfo i : info){
+                if (i.getUser_id() == districtModeratorInfo.getUser_id()){
+                    map.put("code", "500");
+                    map.put("msg", "该用户已是该区区主");
+                    return map;
+                }
             }
             districtModeratorInfoService.addDisInfo(districtModeratorInfo, 2);
             map.put("code", "200");

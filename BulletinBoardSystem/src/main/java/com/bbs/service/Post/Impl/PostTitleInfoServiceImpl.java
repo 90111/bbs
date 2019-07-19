@@ -160,7 +160,10 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     @Override
     public void updatePostTitleInfo(PostTitleInfo postTitleInfo) throws Exception {
         postTitleInfo.setPost_time(new Date());
+        int id = postTitleInfoDao.getPostTitleById(postTitleInfo.getId()).getDistrictInfo_id();
         postTitleInfoDao.updatePostTitleInfo(postTitleInfo);
+        districtInfoDao.updateDistrictPostNum(postTitleInfo.getDistrictInfo_id());
+        districtInfoDao.updateDistrictPostNum(id);
     }
 
     @Override
@@ -173,14 +176,18 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     }
 
     @Override
-    public PageInfo getPostTitleInfosByColum(String colum_name, String s, String nick_name, int page, int size) throws Exception {
+    public PageInfo getPostTitleInfosByColum(String colum_name, String s, String nick_name, int page, int size, String in) throws Exception {
         List<PostTitleInfo> ls;
         try {
-            PageHelper.startPage(page, size);
-            if (nick_name.equals("") || nick_name == null)
-                ls = postTitleInfoDao.getPostTitleInfosByColum(colum_name, "%" + s + "%");
-            else
-                ls = postTitleInfoDao.getPostTitleInfosByColum2(colum_name, "%" + s + "%", nick_name);
+            if (in .equals("") || in == null) {
+                PageHelper.startPage(page, size);
+                if (nick_name.equals("") || nick_name == null)
+                    ls = postTitleInfoDao.getPostTitleInfosByColum(colum_name, "%" + s + "%");
+                else
+                    ls = postTitleInfoDao.getPostTitleInfosByColumAndName(colum_name, "%" + s + "%", nick_name);
+            }else{
+                ls = postTitleInfoDao.ls(colum_name, "%" + s + "%", in);
+            }
             PageInfo<PostTitleInfo> pageInfoDemo = new PageInfo<PostTitleInfo>(ls);
             return pageInfoDemo;
         } catch (Exception e) {
@@ -206,10 +213,10 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     }
 
     @Override
-    public void changePostDis(int id, String colum_name, int state) throws Exception {
-        postTitleInfoDao.changePostState(id, colum_name, state);
+    public void changePostDis(int id, String colum_name, int newDisId) throws Exception {
+        postTitleInfoDao.changePostState(id, colum_name, newDisId);
         districtInfoDao.updateDistrictPostNum(id);
-        districtInfoDao.updateDistrictPostNum(state);
+        districtInfoDao.updateDistrictPostNum(newDisId);
     }
 
 

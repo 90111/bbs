@@ -99,6 +99,8 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService {
         List<UserLoginInfo> ls = new LinkedList<>();
         ls = userLoginInfoDao.getUserLoginInfoByColum(colum_name, "%" + s + "%");
         for (UserLoginInfo info : ls){
+            List<RoleInfo> roleInfoList = roleInfoDao.getRoles(roleUserInfoDao.getRoleUserInfo(info.getId()).getRole_info_id());
+            info.setRoleInfos(roleInfoList);
             info.setUserBaseInfo(userBaseInfoDao.getUserBaseInfoByUserId(info.getId()));
         }
         return ls;

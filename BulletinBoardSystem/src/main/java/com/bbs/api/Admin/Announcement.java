@@ -32,7 +32,7 @@ public class Announcement {
     @RequiresRoles("admin")
     @RequestMapping(value = "/getAnnouncements", method = RequestMethod.GET)
     public Map getAnnouncements(int page, int size){
-        System.out.println("调用getAnnouncements方法");
+//        System.out.println("调用getAnnouncements方法");
         Map<String, Object> map = new HashMap<>();
         try{
             PageInfo pageObj = announcementInfoService.getAnnounceInfos(page, size);
@@ -51,7 +51,7 @@ public class Announcement {
 
     @RequestMapping(value = "/getAnnByDis", method = RequestMethod.GET)
     public Map getPostTitlesByDis(int plate_id, int district_id, int page, int size) {
-        System.out.println("调用getAnnByDis方法");
+//        System.out.println("调用getAnnByDis方法");
         Map<String, Object> map = new HashMap<>();
         try {
             PageInfo pageObj = new PageInfo();
@@ -77,7 +77,7 @@ public class Announcement {
 
     @RequestMapping(value = "/searchAnn", method = RequestMethod.POST)
     public Map searchAnnByPlate(int page, int size) {
-        System.out.println("调用searchAnnByPlate方法");
+//        System.out.println("调用searchAnnByPlate方法");
         Map<String, Object> map = new HashMap<>();
         try{
             PageInfo pageObj = announcementInfoService.getAnnounceInfos(-1, page, size);
@@ -98,7 +98,7 @@ public class Announcement {
 
     @RequestMapping(value = "/searchAnnByPlate", method = RequestMethod.POST)
     public Map searchAnnByPlate(int plate_id, int page, int size) {
-        System.out.println("调用searchAnnByPlate方法");
+//        System.out.println("调用searchAnnByPlate方法");
         Map<String, Object> map = new HashMap<>();
         try{
             PageInfo pageObj = announcementInfoService.getAnnounceInfos(plate_id, page, size);
@@ -119,7 +119,7 @@ public class Announcement {
 
     @RequestMapping(value = "/searchAnnByDis", method = RequestMethod.POST)
     public Map searchAnnByDis(int dis_id, int page, int size) {
-        System.out.println("调用searchAnnByDis方法");
+//        System.out.println("调用searchAnnByDis方法");
         Map<String, Object> map = new HashMap<>();
         try{
             PageInfo pageObj = announcementInfoService.getAnnounceInfos2(dis_id, page, size);
@@ -141,7 +141,7 @@ public class Announcement {
     @RequiresPermissions("deleteAnnouncement")
     @RequestMapping(value = "/deleteAnnouncement", method = RequestMethod.POST)
     public Map deteleAnnouncement(@RequestBody List<AnnouncementInfo> ls){
-        System.out.println("删除公告");
+//        System.out.println("删除公告");
         Map<String,Object> map=new HashMap<>();
         try {
             announcementInfoService.batchDelete(ls);
@@ -157,7 +157,7 @@ public class Announcement {
     @RequiresPermissions("createAnnouncement")
     @RequestMapping(value = "/addAnnouncement",method = RequestMethod.POST)
     public Map addAnnouncement(@RequestBody AnnouncementInfo announcementInfo){
-        System.out.println("添加公告");
+//        System.out.println("添加公告");
         Map<String,Object> map=new HashMap<>();
         try {
             announcementInfoService.addAnnouncementInfo(announcementInfo);

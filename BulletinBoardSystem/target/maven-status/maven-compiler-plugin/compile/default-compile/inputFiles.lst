@@ -59,6 +59,7 @@
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/dao/User/RoleInfoDao.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/config/ShiroConfiguration.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/dao/User/RoleUserInfoDao.java
+/Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/api/Admin/Home.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/service/Post/ReplyInfoService.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/model/Post/PostTitleInfo.java
 /Users/malingpeng/Desktop/bbs/BulletinBoardSystem/src/main/java/com/bbs/service/User/UserCollectionInfoService.java

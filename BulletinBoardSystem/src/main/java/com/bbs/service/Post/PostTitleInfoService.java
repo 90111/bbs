@@ -35,7 +35,7 @@ public interface PostTitleInfoService {
 
     List<PostTitleInfo> searchPost(String postTitle) throws Exception;
 
-    PageInfo getPostTitleInfosByColum(String colum_name, String s, String nick_name, int page, int size) throws Exception;
+    PageInfo getPostTitleInfosByColum(String colum_name, String s, String nick_name, int page, int size, String in) throws Exception;
 
     void batchDelete(List<PostTitleInfo> ls) throws Exception;
 

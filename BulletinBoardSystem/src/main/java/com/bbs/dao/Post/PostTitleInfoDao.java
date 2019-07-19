@@ -36,7 +36,7 @@ public interface PostTitleInfoDao {
     void updatePostTitleInfo(PostTitleInfo postTitleInfo) throws Exception;
 
     @Select("SELECT PostTitleInfo.id as id, title, districtInfo_id, DistrictInfo.plate_id, owner, nick_name, PostTitleInfo.image, UserBaseInfo.icon, view_num, " +
-            "PostTitleInfo.like_num, recommend_num, reply_time, reply_num, PostTitleInfo.state from PostTitleInfo, UserBaseInfo, DistrictInfo " +
+            "PostTitleInfo.like_num, recommend_num, post_time, reply_time, reply_num, PostTitleInfo.state from PostTitleInfo, UserBaseInfo, DistrictInfo " +
             "where districtInfo_id = #{id} and UserBaseInfo.user_id = PostTitleInfo.owner and DistrictInfo.id=districtInfo_id order by ${orderby} desc")
     List<PostTitleInfo> getPostTitleInfos(int id, @Param("orderby") String orderby) throws Exception;
 
@@ -97,7 +97,9 @@ public interface PostTitleInfoDao {
             "PostTitleInfo.image, PostTitleInfo.state FROM DistrictInfo, PostTitleInfo, UserBaseInfo " +
             "WHERE PostTitleInfo.districtInfo_id = DistrictInfo.id and PostTitleInfo.owner = UserBaseInfo.user_id " +
             "and ${colum_name} like #{s} and UserBaseInfo.nick_name=#{nick_name}")
-    List<PostTitleInfo> getPostTitleInfosByColum2(@Param("colum_name") String colum_name, String s, String nick_name) throws Exception;
+    List<PostTitleInfo> getPostTitleInfosByColumAndName(@Param("colum_name") String colum_name, String s, String nick_name) throws Exception;
+
+
 
 
     @Delete("delete from PostTitleInfo where id in (${s})")
@@ -110,5 +112,12 @@ public interface PostTitleInfoDao {
     //获取当日发帖数据
     @Select("SELECT COUNT(id) FROM PostTitleInfo WHERE DATE(post_time)=CURDATE()")
     int selectPostNowNum() throws Exception;
+
+    @Select("SELECT PostTitleInfo.id, DistrictInfo.plate_id, DistrictInfo.id as districtInfo_id, title, owner, reply_time, " +
+            "UserBaseInfo.nick_name, UserBaseInfo.icon, post_time, recommend_num, view_num, PostTitleInfo.like_num, reply_num, " +
+            "PostTitleInfo.image, PostTitleInfo.state FROM DistrictInfo, PostTitleInfo, UserBaseInfo " +
+            "WHERE PostTitleInfo.districtInfo_id = DistrictInfo.id and PostTitleInfo.owner = UserBaseInfo.user_id " +
+            "and DistrictInfo.id in (${s1}) and ${colum_name} like #{s}")
+    List<PostTitleInfo> ls(@Param("colum_name")String colum_name, String s, @Param("s1") String s1) throws Exception;
 
 }

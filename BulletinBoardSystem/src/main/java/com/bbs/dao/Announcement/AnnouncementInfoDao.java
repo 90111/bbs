@@ -13,7 +13,7 @@ public interface AnnouncementInfoDao {
     @Select("SELECT * FROM AnnouncementInfo where plate_id is null and district_id is null ORDER BY id DESC limit 1")
     AnnouncementInfo getRecentAnnouncement(int plate_id, int district_id) throws Exception;
 
-    @Insert("insert into AnnouncementInfo (owner, post_time, content, title) values (#{owner}, #{post_time}, #{content}. #{title})")
+    @Insert("insert into AnnouncementInfo (owner, post_time, content, title) values (#{owner}, #{post_time}, #{content}, #{title})")
     void addAnnouncementInfo(AnnouncementInfo announcementInfo) throws Exception;
 
     @Insert("insert into AnnouncementInfo (plate_id, owner, post_time, content, title) values (#{plate_id}, #{owner}, #{post_time}, #{content}, #{title})")
@@ -22,7 +22,7 @@ public interface AnnouncementInfoDao {
     @Insert("insert into AnnouncementInfo (district_id, owner, post_time, content, title) values (#{district_id}, #{owner}, #{post_time}, #{content}, #{title})")
     void addDisAnnInfo(AnnouncementInfo announcementInfo) throws Exception;
 
-    @Select("select * from AnnouncementInfo order by id")
+    @Select("select * from AnnouncementInfo order by id desc")
     List<AnnouncementInfo> getAnnounceInfos() throws Exception;
 
     @Select("select * from AnnouncementInfo where plate_id = #{plate_id} and district_id is null order by id DESC")

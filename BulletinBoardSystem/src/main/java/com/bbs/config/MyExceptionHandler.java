@@ -1,5 +1,7 @@
 package com.bbs.config;
 
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -26,7 +28,13 @@ public class MyExceptionHandler implements HandlerExceptionResolver {
         } else if (ex instanceof UnauthorizedException) {
             attributes.put("code", "1000002");
             attributes.put("msg", "用户无权限");
-        } else {
+        } else if (ex instanceof UnknownAccountException){
+            attributes.put("code", "1000001");
+            attributes.put("msg", "账号不存在");
+        } else if (ex instanceof IncorrectCredentialsException){
+            attributes.put("code", "1000001");
+            attributes.put("msg", "密码错误");
+        }else {
             ex.printStackTrace();
             attributes.put("code", "1000003");
             attributes.put("msg", ex.getMessage());
