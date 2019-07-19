@@ -33,7 +33,18 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
 
     @Override
     public AnnouncementInfo getRecentAnnouncement(int plate_id, int district_id) throws Exception{
-        return announcementInfoDao.getRecentAnnouncement(plate_id, district_id);
+        if (plate_id == 0 & district_id == 0){
+            return announcementInfoDao.getRecentAnnouncement(plate_id, district_id);
+        }else if(plate_id != 0){
+            List<AnnouncementInfo> ls = announcementInfoDao.getAnnounceInfosByPlateId(plate_id);
+            if (ls.size() > 0)
+                return ls.get(0);
+        }else{
+            List<AnnouncementInfo> ls = announcementInfoDao.getAnnounceInfosBydistrictId(district_id);
+            if (ls.size() > 0)
+                return ls.get(0);
+        }
+        return null;
     }
 
 
@@ -41,7 +52,12 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
     @Override
     public void addAnnouncementInfo(AnnouncementInfo announcementInfo) throws Exception{
         announcementInfo.setPost_time(new Date());
-        announcementInfoDao.addAnnouncementInfo(announcementInfo);
+        if (announcementInfo.getPlate_id() == 0 & announcementInfo.getDistrict_id() == 0){
+            announcementInfoDao.addAnnouncementInfo(announcementInfo);
+        }else if (announcementInfo.getPlate_id() != 0){
+            announcementInfoDao.addPlateAnnInfo(announcementInfo);
+        }else
+            announcementInfoDao.addDisAnnInfo(announcementInfo);
     }
 
     @Override
@@ -65,7 +81,7 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
     @Override
     public PageInfo<AnnouncementInfo> getAnnounceInfos(int plate_id, int page, int size) throws Exception {
         PageHelper.startPage(page, size);
-        List<AnnouncementInfo> ls2 = announcementInfoDao.getAnnounceInfosByPlateId(plate_id, -1);
+        List<AnnouncementInfo> ls2 = announcementInfoDao.getAnnounceInfosByPlateId(plate_id);
         for (AnnouncementInfo info : ls2){
             info.setUserBaseInfo(userBaseInfoDao.getUserBaseInfoByUserId(info.getOwner()));
         }
@@ -78,7 +94,7 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
     @Override
     public PageInfo<AnnouncementInfo> getAnnounceInfos2(int district_id, int page, int size) throws Exception {
         PageHelper.startPage(page, size);
-        List<AnnouncementInfo> ls2 = announcementInfoDao.getAnnounceInfosByPlateId(-1, district_id);
+        List<AnnouncementInfo> ls2 = announcementInfoDao.getAnnounceInfosBydistrictId(district_id);
         for (AnnouncementInfo info : ls2){
             info.setUserBaseInfo(userBaseInfoDao.getUserBaseInfoByUserId(info.getOwner()));
         }
@@ -96,5 +112,29 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
         sb.deleteCharAt(sb.length()-1);
         String s = sb.toString();
         announcementInfoDao.batchDelete(s);
+    }
+
+    @Override
+    public PageInfo<AnnouncementInfo> getAnnInfos(int page, int size) throws Exception {
+        PageHelper.startPage(page, size);
+        List<AnnouncementInfo> ls2 = announcementInfoDao.getAnnInfos();
+        for (AnnouncementInfo info : ls2){
+            info.setUserBaseInfo(userBaseInfoDao.getUserBaseInfoByUserId(info.getOwner()));
+        }
+        PageInfo<AnnouncementInfo> pageInfoDemo = new PageInfo<AnnouncementInfo>(ls2);
+
+        return pageInfoDemo;
+    }
+
+    @Override
+    public PageInfo<AnnouncementInfo> getAnnByColumName(String colum_name, int value, int page, int size) throws Exception {
+        PageHelper.startPage(page, size);
+        List<AnnouncementInfo> ls2 = announcementInfoDao.getAnnByColumName(colum_name, value);
+        for (AnnouncementInfo info : ls2){
+            info.setUserBaseInfo(userBaseInfoDao.getUserBaseInfoByUserId(info.getOwner()));
+        }
+        PageInfo<AnnouncementInfo> pageInfoDemo = new PageInfo<AnnouncementInfo>(ls2);
+
+        return pageInfoDemo;
     }
 }

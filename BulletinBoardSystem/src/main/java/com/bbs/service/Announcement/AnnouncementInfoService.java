@@ -19,4 +19,8 @@ public interface AnnouncementInfoService {
     PageInfo<AnnouncementInfo> getAnnounceInfos2(int district_id, int page, int size) throws Exception;
 
     void batchDelete(List<AnnouncementInfo> ls) throws Exception;
+
+    PageInfo<AnnouncementInfo> getAnnInfos(int page, int size) throws Exception;
+
+    PageInfo<AnnouncementInfo> getAnnByColumName(String colum_name, int value, int page, int size) throws Exception;
 }

@@ -49,6 +49,32 @@ public class Announcement {
         return map;
     }
 
+    @RequestMapping(value = "/getAnnByDis", method = RequestMethod.GET)
+    public Map getPostTitlesByDis(int plate_id, int district_id, int page, int size) {
+        System.out.println("调用getAnnByDis方法");
+        Map<String, Object> map = new HashMap<>();
+        try {
+            PageInfo pageObj = new PageInfo();
+            if (plate_id == 0 & district_id == 0){
+                pageObj = announcementInfoService.getAnnInfos(page, size);
+            }else if (plate_id == 0){
+                pageObj = announcementInfoService.getAnnByColumName("district_id", district_id, page, size);
+            }else {
+                pageObj = announcementInfoService.getAnnByColumName("plate_id", plate_id, page, size);
+            }
+            List<Map<String, Object>> ls = pageObj.getList();
+            map.put("data", ls);
+            map.put("code", "200");
+            map.put("msg", "获取数据成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("code", "500");
+            map.put("msg", "获取数据失败");
+        }
+        return map;
+    }
+
+
     @RequestMapping(value = "/searchAnn", method = RequestMethod.POST)
     public Map searchAnnByPlate(int page, int size) {
         System.out.println("调用searchAnnByPlate方法");
@@ -113,7 +139,7 @@ public class Announcement {
     }
 
     @RequiresPermissions("deleteAnnouncement")
-    @RequestMapping(value = "/deteleAnnouncement", method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteAnnouncement", method = RequestMethod.POST)
     public Map deteleAnnouncement(@RequestBody List<AnnouncementInfo> ls){
         System.out.println("删除公告");
         Map<String,Object> map=new HashMap<>();

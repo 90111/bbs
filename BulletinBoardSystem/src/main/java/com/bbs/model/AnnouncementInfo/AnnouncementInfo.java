@@ -7,8 +7,8 @@ import java.util.Date;
 public class AnnouncementInfo {
     private int id;
     private int owner;
-    private int plate_id=-1;
-    private int district_id=-1;
+    private int plate_id=0;
+    private int district_id=0;
     private String plate_name;
     private String district_name;
     private Date post_time;

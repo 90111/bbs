@@ -38,14 +38,14 @@ public class AnnouncementController {
             map.put("topAnnouncement",announcementInfo);
             if(announcementInfo != null){
                 map.put("userInfo", userBaseInfoService.getUserBaseInfoByUserId(announcementInfo.getOwner()));
-                int districtId = -1;
+                int districtId = 0;
                 districtId = announcementInfo.getDistrict_id();
-                int plateId = -1;
+                int plateId = 0;
                 plateId = announcementInfo.getPlate_id();
-                if (districtId != -1){
+                if (districtId != 0){
                     map.put("district_name", districtInfoService.getDistrictInfo(districtId).getDistrict_name());
                 }
-                if(plateId != -1){
+                if(plateId != 0){
                     map.put("plate_name", plateInfoService.getPlateInfo(plate_id).getPlate_name());
                 }
             }
