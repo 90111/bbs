@@ -61,6 +61,7 @@ public class MessageController {
             data.put("total", messageInfoInfoService.getMessageNum(user_id));
             data.put("system", messageInfoInfoService.getMessageNumByType(user_id, 9));
             data.put("post", messageInfoInfoService.getMessageNumByType(user_id, 10));
+            data.put("reply", messageInfoInfoService.getMessageNumByType(user_id, 11));
             map.put("data", data);
             map.put("code", "200");
             map.put("msg", "获取信息成功");

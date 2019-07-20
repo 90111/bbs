@@ -66,7 +66,7 @@ public class ReplyInfoController {
                 info.setSend_user_id(user_id);
                 info.setReceive_user_id(postTitleInfoService.getPostTitleById(replyInfo.getPost_title_id()).getOwner());
                 StringBuilder sb = new StringBuilder();
-                sb.append(replyInfo.getContent()+">"+replyInfo.getPost_title_id());
+                sb.append(replyInfo.getContent()+"&"+replyInfo.getPost_title_id());
                 info.setContent(sb.toString());
                 info.setType(11);
                 messageInfoInfoService.addMessage(info);

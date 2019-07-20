@@ -40,11 +40,12 @@ public class MessageInfoInfoServiceImpl implements MessageInfoService {
         PageHelper.startPage(page, size);
         for (MessageInfo info : ls){
             info.setUserBaseInfo(userBaseInfoDao.getUserBaseInfoByUserId(info.getSend_user_id()));
-            String[] s = info.getContent().split("\\>");
+            String[] s = info.getContent().split("\\&");
             if (s.length > 1){
-                info.setContent(s[0]+">");
+                info.setContent(s[0]);
                 PostTitleInfo postTitleInfo = new PostTitleInfo();
                 postTitleInfo = postTitleInfoDao.getPostTitleById(Integer.parseInt(s[s.length-1]));
+                postTitleInfo.setContent("");
                 info.setPostTitleInfo(postTitleInfo);
             }
         }

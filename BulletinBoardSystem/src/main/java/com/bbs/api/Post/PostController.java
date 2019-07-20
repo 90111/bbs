@@ -207,7 +207,7 @@ public class PostController {
                 info.setSend_user_id(user_id);
                 info.setType(9);
                 StringBuilder sb = new StringBuilder();
-                sb.append("点赞了你的帖子<" + postTitleInfo.getTitle() + ">").append(postTitleInfo.getId());
+                sb.append("点赞了你的帖子<" + postTitleInfo.getTitle() + ">&").append(postTitleInfo.getId());
                 info.setContent(sb.toString());
                 messageInfoInfoService.addMessage(info);
             }
@@ -238,7 +238,7 @@ public class PostController {
                 info.setReceive_user_id(postTitleInfo.getOwner());
                 info.setSend_user_id(user_id);
                 StringBuilder sb = new StringBuilder();
-                sb.append("收藏了你的帖子<" + postTitleInfo.getTitle()+ ">").append(postTitleInfo.getId());
+                sb.append("收藏了你的帖子<" + postTitleInfo.getTitle()+ ">&").append(postTitleInfo.getId());
                 info.setType(9);
                 info.setContent(sb.toString());
                 messageInfoInfoService.addMessage(info);

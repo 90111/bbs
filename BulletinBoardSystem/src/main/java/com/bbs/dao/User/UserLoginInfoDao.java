@@ -49,4 +49,7 @@ public interface UserLoginInfoDao {
     //获取当日发帖数据
     @Select("SELECT COUNT(id) FROM UserLoginInfo WHERE DATE(regist_time)=CURDATE()")
     int selectRegistNowNum() throws Exception;
+
+//    @Select("select DATE_FORMAT(regist_time,'%Y年%m月%d日') AS time,count(*) from UserLoginInfo WHERE DATE_FORMAT(regist_time,'%Y%m') = DATE_FORMAT(CURDATE( ), '%Y%m' ) group by time ORDER BY time")
+//    List<UserLoginInfo> getAllRegist_time throws Exception;
 }
