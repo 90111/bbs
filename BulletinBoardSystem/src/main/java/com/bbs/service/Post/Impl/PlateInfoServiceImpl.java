@@ -84,4 +84,9 @@ public class PlateInfoServiceImpl implements PlateInfoService {
         return ls;
     }
 
+    @Override
+    public int getPlateNum() throws Exception {
+        return plateInfoDao.getPlateNum();
+    }
+
 }

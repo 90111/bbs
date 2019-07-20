@@ -2,6 +2,7 @@ package com.bbs.service.Post;
 
 import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.model.User.DistrictModeratorInfo;
+import com.bbs.model.User.NumInfo;
 import com.bbs.model.User.UserCollectionInfo;
 import com.github.pagehelper.PageInfo;
 
@@ -47,4 +48,7 @@ public interface PostTitleInfoService {
 
     int selectPostNowNum() throws Exception;
 
+    int getPostNum() throws Exception;
+
+    List<NumInfo> getAllRegist_time() throws Exception;
 }

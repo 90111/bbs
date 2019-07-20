@@ -30,4 +30,8 @@ public interface DistrictInfoDao {
 
     @Delete("DELETE FROM DistrictInfo WHERE id = #{id}")
     void deleteDistrictInfo(int id) throws Exception;
+
+    @Select("select count(*) from DistrictInfo")
+    int getDistrictNum() throws Exception;
+
 }

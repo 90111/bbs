@@ -1,5 +1,6 @@
 package com.bbs.service.User;
 
+import com.bbs.model.User.NumInfo;
 import com.bbs.model.User.RoleInfo;
 import com.bbs.model.User.UserLoginInfo;
 import com.github.pagehelper.PageInfo;
@@ -26,7 +27,9 @@ public interface UserLoginInfoService {
 
     List<RoleInfo> getRole(int user_id) throws Exception;
 
+    int GetUserNum() throws Exception;
+
     int selectRegistNowNum() throws Exception;
 
-    List<UserLoginInfo> getAllRegist_time() throws Exception;
+    List<NumInfo> getAllRegist_time() throws Exception;
 }

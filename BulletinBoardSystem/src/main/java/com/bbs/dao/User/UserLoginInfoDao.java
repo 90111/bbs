@@ -1,6 +1,7 @@
 package com.bbs.dao.User;
 
 import com.bbs.model.User.FunctionInfo;
+import com.bbs.model.User.NumInfo;
 import com.bbs.model.User.RoleInfo;
 import com.bbs.model.User.UserLoginInfo;
 import org.apache.ibatis.annotations.*;
@@ -50,7 +51,11 @@ public interface UserLoginInfoDao {
     @Select("SELECT COUNT(id) FROM UserLoginInfo WHERE DATE(regist_time)=CURDATE()")
     int selectRegistNowNum() throws Exception;
 
-    @Select("select regist_time,count(*) as id from UserLoginInfo WHERE " +
-            "DATE_FORMAT(regist_time,'%Y%m') = DATE_FORMAT(CURDATE( ), '%Y%m' ) group by regist_time ORDER BY regist_time")
-    List<UserLoginInfo> getAllRegist_time() throws Exception;
+//    @Select("select regist_time as time,count(*) as num from UserLoginInfo WHERE " +
+//            "DATE_FORMAT(regist_time,'%Y%m') = DATE_FORMAT(CURDATE( ), '%Y%m' ) group by regist_time ORDER BY regist_time")
+    @Select("SELECT COUNT(*)as num,`regist_time` FROM `UserLoginInfo` group by date_format(`regist_time`,'%Y-%M-%D') limit 30")
+    List<NumInfo> getAllRegist_time() throws Exception;
+
+    @Select("select count(*) from UserLoginInfo")
+    int GetUserNum() throws Exception;
 }

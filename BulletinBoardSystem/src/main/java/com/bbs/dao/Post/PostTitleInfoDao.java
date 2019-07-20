@@ -1,6 +1,7 @@
 package com.bbs.dao.Post;
 
 import com.bbs.model.Post.PostTitleInfo;
+import com.bbs.model.User.NumInfo;
 import com.bbs.model.User.UserCollectionInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
@@ -120,4 +121,13 @@ public interface PostTitleInfoDao {
             "and DistrictInfo.id in (${s1}) and ${colum_name} like #{s}")
     List<PostTitleInfo> ls(@Param("colum_name")String colum_name, String s, @Param("s1") String s1) throws Exception;
 
+
+    @Select("select count(*) from PostTitleInfo")
+    int getPostNum() throws Exception;
+
+
+//    @Select("select post_time as time,count(*) as num from PostTitleInfo WHERE " +
+//            "DATE_FORMAT(post_time,'%Y%m') = DATE_FORMAT(CURDATE( ), '%Y%m' ) group by post_time ORDER BY post_time")
+    @Select("SELECT COUNT(*)as num,`post_time` FROM `PostTitleInfo` group by date_format(`post_time`,'%Y-%M-%D') limit 30")
+    List<NumInfo> getAllPost_time() throws Exception;
 }

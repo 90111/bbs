@@ -10,6 +10,7 @@ import com.bbs.dao.User.UserLikeInfoDao;
 import com.bbs.dao.User.UserLoginInfoDao;
 import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.model.User.DistrictModeratorInfo;
+import com.bbs.model.User.NumInfo;
 import com.bbs.model.User.UserCollectionInfo;
 import com.bbs.service.Post.PostTitleInfoService;
 import com.github.pagehelper.Page;
@@ -223,6 +224,16 @@ public class PostTitleInfoServiceImpl implements PostTitleInfoService {
     @Override
     public int selectPostNowNum() throws Exception{
         return postTitleInfoDao.selectPostNowNum();
+    }
+
+    @Override
+    public int getPostNum() throws Exception {
+        return postTitleInfoDao.getPostNum();
+    }
+
+    @Override
+    public List<NumInfo> getAllRegist_time() throws Exception {
+        return postTitleInfoDao.getAllPost_time();
     }
 
 }

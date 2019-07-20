@@ -23,5 +23,7 @@ public interface PlateInfoService {
 
     List<PlateInfo> getPlatesById(List<DistrictModeratorInfo> districtModeratorInfos) throws Exception;
 
+    int getPlateNum() throws Exception;
+
 
 }

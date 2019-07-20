@@ -18,4 +18,6 @@ public interface DistrictInfoService {
     void deleteDistrictInfo(int id) throws Exception;
 
     DistrictInfo getDistrictByPlateAndName(int plate_id, String name) throws Exception;
+
+    int getDistrictNum() throws Exception;
 }

@@ -45,4 +45,9 @@ public class DistrictInfoServiceImpl implements DistrictInfoService {
     public DistrictInfo getDistrictByPlateAndName(int plate_id, String name) throws Exception {
         return districtInfoDao.getDistrictByPlateAndName(plate_id, name);
     }
+
+    @Override
+    public int getDistrictNum() throws Exception {
+        return districtInfoDao.getDistrictNum();
+    }
 }

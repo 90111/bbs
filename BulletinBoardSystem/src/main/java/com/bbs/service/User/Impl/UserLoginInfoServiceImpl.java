@@ -6,6 +6,7 @@ import com.bbs.dao.User.RoleUserInfoDao;
 import com.bbs.dao.User.UserBaseInfoDao;
 import com.bbs.dao.User.UserLoginInfoDao;
 import com.bbs.model.Post.PostTitleInfo;
+import com.bbs.model.User.NumInfo;
 import com.bbs.model.User.RoleInfo;
 import com.bbs.model.User.RoleUserInfo;
 import com.bbs.model.User.UserLoginInfo;
@@ -112,12 +113,17 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService {
     }
 
     @Override
+    public int GetUserNum() throws Exception {
+        return userLoginInfoDao.GetUserNum();
+    }
+
+    @Override
     public int selectRegistNowNum() throws Exception {
         return userLoginInfoDao.selectRegistNowNum();
     }
 
     @Override
-    public List<UserLoginInfo> getAllRegist_time() throws Exception {
+    public List<NumInfo> getAllRegist_time() throws Exception {
         return userLoginInfoDao.getAllRegist_time();
     }
 }
