@@ -115,4 +115,9 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService {
     public int selectRegistNowNum() throws Exception {
         return userLoginInfoDao.selectRegistNowNum();
     }
+
+    @Override
+    public List<UserLoginInfo> getAllRegist_time() throws Exception {
+        return userLoginInfoDao.getAllRegist_time();
+    }
 }

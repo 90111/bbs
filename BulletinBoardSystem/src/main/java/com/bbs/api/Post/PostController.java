@@ -59,7 +59,7 @@ public class PostController {
 
     @RequestMapping(value = "/getPostTitles", method = RequestMethod.GET)
     public Map getPostTitlesByDistrictId(int id, String orderby, int page, int size) {
-        System.out.println("调用getPostTitlesByDistrictId方法");
+//        System.out.println("调用getPostTitlesByDistrictId方法");
         Map<String, Object> map = new HashMap<>();
         try {
             PageInfo pageObj = postInfoService.getPostTitleInfos(id, orderby, page, size);
@@ -80,7 +80,7 @@ public class PostController {
      */
     @RequestMapping(value = "/getPostTitleContent", method = RequestMethod.GET)
     public Map getPostTitleContent(int id) throws Exception {
-        System.out.println("调用getPostTitleContent");
+//        System.out.println("调用getPostTitleContent");
         Map<String, Object> map = new HashMap<>();
         Subject currentUser = SecurityUtils.getSubject();
         int user_id = -1;
@@ -134,7 +134,7 @@ public class PostController {
     @RequiresAuthentication
     @RequestMapping(value = "/addPostTitle", method = RequestMethod.POST)
     public Map addPostTitleInfo(@RequestBody PostTitleInfo postTitleInfo) {
-        System.out.println("调用addPostTitleInfo方法");
+//        System.out.println("调用addPostTitleInfo方法");
         Map<String, Object> map = new HashMap();
         Subject current = SecurityUtils.getSubject();
         try {

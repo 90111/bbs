@@ -1,5 +1,6 @@
 package com.bbs.model.User;
 
+import java.util.Date;
 import java.util.List;
 
 public class UserLoginInfo {
@@ -9,8 +10,17 @@ public class UserLoginInfo {
     private String user_name;
     private String password;
     private String mail;
+    private Date regist_time;
     private List<RoleInfo> roleInfos;
     private UserBaseInfo userBaseInfo;
+
+    public Date getRegist_time() {
+        return regist_time;
+    }
+
+    public void setRegist_time(Date regist_time) {
+        this.regist_time = regist_time;
+    }
 
     public UserBaseInfo getUserBaseInfo() {
         return userBaseInfo;

@@ -3,11 +3,13 @@ package com.bbs.api.Admin;
 import com.bbs.dao.User.UserCollectionInfoDao;
 import com.bbs.dao.User.UserLikeInfoDao;
 import com.bbs.dao.User.UserLoginInfoDao;
+import com.bbs.model.User.UserLoginInfo;
 import com.bbs.service.Post.Impl.PostTitleInfoServiceImpl;
 import com.bbs.service.Post.Impl.ReplyInfoServiceImpl;
 import com.bbs.service.User.Impl.UserCollectionInfoServiceImpl;
 import com.bbs.service.User.Impl.UserLikeInfoServiceImpl;
 import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
+import com.bbs.service.User.UserLoginInfoService;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -48,13 +51,13 @@ public class Home {
             int postNum=postTitleInfoService.selectPostNowNum();
             int likeNum=userLikeInfoService.selectLikeNowNum();
             int collectNum=userCollectionInfoService.selectCollectNowNum();
-            int registNum=userLoginInfoService.selectRegistNowNum();
+            List<UserLoginInfo> registNumList = userLoginInfoService.getAllRegist_time();
             Map<String, Object> m1 = new HashMap<>();
             m1.put("replyNum", replyNum);
             m1.put("postNum", postNum);
             m1.put("likeNum", likeNum);
             m1.put("collectNum", collectNum);
-            m1.put("registNum", registNum);
+            m1.put("registNumList", registNumList);
             map.put("data",m1);
             map.put("code",200);
             map.put("msg", "成功");

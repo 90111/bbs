@@ -28,4 +28,5 @@ public interface UserLoginInfoService {
 
     int selectRegistNowNum() throws Exception;
 
+    List<UserLoginInfo> getAllRegist_time() throws Exception;
 }
