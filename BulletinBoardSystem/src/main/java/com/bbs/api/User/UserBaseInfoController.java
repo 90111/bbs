@@ -1,6 +1,7 @@
 package com.bbs.api.User;
 
 
+import com.bbs.model.Message.MessageInfo;
 import com.bbs.model.Post.PostTitleInfo;
 import com.bbs.model.User.UserBaseInfo;
 import com.bbs.model.User.UserCollectionInfo;
@@ -47,6 +48,9 @@ public class UserBaseInfoController {
     @Autowired
     private MessageInfoInfoServiceImpl messageInfoInfoService;
 
+    @Autowired
+    private UserBaseInfoServiceImpl userBaseInfoService;
+
     /*
     参数id为user_id
      */
@@ -74,7 +78,7 @@ public class UserBaseInfoController {
     @RequiresAuthentication
     @RequestMapping(value = "/updateBaseInfo", method = RequestMethod.POST)
     public Map updateBaseInfo(@RequestBody UserBaseInfo userBaseInfo) {
-        System.out.println("调用updateBaseInfo方法");
+//        System.out.println("调用updateBaseInfo方法");
         Map<String, Object> map = new HashMap<>();
         Subject currentUser = SecurityUtils.getSubject();
         try {
@@ -94,7 +98,7 @@ public class UserBaseInfoController {
     @RequestMapping(value = "/userPostTitles", method = RequestMethod.POST)
     public Map getUserPostTitle(int id) {
         Map<String, Object> map = new HashMap<>();
-        System.out.println("调用getUserPostTitles方法");
+//        System.out.println("调用getUserPostTitles方法");
         Subject currentUser = SecurityUtils.getSubject();
         try {
             List<PostTitleInfo> ls = postTitleInfoService.getUserPostTitleByUserId(id);
@@ -119,14 +123,15 @@ public class UserBaseInfoController {
     @RequestMapping(value = "/UserCollection", method = RequestMethod.POST)
     public Map getUserCollection(int id) {
         Map<String, Object> map = new HashMap<>();
-        System.out.println("调用getUserCollection方法");
+//        System.out.println("调用getUserCollection方法");
         Subject currentUser = SecurityUtils.getSubject();
         try {
             List<UserCollectionInfo> ls = postTitleInfoService.getUserCollection(id);
             if (currentUser.isAuthenticated()) {
+                int user_id = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal()).getId();
                 for (UserCollectionInfo info : ls) {
-                    info.setLiked(userLikeInfoService.checkIsLike(id, info.getPost_title_id()));
-                    info.setCollected(userCollectionInfoService.checkIsCollected(id, info.getPost_title_id()));
+                    info.setLiked(userLikeInfoService.checkIsLike(user_id, info.getPost_title_id()));
+                    info.setCollected(userCollectionInfoService.checkIsCollected(user_id, info.getPost_title_id()));
                 }
             }
             map.put("code", "200");
@@ -143,7 +148,7 @@ public class UserBaseInfoController {
     @RequiresAuthentication
     @RequestMapping(value = "/deletePost", method = RequestMethod.POST)
     public Map deletePostTitleById(int post_title_id) throws Exception {
-        System.out.println("调用deletePostTitleById方法");
+//        System.out.println("调用deletePostTitleById方法");
         Map<String, Object> map = new HashMap<>();
         Subject currentUser = SecurityUtils.getSubject();
         String username = (String) currentUser.getPrincipal();
@@ -171,13 +176,18 @@ public class UserBaseInfoController {
     @RequiresAuthentication
     @RequestMapping(value = "/followed", method = RequestMethod.GET)
     public Map followed(int follow_id) {
-        System.out.println("调用followed方法");
+//        System.out.println("调用followed方法");
         Map<String, Object> map = new HashMap<>();
         Subject currentUser = SecurityUtils.getSubject();
         try {
             int user_id = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal()).getId();
             userFollowInfoService.changeFollowed(user_id, follow_id);
-            messageInfoInfoService.addMessage(user_id, follow_id);
+            MessageInfo info = new MessageInfo();
+            info.setReceive_user_id(follow_id);
+            info.setSend_user_id(user_id);
+            info.setContent("关注了你");
+            info.setType(9);
+            messageInfoInfoService.addMessage(info);
             map.put("code", "200");
             map.put("msg", "操作成功");
         } catch (Exception e) {
@@ -191,7 +201,7 @@ public class UserBaseInfoController {
     @RequiresAuthentication
     @RequestMapping(value = "/getFollowList", method = RequestMethod.GET)
     public Map getFollowList(int user_id) {
-        System.out.println("调用getFollowList方法");
+//        System.out.println("调用getFollowList方法");
         Map<String, Object> map = new HashMap<>();
         try {
             List<UserBaseInfo> ls = baseInfoService.getFollowList(user_id);
@@ -209,7 +219,7 @@ public class UserBaseInfoController {
     @RequiresAuthentication
     @RequestMapping(value = "/getFansList", method = RequestMethod.GET)
     public Map getFansList(int user_id) {
-        System.out.println("调用getFansList方法");
+//        System.out.println("调用getFansList方法");
         Map<String, Object> map = new HashMap<>();
         try {
             List<UserBaseInfo> ls = baseInfoService.getFansList(user_id);

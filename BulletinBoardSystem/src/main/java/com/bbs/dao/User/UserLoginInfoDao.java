@@ -45,4 +45,8 @@ public interface UserLoginInfoDao {
 
     @Select("select * from UserLoginInfo, UserBaseInfo where ${colum_name} like #{s} and UserLoginInfo.id=UserBaseInfo.user_id")
     List<UserLoginInfo> getUserLoginInfoByColum(String colum_name,  String s) throws Exception;
+
+    //获取当日发帖数据
+    @Select("SELECT COUNT(id) FROM UserLoginInfo WHERE DATE(regist_time)=CURDATE()")
+    int selectRegistNowNum() throws Exception;
 }

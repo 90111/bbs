@@ -110,4 +110,9 @@ public class UserLoginInfoServiceImpl implements UserLoginInfoService {
     public List<RoleInfo> getRole(int user_id) throws Exception {
         return roleInfoDao.getRoles(roleUserInfoDao.getRoleUserInfo(user_id).getRole_info_id());
     }
+
+    @Override
+    public int selectRegistNowNum() throws Exception {
+        return userLoginInfoDao.selectRegistNowNum();
+    }
 }

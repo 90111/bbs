@@ -1,7 +1,10 @@
 package com.bbs.api.Post;
 
 
+import com.bbs.model.Message.MessageInfo;
 import com.bbs.model.Post.ReplyInfo;
+import com.bbs.service.Message.Impl.MessageInfoInfoServiceImpl;
+import com.bbs.service.Post.Impl.PostTitleInfoServiceImpl;
 import com.bbs.service.Post.Impl.ReplyInfoServiceImpl;
 import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
 import org.apache.shiro.SecurityUtils;
@@ -27,9 +30,15 @@ public class ReplyInfoController {
     @Autowired
     private UserLoginInfoServiceImpl userLoginInfoService;
 
+    @Autowired
+    private MessageInfoInfoServiceImpl messageInfoInfoService;
+
+    @Autowired
+    private PostTitleInfoServiceImpl postTitleInfoService;
+
     @RequestMapping(value = "/replyInfo/viewReplyInfo", method = RequestMethod.GET)
     public Map<String, Object> viewReplyInfo(int post_title_id) {
-        System.out.println("调用viewReplyInfo方法");
+//        System.out.println("调用viewReplyInfo方法");
         Map<String, Object> map = new HashMap<>();
         try {
             map.put("ReplyInfos", replyInfoService.getReplyInfos(post_title_id));
@@ -45,7 +54,7 @@ public class ReplyInfoController {
     @RequiresAuthentication
     @RequestMapping(value = "replyInfo/addReplyInfo", method = RequestMethod.POST)
     public Map addReplyInfo(@RequestBody ReplyInfo replyInfo) {
-        System.out.println("调用addReplyInfo方法");
+//        System.out.println("调用addReplyInfo方法");
         Map<String, Object> map = new HashMap<>();
         Subject currentUser = SecurityUtils.getSubject();
         if (currentUser.isAuthenticated()) {
@@ -53,9 +62,18 @@ public class ReplyInfoController {
                 int user_id = userLoginInfoService.getUserLoginInfoByName((String) currentUser.getPrincipal()).getId();
                 replyInfo.setUser_id(user_id);
                 replyInfoService.addReplyInfoService(replyInfo);
+                MessageInfo info = new MessageInfo();
+                info.setSend_user_id(user_id);
+                info.setReceive_user_id(postTitleInfoService.getPostTitleById(replyInfo.getPost_title_id()).getOwner());
+                StringBuilder sb = new StringBuilder();
+                sb.append(replyInfo.getContent()+">"+replyInfo.getPost_title_id());
+                info.setContent(sb.toString());
+                info.setType(11);
+                messageInfoInfoService.addMessage(info);
                 map.put("code", "200");
                 map.put("msg", "回复成功");
             } catch (Exception e) {
+                e.printStackTrace();
                 map.put("code", "500");
                 map.put("msg", "回复失败");
             }

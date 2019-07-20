@@ -26,4 +26,6 @@ public interface UserLoginInfoService {
 
     List<RoleInfo> getRole(int user_id) throws Exception;
 
+    int selectRegistNowNum() throws Exception;
+
 }

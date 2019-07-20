@@ -56,7 +56,7 @@ public class Announcement {
         try {
             PageInfo pageObj = new PageInfo();
             if (plate_id == 0 & district_id == 0){
-                pageObj = announcementInfoService.getAnnInfos(page, size);
+                pageObj = announcementInfoService.getAnnounceInfos(page, size);
             }else if (plate_id == 0){
                 pageObj = announcementInfoService.getAnnByColumName("district_id", district_id, page, size);
             }else {

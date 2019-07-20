@@ -1,5 +1,8 @@
 package com.bbs.model.Message;
 
+import com.bbs.model.Post.PostTitleInfo;
+import com.bbs.model.User.UserBaseInfo;
+
 import java.util.Date;
 
 public class MessageInfo {
@@ -8,6 +11,43 @@ public class MessageInfo {
     private int receive_user_id;
     private Date send_time;
     private String content;
+    private int state;
+    private UserBaseInfo userBaseInfo;
+    private PostTitleInfo postTitleInfo;
+
+    public PostTitleInfo getPostTitleInfo() {
+        return postTitleInfo;
+    }
+
+    public void setPostTitleInfo(PostTitleInfo postTitleInfo) {
+        this.postTitleInfo = postTitleInfo;
+    }
+
+    public UserBaseInfo getUserBaseInfo() {
+        return userBaseInfo;
+    }
+
+    public void setUserBaseInfo(UserBaseInfo userBaseInfo) {
+        this.userBaseInfo = userBaseInfo;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    private int type;
 
     public int getId(){return id;}
     public void setId(int id){this.id=id;}

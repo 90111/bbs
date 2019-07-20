@@ -1,7 +1,10 @@
 package com.bbs.api.Post;
 
+import com.bbs.model.Message.MessageInfo;
 import com.bbs.model.Post.DistrictInfo;
 import com.bbs.model.Post.PostTitleInfo;
+import com.bbs.model.User.UserBaseInfo;
+import com.bbs.service.Message.Impl.MessageInfoInfoServiceImpl;
 import com.bbs.service.Post.DistrictInfoService;
 import com.bbs.service.Post.Impl.DistrictInfoServiceImpl;
 import com.bbs.service.Post.Impl.PlateInfoServiceImpl;
@@ -10,6 +13,7 @@ import com.bbs.service.User.Impl.UserCollectionInfoServiceImpl;
 import com.bbs.service.User.Impl.UserLikeInfoServiceImpl;
 import com.bbs.service.User.Impl.UserBaseInfoServiceImpl;
 import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
+import com.bbs.util.sensitiveWord.SensitiveWord;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
@@ -48,6 +52,9 @@ public class PostController {
 
     @Autowired
     private PlateInfoServiceImpl plateInfoService;
+
+    @Autowired
+    private MessageInfoInfoServiceImpl messageInfoInfoService;
 
 
     @RequestMapping(value = "/getPostTitles", method = RequestMethod.GET)
@@ -105,7 +112,7 @@ public class PostController {
 
     @RequestMapping(value = "/getIndexPostTitles", method = RequestMethod.GET)
     public Map getIndexPostTitles(int page, int size) {
-        System.out.println("调用getIndexPostTitles方法");
+//        System.out.println("调用getIndexPostTitles方法");
         Map<String, Object> map = new HashMap<>();
         try {
             PageInfo pageObj = postInfoService.getPostTitleInfosByTime("post_time", page, size);
@@ -131,9 +138,24 @@ public class PostController {
         Map<String, Object> map = new HashMap();
         Subject current = SecurityUtils.getSubject();
         try {
+            long startNumer = System.currentTimeMillis();
+            String str = postTitleInfo.getContent();
+            boolean flag = SensitiveWord.checkSenstiveWord(str);
+//            System.out.println("字符串的长度为:" + str.length());
+            str = SensitiveWord.filterInfoAfter(str);
+//            System.out.println("含有敏感词汇:" + flag);
+            long endNumber = System.currentTimeMillis();
+//            System.out.println("消耗时间为" + (endNumber - startNumer) + "ms");
+//            System.out.println("转换后的字符串为:\n" + str);
+            postTitleInfo.setContent(str);
             int user_id = userLoginInfoService.getUserLoginInfoByName((String) current.getPrincipal()).getId();
             postTitleInfo.setOwner(user_id);
             postInfoService.addPostTitleInfo(postTitleInfo);
+            List<UserBaseInfo> ls = userBaseInfoService.getFansList(user_id);
+//            for (UserBaseInfo info : ls){
+//                StringBuilder sb = new StringBuilder();
+//                sb.append("发表了新帖<"+postTitleInfo.getTitle()+">"+postTitleInfo.getId());
+//            }
             map.put("code", "200");
             map.put("msg", "发布帖子成功");
         } catch (Exception e) {
@@ -147,7 +169,7 @@ public class PostController {
     @RequiresAuthentication
     @RequestMapping(value = "/updatePostTitle", method = RequestMethod.POST)
     public Map updatePostTItleInfo(@RequestBody PostTitleInfo postTitleInfo) {
-        System.out.println("调用updatePostTItleInfo方法");
+//        System.out.println("调用updatePostTItleInfo方法");
         Map<String, Object> map = new HashMap();
         Subject current = SecurityUtils.getSubject();
         try {
@@ -171,14 +193,25 @@ public class PostController {
     @RequiresAuthentication
     @RequestMapping(value = "/like", method = RequestMethod.GET)
     public Map addLike(int post_title_id) throws Exception {
-        System.out.println("调用addLike方法");
+//        System.out.println("调用addLike方法");
         Map<String, Object> map = new HashMap<>();
         Subject currentUser = SecurityUtils.getSubject();
         String username = (String) currentUser.getPrincipal();
         int user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
         try {
-            userLikeInfoService.changeLike(user_id, post_title_id);
-            userBaseInfoService.updateUserLikeNum(postInfoService.getPostTitleById(post_title_id).getOwner());
+            boolean flag = userLikeInfoService.changeLike(user_id, post_title_id);
+            PostTitleInfo postTitleInfo = postInfoService.getPostTitleById(post_title_id);
+            if (flag){
+                MessageInfo info = new MessageInfo();
+                info.setReceive_user_id(postTitleInfo.getOwner());
+                info.setSend_user_id(user_id);
+                info.setType(9);
+                StringBuilder sb = new StringBuilder();
+                sb.append("点赞了你的帖子<" + postTitleInfo.getTitle() + ">").append(postTitleInfo.getId());
+                info.setContent(sb.toString());
+                messageInfoInfoService.addMessage(info);
+            }
+            userBaseInfoService.updateUserLikeNum(postTitleInfo.getOwner());
             map.put("code", "200");
             map.put("msg", "操作成功");
         } catch (Exception e) {
@@ -192,13 +225,24 @@ public class PostController {
     @RequiresAuthentication
     @RequestMapping(value = "/collect", method = RequestMethod.GET)
     public Map addCollect(int post_title_id) throws Exception {
-        System.out.println("调用addCollection");
+//        System.out.println("调用addCollection");
         Map<String, Object> map = new HashMap<>();
         Subject currentUser = SecurityUtils.getSubject();
         String username = (String) currentUser.getPrincipal();
         int user_id = userLoginInfoService.getUserLoginInfoByName(username).getId();
         try {
-            userCollectionInfoService.changeCollection(user_id, post_title_id);
+            boolean flag = userCollectionInfoService.changeCollection(user_id, post_title_id);
+            if (flag){
+                MessageInfo info = new MessageInfo();
+                PostTitleInfo postTitleInfo = postInfoService.getPostTitleById(post_title_id);
+                info.setReceive_user_id(postTitleInfo.getOwner());
+                info.setSend_user_id(user_id);
+                StringBuilder sb = new StringBuilder();
+                sb.append("收藏了你的帖子<" + postTitleInfo.getTitle()+ ">").append(postTitleInfo.getId());
+                info.setType(9);
+                info.setContent(sb.toString());
+                messageInfoInfoService.addMessage(info);
+            }
             map.put("code", "200");
             map.put("msg", "操作成功");
         } catch (Exception e) {
@@ -211,7 +255,7 @@ public class PostController {
 
     @RequestMapping(value = "/getGreatPostTitles", method = RequestMethod.GET)
     public Map getGreatPostTitles() {
-        System.out.println("调用getGreatPostTitles方法");
+//        System.out.println("调用getGreatPostTitles方法");
         Map<String, Object> map = new HashMap<>();
         Subject currentUser = SecurityUtils.getSubject();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -264,7 +308,7 @@ public class PostController {
 
     @RequestMapping(value = "/getRecommendPostTitles", method = RequestMethod.GET)
     public Map getRecommendPostTitles(int district_id) {
-        System.out.println("调用getRecommendPostTitles方法");
+//        System.out.println("调用getRecommendPostTitles方法");
         Map<String, Object> map = new HashMap<>();
         Subject currentUser = SecurityUtils.getSubject();
         try {
@@ -290,7 +334,7 @@ public class PostController {
 
     @RequestMapping(value = "/searchPost", method = RequestMethod.GET)
     public Map searchPost(String postTitle) {
-        System.out.println("调用searchPost方法");
+//        System.out.println("调用searchPost方法");
         if (postTitle.isEmpty() || postTitle == null || postTitle.equals("")) {
             return null;
         }

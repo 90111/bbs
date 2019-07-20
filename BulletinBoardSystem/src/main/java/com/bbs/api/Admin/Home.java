@@ -1,7 +1,13 @@
 package com.bbs.api.Admin;
 
+import com.bbs.dao.User.UserCollectionInfoDao;
+import com.bbs.dao.User.UserLikeInfoDao;
+import com.bbs.dao.User.UserLoginInfoDao;
 import com.bbs.service.Post.Impl.PostTitleInfoServiceImpl;
 import com.bbs.service.Post.Impl.ReplyInfoServiceImpl;
+import com.bbs.service.User.Impl.UserCollectionInfoServiceImpl;
+import com.bbs.service.User.Impl.UserLikeInfoServiceImpl;
+import com.bbs.service.User.Impl.UserLoginInfoServiceImpl;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,30 +30,32 @@ public class Home {
     @Autowired
     private PostTitleInfoServiceImpl postTitleInfoService;
 
-    @RequestMapping(value = "/getReplyNowNum",method = RequestMethod.GET)
+    @Autowired
+    private UserCollectionInfoServiceImpl userCollectionInfoService;
+
+    @Autowired
+    private UserLikeInfoServiceImpl userLikeInfoService;
+
+    @Autowired
+    private UserLoginInfoServiceImpl userLoginInfoService;
+
+    @RequestMapping(value = "/getHomeMessage",method = RequestMethod.GET)
     public Map getReplyNowNum(){
         System.out.println("今日回复数");
         Map<String,Object> map=new HashMap<>();
         try {
-            int num=replyInfoService.selectReplyNowNum();
-            map.put("获取今日回复数",num);
-            map.put("code",200);
-            map.put("msg", "成功");
-        }catch (Exception e){
-            e.printStackTrace();
-            map.put("code",500);
-            map.put("msg", "失败");
-        }
-        return map;
-    }
-
-    @RequestMapping(value = "/getPostNowNum",method = RequestMethod.GET)
-    public Map getPostNowNum(){
-        System.out.println("今日发帖数");
-        Map<String,Object> map=new HashMap<>();
-        try {
-            int num=postTitleInfoService.selectPostNowNum();
-            map.put("获取今日发帖数",num);
+            int replyNum=replyInfoService.selectReplyNowNum();
+            int postNum=postTitleInfoService.selectPostNowNum();
+            int likeNum=userLikeInfoService.selectLikeNowNum();
+            int collectNum=userCollectionInfoService.selectCollectNowNum();
+            int registNum=userLoginInfoService.selectRegistNowNum();
+            Map<String, Object> m1 = new HashMap<>();
+            m1.put("replyNum", replyNum);
+            m1.put("postNum", postNum);
+            m1.put("likeNum", likeNum);
+            m1.put("collectNum", collectNum);
+            m1.put("registNum", registNum);
+            map.put("data",m1);
             map.put("code",200);
             map.put("msg", "成功");
         }catch (Exception e){

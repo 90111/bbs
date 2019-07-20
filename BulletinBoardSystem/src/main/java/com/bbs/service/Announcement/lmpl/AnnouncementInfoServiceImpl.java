@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -32,14 +33,14 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
     private UserBaseInfoDao userBaseInfoDao;
 
     @Override
-    public AnnouncementInfo getRecentAnnouncement(int plate_id, int district_id) throws Exception{
-        if (plate_id == 0 & district_id == 0){
+    public AnnouncementInfo getRecentAnnouncement(int plate_id, int district_id) throws Exception {
+        if (plate_id == 0 & district_id == 0) {
             return announcementInfoDao.getRecentAnnouncement(plate_id, district_id);
-        }else if(plate_id != 0){
+        } else if (plate_id != 0) {
             List<AnnouncementInfo> ls = announcementInfoDao.getAnnounceInfosByPlateId(plate_id);
             if (ls.size() > 0)
                 return ls.get(0);
-        }else{
+        } else {
             List<AnnouncementInfo> ls = announcementInfoDao.getAnnounceInfosBydistrictId(district_id);
             if (ls.size() > 0)
                 return ls.get(0);
@@ -48,15 +49,14 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
     }
 
 
-
     @Override
-    public void addAnnouncementInfo(AnnouncementInfo announcementInfo) throws Exception{
+    public void addAnnouncementInfo(AnnouncementInfo announcementInfo) throws Exception {
         announcementInfo.setPost_time(new Date());
-        if (announcementInfo.getPlate_id() == 0 & announcementInfo.getDistrict_id() == 0){
+        if (announcementInfo.getPlate_id() == 0 & announcementInfo.getDistrict_id() == 0) {
             announcementInfoDao.addAnnouncementInfo(announcementInfo);
-        }else if (announcementInfo.getPlate_id() != 0){
+        } else if (announcementInfo.getPlate_id() != 0) {
             announcementInfoDao.addPlateAnnInfo(announcementInfo);
-        }else
+        } else
             announcementInfoDao.addDisAnnInfo(announcementInfo);
     }
 
@@ -64,12 +64,12 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
     public PageInfo<AnnouncementInfo> getAnnounceInfos(int page, int size) throws Exception {
         PageHelper.startPage(page, size);
         List<AnnouncementInfo> ls = announcementInfoDao.getAnnounceInfos();
-        for (AnnouncementInfo info : ls){
+        for (AnnouncementInfo info : ls) {
             info.setUserBaseInfo(userBaseInfoDao.getUserBaseInfoByUserId(info.getOwner()));
-            if (info.getPlate_id()!=-1&info.getDistrict_id()==-1){
+            if (info.getPlate_id() != -1 & info.getDistrict_id() == -1) {
                 info.setPlate_name(plateInfoDao.getPlateInfo(info.getPlate_id()).getPlate_name());
             }
-            if(info.getPlate_id()==-1&info.getDistrict_id()!=-1){
+            if (info.getPlate_id() == -1 & info.getDistrict_id() != -1) {
                 info.setPlate_name(plateInfoDao.getPlateInfo(districtInfoDao.getDistrictInfo(info.getDistrict_id()).getPlate_id()).getPlate_name());
                 info.setDistrict_name(districtInfoDao.getDistrictInfo(info.getDistrict_id()).getDistrict_name());
             }
@@ -81,8 +81,12 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
     @Override
     public PageInfo<AnnouncementInfo> getAnnounceInfos(int plate_id, int page, int size) throws Exception {
         PageHelper.startPage(page, size);
-        List<AnnouncementInfo> ls2 = announcementInfoDao.getAnnounceInfosByPlateId(plate_id);
-        for (AnnouncementInfo info : ls2){
+        List<AnnouncementInfo> ls2 = new LinkedList<>();
+        if (plate_id == -1) {
+            ls2 = announcementInfoDao.getAnnInfos();
+        } else
+            ls2 = announcementInfoDao.getAnnounceInfosByPlateId(plate_id);
+        for (AnnouncementInfo info : ls2) {
             info.setUserBaseInfo(userBaseInfoDao.getUserBaseInfoByUserId(info.getOwner()));
         }
         PageInfo<AnnouncementInfo> pageInfoDemo = new PageInfo<AnnouncementInfo>(ls2);
@@ -95,7 +99,7 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
     public PageInfo<AnnouncementInfo> getAnnounceInfos2(int district_id, int page, int size) throws Exception {
         PageHelper.startPage(page, size);
         List<AnnouncementInfo> ls2 = announcementInfoDao.getAnnounceInfosBydistrictId(district_id);
-        for (AnnouncementInfo info : ls2){
+        for (AnnouncementInfo info : ls2) {
             info.setUserBaseInfo(userBaseInfoDao.getUserBaseInfoByUserId(info.getOwner()));
         }
         PageInfo<AnnouncementInfo> pageInfoDemo = new PageInfo<AnnouncementInfo>(ls2);
@@ -106,10 +110,10 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
     @Override
     public void batchDelete(List<AnnouncementInfo> ls) throws Exception {
         StringBuilder sb = new StringBuilder();
-        for (AnnouncementInfo info : ls){
+        for (AnnouncementInfo info : ls) {
             sb.append("'").append(info.getId()).append("'").append(",");
         }
-        sb.deleteCharAt(sb.length()-1);
+        sb.deleteCharAt(sb.length() - 1);
         String s = sb.toString();
         announcementInfoDao.batchDelete(s);
     }
@@ -118,7 +122,7 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
     public PageInfo<AnnouncementInfo> getAnnInfos(int page, int size) throws Exception {
         PageHelper.startPage(page, size);
         List<AnnouncementInfo> ls2 = announcementInfoDao.getAnnInfos();
-        for (AnnouncementInfo info : ls2){
+        for (AnnouncementInfo info : ls2) {
             info.setUserBaseInfo(userBaseInfoDao.getUserBaseInfoByUserId(info.getOwner()));
         }
         PageInfo<AnnouncementInfo> pageInfoDemo = new PageInfo<AnnouncementInfo>(ls2);
@@ -130,7 +134,7 @@ public class AnnouncementInfoServiceImpl implements AnnouncementInfoService {
     public PageInfo<AnnouncementInfo> getAnnByColumName(String colum_name, int value, int page, int size) throws Exception {
         PageHelper.startPage(page, size);
         List<AnnouncementInfo> ls2 = announcementInfoDao.getAnnByColumName(colum_name, value);
-        for (AnnouncementInfo info : ls2){
+        for (AnnouncementInfo info : ls2) {
             info.setUserBaseInfo(userBaseInfoDao.getUserBaseInfoByUserId(info.getOwner()));
         }
         PageInfo<AnnouncementInfo> pageInfoDemo = new PageInfo<AnnouncementInfo>(ls2);

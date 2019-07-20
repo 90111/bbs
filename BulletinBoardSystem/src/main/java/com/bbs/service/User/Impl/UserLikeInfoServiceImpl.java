@@ -7,6 +7,7 @@ import com.bbs.service.User.UserLikeInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @Service
 public class UserLikeInfoServiceImpl implements UserLikeInfoService {
@@ -29,13 +30,21 @@ public class UserLikeInfoServiceImpl implements UserLikeInfoService {
     }
 
     @Override
-    public void changeLike(int user_id, int post_title_id) throws Exception {
+    public boolean changeLike(int user_id, int post_title_id) throws Exception {
+        boolean flag = false;
         if (userLikeInfoDao.checkIsLike(user_id, post_title_id) == 1){
             userLikeInfoDao.deleteLike(user_id, post_title_id);
         }else {
-            userLikeInfoDao.addLike(user_id, post_title_id);
+            userLikeInfoDao.addLike(user_id, post_title_id, new Date());
+            flag = true;
         }
         postTitleInfoDao.updatePostTitleLikeNum(post_title_id);
+        return flag;
+    }
+
+    @Override
+    public int selectLikeNowNum() throws Exception {
+        return userLikeInfoDao.selectLikeNowNum();
     }
 
 

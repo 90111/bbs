@@ -31,7 +31,7 @@ public class UserLoginInfoController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Serializable login(@RequestBody UserLoginInfo userLoginInfo) throws JSONException {
-        System.out.println("调用login方法");
+//        System.out.println("调用login方法");
         JSONObject jsonObject = new JSONObject();
         //添加用户认证信息
         Subject currentUser = SecurityUtils.getSubject();
@@ -46,6 +46,15 @@ public class UserLoginInfoController {
             jsonObject.put("id", info.getId());
             jsonObject.put("user_name", info.getUser_name());
             jsonObject.put("icon", userBaseInfoService.getUserBaseInfoByUserId(info.getId()).getIcon());
+        } catch (IncorrectCredentialsException e) {
+            jsonObject.put("code", 500);
+            jsonObject.put("msg", "密码错误");
+        } catch (LockedAccountException e) {
+            jsonObject.put("code", 500);
+            jsonObject.put("msg", "登录失败，该用户已被冻结");
+        } catch (AuthenticationException e) {
+            jsonObject.put("code", 500);
+            jsonObject.put("msg", "该用户不存在");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,7 +63,7 @@ public class UserLoginInfoController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Map register(@RequestBody UserLoginInfo userLoginInfo) throws Exception {
-        System.out.println("调用register方法");
+//        System.out.println("调用register方法");
         userLoginInfoService.addUserLoginInfo(userLoginInfo);
         Map<String, Object> map = new HashMap<>();
         map.put("code", "200");
@@ -64,7 +73,7 @@ public class UserLoginInfoController {
 
     @RequestMapping(value = "/checkUsername", method = RequestMethod.POST)
     public Serializable checkUsername(@RequestBody UserLoginInfo userLoginInfo) throws Exception {
-        System.out.println("调用checkUsername方法");
+//        System.out.println("调用checkUsername方法");
         JSONObject jsonObject = new JSONObject();
         UserLoginInfo userLoginInfo1 = null;
         userLoginInfo1 = userLoginInfoService.getUserLoginInfoByName(userLoginInfo.getUser_name());
@@ -80,7 +89,7 @@ public class UserLoginInfoController {
 
     @RequestMapping(value = "/checkMail", method = RequestMethod.POST)
     public Serializable checkMail(@RequestBody UserLoginInfo userLoginInfo) throws Exception {
-        System.out.println("调用checkMail方法");
+//        System.out.println("调用checkMail方法");
         JSONObject jsonObject = new JSONObject();
         UserLoginInfo userLoginInfo1 = null;
         userLoginInfo1 = userLoginInfoService.getUserLoginInfoByMail(userLoginInfo.getMail());
@@ -96,7 +105,7 @@ public class UserLoginInfoController {
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public Map logout() {
-        System.out.println("调用logout方法");
+//        System.out.println("调用logout方法");
         Map<String, Object> map = new HashMap<>();
         try {
             Subject currentUser = SecurityUtils.getSubject();
@@ -151,7 +160,7 @@ public class UserLoginInfoController {
     @RequiresAuthentication
     @RequestMapping(value = "/changePwd", method = RequestMethod.POST)
     public Map changePwd(String oldPwd, String newPwd) {
-        System.out.println("调用changePwd方法");
+//        System.out.println("调用changePwd方法");
         Map<String, Object> map = new HashMap<>();
         Subject currentUser = SecurityUtils.getSubject();
         try {

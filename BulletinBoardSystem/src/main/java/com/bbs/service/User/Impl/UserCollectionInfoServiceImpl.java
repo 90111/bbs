@@ -6,6 +6,7 @@ import com.bbs.service.User.UserCollectionInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @Service
 public class UserCollectionInfoServiceImpl implements UserCollectionInfoService {
@@ -24,12 +25,20 @@ public class UserCollectionInfoServiceImpl implements UserCollectionInfoService 
     }
 
     @Override
-    public void changeCollection(int user_id, int post_title_id) throws Exception {
+    public boolean changeCollection(int user_id, int post_title_id) throws Exception {
+        boolean flag = false;
         if (userCollectionInfoDao.checkIsCollected(user_id, post_title_id) == 1){
             userCollectionInfoDao.deleteCollection(user_id, post_title_id);
         }else {
-            userCollectionInfoDao.addCollection(user_id, post_title_id);
+            userCollectionInfoDao.addCollection(user_id, post_title_id, new Date());
+            flag = true;
         }
         postTitleInfoDao.updatePostTitleRecommendNum(post_title_id);
+        return flag;
+    }
+
+    @Override
+    public int selectCollectNowNum() throws Exception {
+        return userCollectionInfoDao.selectCollectNowNum();
     }
 }
