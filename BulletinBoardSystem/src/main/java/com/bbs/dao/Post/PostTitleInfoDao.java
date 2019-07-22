@@ -128,6 +128,6 @@ public interface PostTitleInfoDao {
 
 //    @Select("select post_time as time,count(*) as num from PostTitleInfo WHERE " +
 //            "DATE_FORMAT(post_time,'%Y%m') = DATE_FORMAT(CURDATE( ), '%Y%m' ) group by post_time ORDER BY post_time")
-    @Select("SELECT COUNT(*)as num,`post_time` FROM `PostTitleInfo` group by date_format(`post_time`,'%Y-%M-%D') limit 30")
+    @Select("SELECT COUNT(*)as num,`post_time` as time FROM `PostTitleInfo` group by date_format(`post_time`,'%Y-%M-%D') order by time limit 30")
     List<NumInfo> getAllPost_time() throws Exception;
 }

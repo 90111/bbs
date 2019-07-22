@@ -53,7 +53,7 @@ public interface UserLoginInfoDao {
 
 //    @Select("select regist_time as time,count(*) as num from UserLoginInfo WHERE " +
 //            "DATE_FORMAT(regist_time,'%Y%m') = DATE_FORMAT(CURDATE( ), '%Y%m' ) group by regist_time ORDER BY regist_time")
-    @Select("SELECT COUNT(*)as num,`regist_time` FROM `UserLoginInfo` group by date_format(`regist_time`,'%Y-%M-%D') limit 30")
+    @Select("SELECT COUNT(*)as num,`regist_time` as time FROM `UserLoginInfo` group by date_format(`regist_time`,'%Y-%M-%D') order by time limit 30")
     List<NumInfo> getAllRegist_time() throws Exception;
 
     @Select("select count(*) from UserLoginInfo")

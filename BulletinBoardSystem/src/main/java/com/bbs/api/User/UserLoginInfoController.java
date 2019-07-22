@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,6 +65,7 @@ public class UserLoginInfoController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Map register(@RequestBody UserLoginInfo userLoginInfo) throws Exception {
 //        System.out.println("调用register方法");
+        userLoginInfo.setRegist_time(new Date());
         userLoginInfoService.addUserLoginInfo(userLoginInfo);
         Map<String, Object> map = new HashMap<>();
         map.put("code", "200");
