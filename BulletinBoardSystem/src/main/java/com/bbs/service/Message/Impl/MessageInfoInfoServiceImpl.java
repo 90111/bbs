@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -37,19 +38,25 @@ public class MessageInfoInfoServiceImpl implements MessageInfoService {
     @Override
     public PageInfo<MessageInfo> getMessageInfos(int receive_user_id, int type, int page, int size) throws Exception {
         List<MessageInfo> ls = messageDao.getMessageInfos(receive_user_id, type);
+        List<MessageInfo> ls2 = new LinkedList<>();
         PageHelper.startPage(page, size);
         for (MessageInfo info : ls){
-            info.setUserBaseInfo(userBaseInfoDao.getUserBaseInfoByUserId(info.getSend_user_id()));
-            String[] s = info.getContent().split("\\&");
-            if (s.length > 1){
-                info.setContent(s[0]);
-                PostTitleInfo postTitleInfo = new PostTitleInfo();
-                postTitleInfo = postTitleInfoDao.getPostTitleById(Integer.parseInt(s[s.length-1]));
-                postTitleInfo.setContent("");
-                info.setPostTitleInfo(postTitleInfo);
+            try{
+                info.setUserBaseInfo(userBaseInfoDao.getUserBaseInfoByUserId(info.getSend_user_id()));
+                String[] s = info.getContent().split("\\&");
+                if (s.length > 1){
+                    info.setContent(s[0]);
+                    PostTitleInfo postTitleInfo = new PostTitleInfo();
+                    postTitleInfo = postTitleInfoDao.getPostTitleById(Integer.parseInt(s[s.length-1]));
+                    postTitleInfo.setContent("");
+                    info.setPostTitleInfo(postTitleInfo);
+                    ls2.add(info);
+                }
+            }catch (Exception e){
+                System.out.println("");
             }
         }
-        return new PageInfo<MessageInfo>(ls);
+        return new PageInfo<MessageInfo>(ls2);
     }
 
     @Override

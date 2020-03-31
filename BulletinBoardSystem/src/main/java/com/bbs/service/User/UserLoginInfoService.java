@@ -4,8 +4,10 @@ import com.bbs.model.User.NumInfo;
 import com.bbs.model.User.RoleInfo;
 import com.bbs.model.User.UserLoginInfo;
 import com.github.pagehelper.PageInfo;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 
 public interface UserLoginInfoService {
 
